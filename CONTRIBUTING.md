@@ -25,7 +25,7 @@ Comments should be exclusively in English
 
 ```cpp
 // This is a comment
-void canJump()
+bool canJump()
 {
   /*[...]*/
 }
