@@ -10,8 +10,11 @@ public class PlaneController : MonoBehaviour
     private float pitchAxis = 0.0f;
     private float rollAxis = 0.0f;
 
+    // Player parameters
     [SerializeField]
     private float maxSpeed = 200.0f;
+    [SerializeField]
+    private float autoCorrection = 1.0f;
 
     // RigidBody
     private Rigidbody planeRigidBody;
@@ -37,5 +40,9 @@ public class PlaneController : MonoBehaviour
     {
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis), ForceMode.Force);
         planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.Force);
+
+        // Auto correction
+        planeRigidBody.AddRelativeTorque(new Vector3(autoCorrection * transform.rotation.x * transform.rotation.x, 0,
+                                                     autoCorrection * transform.rotation.z * transform.rotation.z),ForceMode.Force);
     }
 }
