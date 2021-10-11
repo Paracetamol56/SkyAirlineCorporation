@@ -13,16 +13,20 @@ public class PlaneController : MonoBehaviour
     // Plane parameters
     [Header("Plane parameters")]
     [SerializeField]
+    [Tooltip("Maximum amount of throttles you are allowed to use.")]
     private float maxThrottle = 200.0f;
     [SerializeField]
+    [Tooltip("Auto stabilization rotate the plane into standard horizontal position.\n0 = not at all\n1 = normal stabilization")]
     private float autoStabilization = 1.0f;
     [SerializeField]
+    [Tooltip("Defines input sensitivity for throttle only.")]
     private float throttleInputMultiplicator = 1.0f;
     [SerializeField]
+    [Tooltip("Defines input sensitivity.")]
     private float inputMultiplicator = 3.0f;
     [SerializeField]
+    [Tooltip("This coefficient is used to compute the plane lift from the velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
     private float liftCoefficient = 130.0f;
-
 
     // RigidBody
     private Rigidbody planeRigidBody;
