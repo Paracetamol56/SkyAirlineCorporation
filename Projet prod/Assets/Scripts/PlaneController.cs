@@ -23,7 +23,10 @@ public class PlaneController : MonoBehaviour
 
     private void Update()
     {
-        throttle += Input.GetAxis("Throttle");
+        if (throttle <= maxSpeed)
+        {
+            throttle += Input.GetAxis("Throttle");
+        }
 
         yawAxis = Input.GetAxis("Yaw");
         pitchAxis = Input.GetAxis("Pitch");
@@ -32,6 +35,7 @@ public class PlaneController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis), ForceMode.Force);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.Force);
     }
 }
