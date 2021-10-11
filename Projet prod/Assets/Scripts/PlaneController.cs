@@ -20,6 +20,8 @@ public class PlaneController : MonoBehaviour
     private float throttleInputMultiplicator = 1.0f;
     [SerializeField]
     private float inputMultiplicator = 3.0f;
+    [SerializeField]
+    private float liftCoefficient = 130.0f;
 
 
     // RigidBody
@@ -43,9 +45,13 @@ public class PlaneController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Lift calculation
+        float velocity = Vector3.Magnitude(planeRigidBody.velocity);
+        float lift = ((velocity * velocity) / liftCoefficient);
+
         // Rigid body forces and torques
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 4.0f), ForceMode.Acceleration);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle), ForceMode.Acceleration);
 
         // Auto stabilization
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
