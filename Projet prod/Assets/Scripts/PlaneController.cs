@@ -14,7 +14,12 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 200.0f;
     [SerializeField]
-    private float autoCorrection = 1.0f;
+    private float autoStabilization = 1.0f;
+    [SerializeField]
+    private float throttleInputMultiplicator = 1.0f;
+    [SerializeField]
+    private float inputMultiplicator = 3.0f;
+
 
     // RigidBody
     private Rigidbody planeRigidBody;
@@ -26,23 +31,28 @@ public class PlaneController : MonoBehaviour
 
     private void Update()
     {
-        if (throttle <= maxSpeed)
+        if (throttle <= maxSpeed && throttle >= 0.0f)
         {
-            throttle += Input.GetAxis("Throttle");
+            throttle = Mathf.Clamp(throttle + Input.GetAxis("Throttle") * throttleInputMultiplicator, 0.0f, maxSpeed);
         }
 
-        yawAxis = Input.GetAxis("Yaw");
-        pitchAxis = Input.GetAxis("Pitch");
-        rollAxis = Input.GetAxis("Roll");
+        yawAxis = Input.GetAxis("Yaw") * inputMultiplicator;
+        pitchAxis = Input.GetAxis("Pitch") * inputMultiplicator;
+        rollAxis = Input.GetAxis("Roll") * inputMultiplicator;
     }
 
     private void FixedUpdate()
     {
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis), ForceMode.Force);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.Force);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle * 100.0f), ForceMode.Force);
 
-        // Auto correction
-        planeRigidBody.AddRelativeTorque(new Vector3(autoCorrection * transform.rotation.x * transform.rotation.x, 0,
-                                                     autoCorrection * transform.rotation.z * transform.rotation.z),ForceMode.Force);
+        // Auto stabilization
+        Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
+        stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
+        planeRigidBody.AddRelativeTorque(stabilizationTorque * autoStabilization, ForceMode.Force);
+
+
+        // Debug speed
+        Debug.Log(Vector3.Magnitude(planeRigidBody.velocity));
     }
 }
