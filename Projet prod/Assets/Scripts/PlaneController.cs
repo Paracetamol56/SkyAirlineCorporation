@@ -44,12 +44,12 @@ public class PlaneController : MonoBehaviour
     private void FixedUpdate()
     {
         // Rigid body forces and torques
-        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 4.0f), ForceMode.VelocityChange);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.VelocityChange);
+        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 4.0f), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, 9.81f, throttle), ForceMode.Acceleration);
 
         // Auto stabilization
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
         stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
-        planeRigidBody.AddRelativeTorque(stabilizationTorque * autoStabilization, ForceMode.VelocityChange);
+        planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
     }
 }
