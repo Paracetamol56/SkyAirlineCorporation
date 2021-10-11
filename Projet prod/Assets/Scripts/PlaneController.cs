@@ -27,6 +27,26 @@ public class PlaneController : MonoBehaviour
     // RigidBody
     private Rigidbody planeRigidBody;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (maxThrottle <= 0.0f)
+            maxThrottle = 1.0f;
+
+        if (autoStabilization <= 0.0f)
+            autoStabilization = 1.0f;
+
+        if (throttleInputMultiplicator <= 0.0f)
+            throttleInputMultiplicator = 1.0f;
+
+        if (inputMultiplicator <= 0.0f)
+            inputMultiplicator = 1.0f;
+
+        if (liftCoefficient <= 0.0f)
+            liftCoefficient = 0.01f;
+    }
+#endif
+
     private void Start()
     {
         planeRigidBody = GetComponent<Rigidbody>();
@@ -58,4 +78,5 @@ public class PlaneController : MonoBehaviour
         stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
         planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
     }
+
 }
