@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaneController : MonoBehaviour
 {
@@ -30,6 +31,19 @@ public class PlaneController : MonoBehaviour
 
     // RigidBody
     private Rigidbody planeRigidBody;
+
+    // Debuging Canevas
+    [Header("Debuging Canevas")]
+    [SerializeField]
+    private Slider YawSlider;
+    [SerializeField]
+    private Slider PitchSlider;
+    [SerializeField]
+    private Slider RollSlider;
+    [SerializeField]
+    private Slider ThrottleSlider;
+    [SerializeField]
+    private Text speedText;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -65,6 +79,8 @@ public class PlaneController : MonoBehaviour
         yawAxis = Input.GetAxis("Yaw") * inputMultiplicator;
         pitchAxis = Input.GetAxis("Pitch") * inputMultiplicator;
         rollAxis = Input.GetAxis("Roll") * inputMultiplicator;
+
+        UpdateUi();
     }
 
     private void FixedUpdate()
@@ -83,4 +99,12 @@ public class PlaneController : MonoBehaviour
         planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
     }
 
+    private void UpdateUi()
+    {
+        YawSlider.value = yawAxis / inputMultiplicator;
+        PitchSlider.value = pitchAxis / inputMultiplicator;
+        RollSlider.value = - rollAxis / inputMultiplicator;
+        ThrottleSlider.value = throttle / maxThrottle;
+        speedText.text = Vector3.Magnitude(planeRigidBody.velocity).ToString();
+    }
 }
