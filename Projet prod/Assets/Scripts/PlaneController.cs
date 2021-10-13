@@ -74,7 +74,7 @@ public class PlaneController : MonoBehaviour
         float lift = ((velocity * velocity) / liftCoefficient);
 
         // Rigid body forces and torques
-        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 4.0f), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 2.0f), ForceMode.Acceleration);
         planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle), ForceMode.Acceleration);
 
         // Auto stabilization
