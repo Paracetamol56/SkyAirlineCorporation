@@ -2085,7 +2085,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491314545}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c8bd9425158611b46905a1d6fe4c7547, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2110,7 +2110,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7f0d8f351c8d1e04d90afb5aaf9c4586, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2149,7 +2149,7 @@ Transform:
   m_GameObject: {fileID: 1491314545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2501,8 +2501,8 @@ Rigidbody:
   m_GameObject: {fileID: 2083578695}
   serializedVersion: 2
   m_Mass: 1500
-  m_Drag: 5
-  m_AngularDrag: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2528,8 +2528,8 @@ MonoBehaviour:
   maxThrottle: 200
   autoStabilization: 1
   throttleInputMultiplicator: 1
-  inputMultiplicator: 3
-  liftCoefficient: 130
+  inputMultiplicator: 5
+  liftCoefficient: 200
   YawSlider: {fileID: 1285507395}
   PitchSlider: {fileID: 374317594}
   RollSlider: {fileID: 1240413700}
@@ -2542,7 +2542,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083578695}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c8bd9425158611b46905a1d6fe4c7547, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

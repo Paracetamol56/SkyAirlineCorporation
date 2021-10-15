@@ -24,10 +24,13 @@ public class PlaneController : MonoBehaviour
     private float throttleInputMultiplicator = 1.0f;
     [SerializeField]
     [Tooltip("Defines input sensitivity.")]
-    private float inputMultiplicator = 3.0f;
+    private float inputMultiplicator = 5.0f;
     [SerializeField]
-    [Tooltip("This coefficient is used to compute the plane lift from the velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
-    private float liftCoefficient = 130.0f;
+    [Tooltip("This coefficient is used to compute the plane lift from the z velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
+    private float liftCoefficient = 1000.0f;
+    [SerializeField]
+    [Tooltip("This coefficient is used to compute the plane drag from the velocity.\nUsually defined experimentally using air density, shape and inclination. Here we are using a simplified version, so take what works the best.")]
+    private float dragCoefficient = 100.0f;
 
     // RigidBody
     private Rigidbody planeRigidBody;
@@ -86,12 +89,18 @@ public class PlaneController : MonoBehaviour
     private void FixedUpdate()
     {
         // Lift calculation
+        float zVelocity = Vector3.Magnitude(new Vector3(0, 0, planeRigidBody.velocity.z));
+        float lift = (zVelocity * zVelocity) / liftCoefficient;
+        Debug.Log(lift);
+
+        // Drag calculation
         float velocity = Vector3.Magnitude(planeRigidBody.velocity);
-        float lift = ((velocity * velocity) / liftCoefficient);
+        float drag = (velocity * velocity) / dragCoefficient;
+        Debug.Log(drag);
 
         // Rigid body forces and torques
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 2.0f), ForceMode.Acceleration);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle - drag), ForceMode.Acceleration);
 
         // Auto stabilization
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
