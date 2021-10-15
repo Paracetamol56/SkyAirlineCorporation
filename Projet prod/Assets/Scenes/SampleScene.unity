@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 410720290}
   - component: {fileID: 410720289}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2530,6 +2530,11 @@ MonoBehaviour:
   throttleInputMultiplicator: 1
   inputMultiplicator: 3
   liftCoefficient: 130
+  YawSlider: {fileID: 1285507395}
+  PitchSlider: {fileID: 374317594}
+  RollSlider: {fileID: 1240413700}
+  ThrottleSlider: {fileID: 986210715}
+  speedText: {fileID: 410720289}
 --- !u!65 &2083578699
 BoxCollider:
   m_ObjectHideFlags: 0
