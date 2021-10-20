@@ -2528,8 +2528,9 @@ MonoBehaviour:
   maxThrottle: 200
   autoStabilization: 1
   throttleInputMultiplicator: 1
-  inputMultiplicator: 5
-  liftCoefficient: 200
+  inputMultiplicator: 1
+  liftCoefficient: 1000
+  dragCoefficient: 10
   YawSlider: {fileID: 1285507395}
   PitchSlider: {fileID: 374317594}
   RollSlider: {fileID: 1240413700}

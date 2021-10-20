@@ -79,9 +79,9 @@ public class PlaneController : MonoBehaviour
         throttle = Mathf.Clamp(throttle + Input.GetAxis("Throttle") * throttleInputMultiplicator, 0.0f, maxThrottle);
 
         // Axis inputs
-        yawAxis = Input.GetAxis("Yaw") * inputMultiplicator;
-        pitchAxis = Input.GetAxis("Pitch") * inputMultiplicator;
-        rollAxis = Input.GetAxis("Roll") * inputMultiplicator;
+        yawAxis = Input.GetAxis("Yaw") * 50.0f / (throttle + 1.0f);
+        pitchAxis = Input.GetAxis("Pitch") * 2.0f;
+        rollAxis = Input.GetAxis("Roll") * 5.0f;
 
         UpdateUi();
     }
@@ -91,16 +91,10 @@ public class PlaneController : MonoBehaviour
         // Lift calculation
         float zVelocity = Vector3.Magnitude(new Vector3(0, 0, planeRigidBody.velocity.z));
         float lift = (zVelocity * zVelocity) / liftCoefficient;
-        Debug.Log(lift);
-
-        // Drag calculation
-        float velocity = Vector3.Magnitude(planeRigidBody.velocity);
-        float drag = (velocity * velocity) / dragCoefficient;
-        Debug.Log(drag);
 
         // Rigid body forces and torques
-        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis / 2.0f), ForceMode.Acceleration);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle - drag), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle), ForceMode.Acceleration);
 
         // Auto stabilization
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
