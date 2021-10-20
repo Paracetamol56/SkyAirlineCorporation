@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 558850384}
   - component: {fileID: 558850383}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0765661df20d1684c9d5c735015fa27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawMode: 0
   mapLargeur: 100
   mapHauteur: 100
   noiseScale: 27.6
@@ -173,6 +174,15 @@ MonoBehaviour:
   persistance: 0.5
   lacunarity: 2
   autoUpdate: 1
+  seed: 0
+  offset: {x: 0, y: 0}
+  regions:
+  - name: Water
+    height: 0.4
+    colour: {r: 0.06756851, g: 0.3619714, b: 0.6886792, a: 0}
+  - name: Land
+    height: 1
+    colour: {r: 0.19419166, g: 0.6509434, b: 0.020879272, a: 0}
 --- !u!4 &558850385
 Transform:
   m_ObjectHideFlags: 0
