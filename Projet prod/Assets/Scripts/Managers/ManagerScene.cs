@@ -40,12 +40,10 @@ public class ManagerScene : MonoBehaviour
     //variables
     private GameMode Mode;
 
-
     void Start()
     {
         Mode = GameMode.Freemode;
     }
-
 
     public  void SetMode(GameMode value)
     {
