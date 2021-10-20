@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 position = targetTransform.position + targetTransform.rotation * offsetPosition;
+        Vector3 position = targetTransform.position + (targetTransform.rotation * offsetPosition);
         Quaternion rotation = targetTransform.rotation * Quaternion.Euler(offsetRotation);
 
         transform.rotation = rotation;
