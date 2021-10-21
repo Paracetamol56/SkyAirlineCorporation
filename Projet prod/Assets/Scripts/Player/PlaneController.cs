@@ -35,6 +35,7 @@ public class PlaneController : MonoBehaviour
     private float speed = 0.0f;
     private float speedRef;
     private bool isGrounded = false;
+    private PlaneObjectController planeObjectController;
 
     // RigidBody
     private Rigidbody planeRigidBody;
@@ -75,6 +76,7 @@ public class PlaneController : MonoBehaviour
     private void Start()
     {
         planeRigidBody = GetComponent<Rigidbody>();
+        planeObjectController = GetComponent<PlaneObjectController>();
     }
 
     private void Update()
@@ -87,6 +89,7 @@ public class PlaneController : MonoBehaviour
         pitchAxis = Input.GetAxis("Pitch") * 2.0f;
         rollAxis = Input.GetAxis("Roll") * 5.0f;
 
+        planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
         UpdateUi();
     }
 
