@@ -80,7 +80,7 @@ public class PlaneController : MonoBehaviour
     private void Update()
     {
         // Throttle input
-        throttle = Mathf.Clamp(throttle + Input.GetAxis("Throttle") * throttleInputMultiplicator, 0.0f, maxThrottle);
+        throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
 
         // Axis inputs
         yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
