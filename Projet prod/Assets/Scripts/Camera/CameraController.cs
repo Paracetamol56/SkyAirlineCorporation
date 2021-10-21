@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-   /* public GameObject Plane;
-    public Camera Camera;
-
-    void Update()
-    {
-    Vector3 moveCamto = Plane.transform.position - Plane.transform.forward * 10.0f + Plane.transform.up * 5.0f;
-    Camera.main.transform.position = moveCamto;
-    Camera.main.transform.LookAt(Plane.transform.position);
-    }*/
-
     // Target to follow
     [SerializeField]
     private Transform targetTransform;
@@ -34,7 +24,7 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 position = Vector3.SmoothDamp(transform.position, targetTransform.position + targetTransform.rotation * offsetPosition, ref cameraVelocity, smoothness);
+        Vector3 position = Vector3.SmoothDamp(transform.position, targetTransform.position + (targetTransform.rotation * offsetPosition), ref cameraVelocity, smoothness);
         Quaternion rotation = targetTransform.rotation * Quaternion.Euler(offsetRotation);
 
         transform.position = position;
