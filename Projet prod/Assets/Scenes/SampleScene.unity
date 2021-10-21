@@ -2075,6 +2075,7 @@ MonoBehaviour:
   targetTransform: {fileID: 2083578697}
   offsetPosition: {x: 0, y: 7, z: -18}
   offsetRotation: {x: 12, y: 0, z: 0}
+  smoothness: 0.05
 --- !u!1 &1491314545
 GameObject:
   m_ObjectHideFlags: 0
