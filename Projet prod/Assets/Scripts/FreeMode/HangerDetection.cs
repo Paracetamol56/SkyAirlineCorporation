@@ -8,11 +8,13 @@ public class HangerDetection : MonoBehaviour
     private bool canJoin = false;
     [SerializeField]
     private Text canJoinText;
-    
+    [SerializeField]
+    private string hangerName;
+
     private void OnTriggerEnter(Collider other)
     {
         canJoin = true;
-        switch (transform.name)
+        switch (hangerName)
         {
             case "HangerLivraison":
                 Debug.Log("Call SceneManager : arg HangerLivraison");
