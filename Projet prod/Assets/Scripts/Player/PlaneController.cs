@@ -48,6 +48,8 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     private Text speedText;
 
+    private bool isGrounded;
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -79,9 +81,20 @@ public class PlaneController : MonoBehaviour
         throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
 
         // Axis inputs
-        yawAxis = Input.GetAxis("Yaw") * 50.0f / (throttle + 1.0f);
-        pitchAxis = Input.GetAxis("Pitch") * 2.0f;
-        rollAxis = Input.GetAxis("Roll") * 5.0f;
+        if (isGrounded)
+        {
+            // TODO : yawAxis -> test fixable value
+
+            yawAxis = Input.GetAxis("Yaw") * 10;
+            pitchAxis = Input.GetAxis("Pitch") * 2.0f;
+            rollAxis = 0;
+        }
+        else
+        {
+            yawAxis = Input.GetAxis("Yaw") * 50.0f / (throttle + 1.0f);
+            pitchAxis = Input.GetAxis("Pitch") * 2.0f;
+            rollAxis = Input.GetAxis("Roll") * 5.0f;
+        }
 
         UpdateUi();
     }
@@ -100,6 +113,19 @@ public class PlaneController : MonoBehaviour
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
         stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
         planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
+
+        // Test if the plane is grounded or not
+
+        // test hit to verif if is the ground
+        Vector3 dwn = transform.TransformDirection(Vector3.down);
+        if (Physics.Raycast(transform.position, dwn, 5))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 
     private void UpdateUi()

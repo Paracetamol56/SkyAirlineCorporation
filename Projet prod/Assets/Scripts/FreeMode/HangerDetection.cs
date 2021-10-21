@@ -17,11 +17,13 @@ public class HangerDetection : MonoBehaviour
             case "HangerLivraison":
                 Debug.Log("Call SceneManager : arg HangerLivraison");
                 canJoinText.text = "Appuyez sur ENTREE pour lancer la partie en mode : Livraison";
+                ManagerScene.instance.SetMode(ManagerScene.GameMode.Delivery);
                 // Setup the current gametype in the GameManager
                 break;
             case "HangerCanadaire":
                 Debug.Log("Call SceneManager : arg HangerCanadaire");
                 canJoinText.text = "Appuyez sur ENTREE pour lancer la partie en mode : Canadaire";
+                ManagerScene.instance.SetMode(ManagerScene.GameMode.FFplane);
                 // Setup the current gametype in the GameManager
                 break;
         }
@@ -32,6 +34,7 @@ public class HangerDetection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter) && canJoin)
         {
             // call the fonction loadGameScene of SceneManager
+            ManagerScene.instance.LoadGameScene();
             Debug.Log("waw je lance le jeu");
         }
     }
