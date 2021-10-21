@@ -1,6 +1,6 @@
 # SkyAirlineCorporation ✈️
 
-[![CodeFactor](https://www.codefactor.io/repository/github/paracetamol56/projet-prod/badge)](https://www.codefactor.io/repository/github/paracetamol56/projet-prod)
+[![CodeFactor](https://www.codefactor.io/repository/github/paracetamol56/skyairlinecorporation/badge)](https://www.codefactor.io/repository/github/paracetamol56/skyairlinecorporation)
 ![Progressbar](https://progress-bar.dev/30/?scale=100&title=completion&width=120&color=565656&suffix=%)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Paracetamol56/Projet-prod)
 ![GitHub issues](https://img.shields.io/github/issues/Paracetamol56/Projet-prod)
