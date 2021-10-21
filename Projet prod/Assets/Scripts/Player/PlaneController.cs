@@ -90,7 +90,7 @@ public class PlaneController : MonoBehaviour
         rollAxis = Input.GetAxis("Roll") * 5.0f;
 
         planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
-        UpdateUi();
+        // UpdateUi();
     }
 
     private void FixedUpdate()
