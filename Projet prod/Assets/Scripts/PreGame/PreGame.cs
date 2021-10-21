@@ -10,6 +10,11 @@ public class PreGame : MonoBehaviour
     private GameObject currentPlaneShown;
     private int planeIndex = 0;
     private GameObject showPoint;
+    private GlobalGameManager.listOfPlanes currentPlaneType;
+
+    // Instances of managers
+    private GlobalGameManager gm;
+    private ManagerScene ms;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +22,9 @@ public class PreGame : MonoBehaviour
         showPoint = GameObject.Find("ShowPoint");
         planesSelection[planeIndex].transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(planesSelection[planeIndex], showPoint.transform);
+
+        gm = GlobalGameManager.GetInstance();
+        ms = ManagerScene.instance;
     }
 
     // Update is called once per frame
@@ -28,8 +36,11 @@ public class PreGame : MonoBehaviour
     public void StartGame()
     {
         SaveCurrentPlane();
-        ManagerScene.instance.SetMode(ManagerScene.GameMode.Freemode);
-        ManagerScene.instance.LoadGameScene();
+
+        gm.SetSelectedPlane(currentPlaneType);
+        
+        ms.SetMode(ManagerScene.GameMode.Freemode);
+        ms.LoadGameScene();
     }
     
     public void ExitGame()
@@ -57,6 +68,25 @@ public class PreGame : MonoBehaviour
         currentPlaneShown = planesSelection[planeIndex];
         currentPlaneShown.transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(currentPlaneShown, showPoint.transform);
+
+        switch (planeIndex)
+        {
+            case 0:
+                currentPlaneType = GlobalGameManager.listOfPlanes.basic_plane;
+                break;
+
+            case 1:
+                currentPlaneType = GlobalGameManager.listOfPlanes.canadaire_plane;
+                break;
+
+            case 2:
+                currentPlaneType = GlobalGameManager.listOfPlanes.delivery_plane;
+                break;
+
+            default:
+                currentPlaneType = GlobalGameManager.listOfPlanes.basic_plane;
+                break;
+        }
     }
 
     private void SaveCurrentPlane()
