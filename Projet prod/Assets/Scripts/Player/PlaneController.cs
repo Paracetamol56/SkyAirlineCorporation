@@ -32,6 +32,10 @@ public class PlaneController : MonoBehaviour
     [Tooltip("This coefficient is used to compute the plane drag from the velocity.\nUsually defined experimentally using air density, shape and inclination. Here we are using a simplified version, so take what works the best.")]
     private float dragCoefficient = 100.0f;
 
+    private float speed = 0.0f;
+    private float speedRef;
+    private bool isGrounded = false;
+
     // RigidBody
     private Rigidbody planeRigidBody;
 
@@ -47,8 +51,6 @@ public class PlaneController : MonoBehaviour
     private Slider ThrottleSlider;
     [SerializeField]
     private Text speedText;
-
-    private bool isGrounded;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -81,51 +83,37 @@ public class PlaneController : MonoBehaviour
         throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
 
         // Axis inputs
-        if (isGrounded)
-        {
-            // TODO : yawAxis -> test fixable value
-
-            yawAxis = Input.GetAxis("Yaw") * 10;
-            pitchAxis = Input.GetAxis("Pitch") * 2.0f;
-            rollAxis = 0;
-        }
-        else
-        {
-            yawAxis = Input.GetAxis("Yaw") * 50.0f / (throttle + 1.0f);
-            pitchAxis = Input.GetAxis("Pitch") * 2.0f;
-            rollAxis = Input.GetAxis("Roll") * 5.0f;
-        }
+        yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
+        pitchAxis = Input.GetAxis("Pitch") * 2.0f;
+        rollAxis = Input.GetAxis("Roll") * 5.0f;
 
         UpdateUi();
     }
 
     private void FixedUpdate()
     {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2.0f, LayerMask.NameToLayer("Ground")))
+            isGrounded = true;
+        else
+            isGrounded = false;
+
         // Lift calculation
         float zVelocity = Vector3.Magnitude(new Vector3(0, 0, planeRigidBody.velocity.z));
         float lift = (zVelocity * zVelocity) / liftCoefficient;
 
+        // Speed calculation
+        speed = Mathf.SmoothDamp(speed, throttle, ref speedRef, 10.0f);
+        Debug.Log(transform.rotation.x);
+
         // Rigid body forces and torques
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, throttle), ForceMode.Acceleration);
+        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed - (transform.rotation.x * 100.0f)), ForceMode.Acceleration);
 
         // Auto stabilization
         Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
         stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
         planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
-
-        // Test if the plane is grounded or not
-
-        // test hit to verif if is the ground
-        Vector3 dwn = transform.TransformDirection(Vector3.down);
-        if (Physics.Raycast(transform.position, dwn, 5))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
     }
 
     private void UpdateUi()
