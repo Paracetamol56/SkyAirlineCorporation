@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4523782845206345637}
   - component: {fileID: 4128971803599827672}
-  - component: {fileID: 4128971803599827675}
   - component: {fileID: 4128971803599827674}
   m_Layer: 0
   m_Name: Generic Plane
@@ -27,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858569116650040607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.88, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,19 +48,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4128971803599827675
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3858569116650040607}
-  m_Material: {fileID: 13400000, guid: c8bd9425158611b46905a1d6fe4c7547, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.119472764, y: 0.028195404, z: 0.18071708}
-  m_Center: {x: 0.00014344216, y: 0.013164751, z: 0.00035720825}
 --- !u!114 &4128971803599827674
 MonoBehaviour:
   m_ObjectHideFlags: 0

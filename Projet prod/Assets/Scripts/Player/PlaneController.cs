@@ -109,7 +109,6 @@ public class PlaneController : MonoBehaviour
 
         // Speed calculation
         speed = Mathf.SmoothDamp(speed, throttle, ref speedRef, 10.0f);
-        Debug.Log(transform.rotation.x);
 
         // Rigid body forces and torques
         planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);

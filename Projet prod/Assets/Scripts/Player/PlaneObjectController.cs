@@ -60,7 +60,7 @@ public class PlaneObjectController : MonoBehaviour
     {
         float rotationSpeed = Mathf.Lerp(minPropellerSpeed, maxPropellerSpeed, throttle);
 
-        leftPropeller.Rotate(leftPropeller.forward, rotationSpeed);
-        rightPropeller.Rotate(rightPropeller.forward, rotationSpeed);
+        leftPropeller.Rotate(Vector3.forward, rotationSpeed);
+        rightPropeller.Rotate(Vector3.forward, rotationSpeed);
     }
 }
