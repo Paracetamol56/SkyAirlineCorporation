@@ -92,7 +92,7 @@ public class PlaneController : MonoBehaviour
 
         planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
 
-        // UpdateUi();
+        UpdateUi();
     }
 
     private void FixedUpdate()
