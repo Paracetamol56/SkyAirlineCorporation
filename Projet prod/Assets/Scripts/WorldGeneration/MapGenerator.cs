@@ -4,10 +4,15 @@ using UnityEngine;
 using System;
 using System.Threading;
 
-
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap,ColourMap,Mesh};
+    public enum DrawMode
+    {
+        NoiseMap,
+        ColourMap,
+        Mesh
+    }
+
     public DrawMode drawMode;
 
     public PerlinNoiseGenerator.NormalizeMode normalizeMode; 
@@ -26,7 +31,6 @@ public class MapGenerator : MonoBehaviour
     public AnimationCurve meshHeightCurve;
     public bool autoUpdate;
 
-    
     public Vector2 offset;
 
     public TerrainType[] regions;
@@ -133,39 +137,29 @@ public class MapGenerator : MonoBehaviour
         float[,] noiseMap = PerlinNoiseGenerator.GenerateNoiseMap(mapChunkSize + 2, mapChunkSize + 2, seed, noiseScale, octavesnb, persistance, lacunarity, centre + offset, normalizeMode);
         Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
         for (int y = 0; y < mapChunkSize; y++)
-        {
             for(int x = 0; x < mapChunkSize; x++)
             {
                 float currentHeight = noiseMap[x, y];
-                for(int i = 0; i < regions.Length;i++)
+                for(int i = 0; i < regions.Length; i++)
                 {
                     if (currentHeight >= regions[i].height)
-                    {
-                        colourMap[y * mapChunkSize + x] = regions[i].colour;
-                        
-                    }
+                        colourMap[(y * mapChunkSize) + x] = regions[i].colour;
                     else
-                    {
                         break;
-                    }
                 }
             }
-        }
-
         return new MapData(noiseMap, colourMap);
     }
+
     private void OnValidate()
     {
         
         if (lacunarity < 1)
-        {
             lacunarity = 1;
-        }
         if (octavesnb < 0)
-        {
             octavesnb = 0;
-        }
     }
+
     struct MapThreadInfo<T>
     {
         public readonly Action<T> callback;
