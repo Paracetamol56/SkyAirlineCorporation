@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using System.Threading;
 
-
 public class MapGenerator : MonoBehaviour
 {
     public enum DrawMode { NoiseMap,Mesh};
