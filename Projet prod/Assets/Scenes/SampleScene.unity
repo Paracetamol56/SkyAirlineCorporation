@@ -2416,6 +2416,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: YawSlider
+      value: 
+      objectReference: {fileID: 1285507395}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: speedText
+      value: 
+      objectReference: {fileID: 410720289}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: RollSlider
+      value: 
+      objectReference: {fileID: 1240413700}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: PitchSlider
+      value: 
+      objectReference: {fileID: 374317594}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ThrottleSlider
+      value: 
+      objectReference: {fileID: 986210715}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: minFlightSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263512513298441785, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: averrageMinFlightSpeed
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7497446593010743804, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
       propertyPath: m_Name
       value: Canadaire
@@ -2431,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 8259656919763234322, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
       propertyPath: elevatorAmplitude
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259656919763234322, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: minPropellerSpeed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e7abed11aacac54497c7c372b014707, type: 3}

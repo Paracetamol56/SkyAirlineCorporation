@@ -17,6 +17,9 @@ public class PlaneController : MonoBehaviour
     [Tooltip("Maximum amount of throttles you are allowed to use.")]
     private float maxThrottle = 200.0f;
     [SerializeField]
+    [Tooltip("Minimum speed to keep the airplane in the air.\nWill be modified by angle of attack")]
+    private float averrageMinFlightSpeed = 75.0f;
+    [SerializeField]
     [Tooltip("Auto stabilization rotate the plane into standard horizontal position.\n0 = not at all\n1 = normal stabilization")]
     private float autoStabilization = 1.0f;
     [SerializeField]
@@ -28,9 +31,6 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     [Tooltip("This coefficient is used to compute the plane lift from the z velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
     private float liftCoefficient = 1000.0f;
-    [SerializeField]
-    [Tooltip("This coefficient is used to compute the plane drag from the velocity.\nUsually defined experimentally using air density, shape and inclination. Here we are using a simplified version, so take what works the best.")]
-    private float dragCoefficient = 100.0f;
 
     private float speed = 0.0f;
     private float speedRef;
@@ -54,6 +54,9 @@ public class PlaneController : MonoBehaviour
     private Text speedText;
 
 #if UNITY_EDITOR
+    /// <summary>
+    /// Inspector inputs verifications
+    /// </summary>
     private void OnValidate()
     {
         if (maxThrottle <= 0.0f)
@@ -73,12 +76,20 @@ public class PlaneController : MonoBehaviour
     }
 #endif
 
+
+    /// <summary>
+    /// Called once if the object wakes up correctly
+    /// </summary>
     private void Start()
     {
         planeRigidBody = GetComponent<Rigidbody>();
         planeObjectController = GetComponent<PlaneObjectController>();
     }
 
+
+    /// <summary>
+    /// Rendering computations
+    /// </summary>
     private void Update()
     {
         // Throttle input
@@ -86,7 +97,10 @@ public class PlaneController : MonoBehaviour
         planeObjectController.UpdateThrottle(throttle / maxThrottle);
 
         // Axis inputs
-        yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
+        if (isGrounded)
+            yawAxis = Input.GetAxis("Yaw") * 2.0f;
+        else
+            yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
         pitchAxis = Input.GetAxis("Pitch") * 2.0f;
         rollAxis = Input.GetAxis("Roll") * 5.0f;
 
@@ -95,31 +109,55 @@ public class PlaneController : MonoBehaviour
         UpdateUi();
     }
 
+
+    /// <summary>
+    /// Physic computations
+    /// </summary>
     private void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2.0f, LayerMask.NameToLayer("Ground")))
-            isGrounded = true;
-        else
-            isGrounded = false;
+        // Speed calculation (independant of isGrounded)
+        speed = Mathf.SmoothDamp(speed, throttle, ref speedRef, 10.0f);
 
         // Lift calculation
         float zVelocity = Vector3.Magnitude(new Vector3(0, 0, planeRigidBody.velocity.z));
         float lift = (zVelocity * zVelocity) / liftCoefficient;
 
-        // Speed calculation
-        speed = Mathf.SmoothDamp(speed, throttle, ref speedRef, 10.0f);
+        // Ground verification (independant of isGrounded)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2.0f, LayerMask.NameToLayer("Ground")))
+        {
+            isGrounded = true;
 
-        // Rigid body forces and torques
-        planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);
-        planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed - (transform.rotation.x * 100.0f)), ForceMode.Acceleration);
+            // Rigid body forces and torques
+            planeRigidBody.AddRelativeTorque(new Vector3(0, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed), ForceMode.Acceleration);
+        }
+        else
+        {
+            isGrounded = false;
 
-        // Auto stabilization
-        Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
-        stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
-        planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
+            // Apply minFlightSpeed if plane is in the air
+            float angleOfAttack = transform.localRotation.x * 180f;
+            if (angleOfAttack <= 15)
+                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);
+            Debug.Log(angleOfAttack);
+            
+
+            // Rigid body forces and torques
+            planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed + (transform.localRotation.x * 50.0f)), ForceMode.Acceleration);
+
+            // Auto stabilization
+            Vector3 stabilizationTorque = Vector3.Cross(transform.up, Vector3.up);
+            stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
+            planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
+        }
     }
 
+
+    /// <summary>
+    /// Update the debugging UI
+    /// </summary>
     private void UpdateUi()
     {
         YawSlider.value = yawAxis / inputMultiplicator;
