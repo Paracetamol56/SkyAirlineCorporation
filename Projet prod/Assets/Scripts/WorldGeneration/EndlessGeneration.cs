@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndlessGeneration : MonoBehaviour
 {
-    const float scale = 10f;
+    
 
     const float viewerMoveThresholdForChunkUpdate = 25f;
     const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
@@ -27,14 +27,14 @@ public class EndlessGeneration : MonoBehaviour
     {
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
         mapGenerator = FindObjectOfType<MapGenerator>();
-        chunkSize = MapGenerator.mapChunkSize - 1;
+        chunkSize = mapGenerator.mapChunkSize - 1;
         chunkVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
         UpdateVisibleChunks();
     }
     private void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/scale;
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z)/mapGenerator.terrainData.uniformScale;
         if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
         {
             viewerPositionOld = viewerPosition;
@@ -100,9 +100,9 @@ public class EndlessGeneration : MonoBehaviour
             meshCollider = meshObject.AddComponent<MeshCollider>();
             
             meshRenderer.material = material;
-            meshObject.transform.position = positionV3*scale;
+            meshObject.transform.position = positionV3 * mapGenerator.terrainData.uniformScale;
             meshObject.transform.parent = parent;
-            meshObject.transform.localScale = Vector3.one * scale;
+            meshObject.transform.localScale = Vector3.one * mapGenerator.terrainData.uniformScale;
 
             SetVisible(false);
 
@@ -122,8 +122,6 @@ public class EndlessGeneration : MonoBehaviour
         {
             this.mapData = mapData;
             mapDataReceived = true;
-            Texture2D texture = TextureGenerator.TextureFromCoulourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize);
-            meshRenderer.material.mainTexture = texture;
             UpdateTerrainChunk();
         }
 

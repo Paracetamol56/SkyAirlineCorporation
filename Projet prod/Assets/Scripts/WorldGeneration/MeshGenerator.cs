@@ -64,7 +64,7 @@ public static class MeshGenerator
                 vertexIndex++;
             }
         }
-        meshData.Finalize();
+        meshData.ProcessMesh();
         return meshData;
     }
 
@@ -177,7 +177,7 @@ public class MeshData
         Vector3 sideAC = pointC - pointA;
         return Vector3.Cross(sideAB, sideAC).normalized;
     }
-    public void Finalize()
+    public void ProcessMesh()
     {
         if (useFlatShading)
         {
