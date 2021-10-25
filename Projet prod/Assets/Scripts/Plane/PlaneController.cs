@@ -41,7 +41,7 @@ public class PlaneController : MonoBehaviour
     private Rigidbody planeRigidBody;
 
     // Debuging Canevas
-    [Header("Debuging Canevas")]
+    /*[Header("Debuging Canevas")]
     [SerializeField]
     private Slider YawSlider;
     [SerializeField]
@@ -51,7 +51,7 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     private Slider ThrottleSlider;
     [SerializeField]
-    private Text speedText;
+    private Text speedText;*/
 
 #if UNITY_EDITOR
     /// <summary>
@@ -106,7 +106,7 @@ public class PlaneController : MonoBehaviour
 
         planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
 
-        UpdateUi();
+        //UpdateUi();
     }
 
 
@@ -139,9 +139,7 @@ public class PlaneController : MonoBehaviour
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
             if (angleOfAttack <= 15)
-                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);
-            Debug.Log(angleOfAttack);
-            
+                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);            
 
             // Rigid body forces and torques
             planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);
@@ -158,12 +156,12 @@ public class PlaneController : MonoBehaviour
     /// <summary>
     /// Update the debugging UI
     /// </summary>
-    private void UpdateUi()
+    /*private void UpdateUi()
     {
         YawSlider.value = yawAxis / inputMultiplicator;
         PitchSlider.value = pitchAxis / inputMultiplicator;
         RollSlider.value = - rollAxis / inputMultiplicator;
         ThrottleSlider.value = throttle / maxThrottle;
         speedText.text = Vector3.Magnitude(planeRigidBody.velocity).ToString();
-    }
+    }*/
 }
