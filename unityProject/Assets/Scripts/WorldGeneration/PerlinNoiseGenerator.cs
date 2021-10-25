@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class PerlinNoiseGenerator
 {
-    public enum NormalizeMode { Local,Global };
+    public enum NormalizeMode { Local, Global };
 
-    public static float[,] GenerateNoiseMap(int mapLargeur, int mapHauteur,int seed, float scale, int octaves, float persistance, float lacunarity,Vector2 offset,NormalizeMode normalizeMode)
+    public static float[,] GenerateNoiseMap(int mapLargeur, int mapHauteur, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset, NormalizeMode normalizeMode)
     {
         float[,] noiseMap = new float[mapLargeur, mapHauteur];
         System.Random prng = new System.Random(seed);
@@ -38,13 +38,13 @@ public static class PerlinNoiseGenerator
         {
             for (int x = 0; x < mapLargeur; x++)
             {
-                 amplitude = 1;
-                 frequency = 1;
+                amplitude = 1;
+                frequency = 1;
                 float noiseHeight = 0;
                 for (int i = 0; i < octaves; i++)
                 {
                     float sampleX = (x - halfWidth + octaveOffsets[i].x) / scale * frequency;
-                    float sampleY = (y - halfHeight + octaveOffsets[i].y) / scale * frequency ;
+                    float sampleY = (y - halfHeight + octaveOffsets[i].y) / scale * frequency;
 
                     float perlinValeur = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
                     noiseHeight += perlinValeur * amplitude;
@@ -75,7 +75,7 @@ public static class PerlinNoiseGenerator
                 else
                 {
                     float normalizedHeight = (noiseMap[x, y] + 1) / (maxPossibleHeight);
-                    noiseMap[x, y] = Mathf.Clamp(normalizedHeight,0,int.MaxValue);
+                    noiseMap[x, y] = Mathf.Clamp(normalizedHeight, 0, int.MaxValue);
                 }
             }
         }

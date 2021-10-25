@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TextureGenerator
 {
-    public static Texture2D TextureFromCoulourMap(Color[] colourMap,int largeur, int hauteur)
+    public static Texture2D TextureFromCoulourMap(Color[] colourMap, int largeur, int hauteur)
     {
         Texture2D texture = new Texture2D(largeur, hauteur);
         texture.filterMode = FilterMode.Point;
@@ -27,6 +27,6 @@ public static class TextureGenerator
                 //Debug.Log(noiseMap[x, y]);
             }
         }
-        return TextureFromCoulourMap(colorMap,largeur,hauteur);
+        return TextureFromCoulourMap(colorMap, largeur, hauteur);
     }
 }

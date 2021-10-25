@@ -7,18 +7,18 @@ using System.Threading;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap,ColourMap,Mesh};
+    public enum DrawMode { NoiseMap, ColourMap, Mesh };
     public DrawMode drawMode;
 
-    public PerlinNoiseGenerator.NormalizeMode normalizeMode; 
+    public PerlinNoiseGenerator.NormalizeMode normalizeMode;
 
-    public const int mapChunkSize=239;
-    [Range(0,6)]
+    public const int mapChunkSize = 239;
+    [Range(0, 6)]
     public int editorPreviewLOD;
     public float noiseScale;
-    
+
     public int octavesnb;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float persistance;
     public float lacunarity;
     public int seed;
@@ -26,7 +26,7 @@ public class MapGenerator : MonoBehaviour
     public AnimationCurve meshHeightCurve;
     public bool autoUpdate;
 
-    
+
     public Vector2 offset;
 
     public TerrainType[] regions;
@@ -52,24 +52,24 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public void RequestMapData(Vector2 centre,Action<MapData> callback)
+    public void RequestMapData(Vector2 centre, Action<MapData> callback)
     {
         ThreadStart threadStart = delegate
         {
-            MapDataThread(centre,callback);
+            MapDataThread(centre, callback);
         };
         new Thread(threadStart).Start();
     }
     void MapDataThread(Vector2 centre, Action<MapData> callback)
     {
         MapData mapData = GenerateMapData(centre);
-        lock (mapThreadInfosQueue) 
-        { 
+        lock (mapThreadInfosQueue)
+        {
             mapThreadInfosQueue.Enqueue(new MapThreadInfo<MapData>(callback, mapData));
         }
     }
 
-    public void RequestMeshData(MapData mapData,int lod,Action<MeshData> callback)
+    public void RequestMeshData(MapData mapData, int lod, Action<MeshData> callback)
     {
         ThreadStart threadStart = delegate
         {
@@ -78,12 +78,12 @@ public class MapGenerator : MonoBehaviour
         new Thread(threadStart).Start();
     }
 
-    void MeshDataThread(MapData mapData,int lod, Action<MeshData> callback)
+    void MeshDataThread(MapData mapData, int lod, Action<MeshData> callback)
     {
-        MeshData meshData = MeshGenerator.GenerateTerrainMesh(mapData.heightMap,meshHeightMultiplier,meshHeightCurve, lod);
+        MeshData meshData = MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMultiplier, meshHeightCurve, lod);
         lock (meshDataThreadInfoQueue)
         {
-            meshDataThreadInfoQueue.Enqueue(new MapThreadInfo<MeshData>(callback,meshData));
+            meshDataThreadInfoQueue.Enqueue(new MapThreadInfo<MeshData>(callback, meshData));
         }
     }
 
@@ -91,20 +91,20 @@ public class MapGenerator : MonoBehaviour
     {
         if (mapThreadInfosQueue.Count > 0)
         {
-            for(int i = 0; i < mapThreadInfosQueue.Count; i++)
+            for (int i = 0; i < mapThreadInfosQueue.Count; i++)
             {
                 MapThreadInfo<MapData> threadInfo = mapThreadInfosQueue.Dequeue();
                 threadInfo.callback(threadInfo.parameter);
             }
         }
 
-        if (meshDataThreadInfoQueue.Count>0)
+        if (meshDataThreadInfoQueue.Count > 0)
         {
             for (int i = 0; i < meshDataThreadInfoQueue.Count; i++)
             {
                 MapThreadInfo<MeshData> threadInfo = meshDataThreadInfoQueue.Dequeue();
                 threadInfo.callback(threadInfo.parameter);
-            } 
+            }
         }
     }
 
@@ -114,15 +114,15 @@ public class MapGenerator : MonoBehaviour
         Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
         for (int y = 0; y < mapChunkSize; y++)
         {
-            for(int x = 0; x < mapChunkSize; x++)
+            for (int x = 0; x < mapChunkSize; x++)
             {
                 float currentHeight = noiseMap[x, y];
-                for(int i = 0; i < regions.Length;i++)
+                for (int i = 0; i < regions.Length; i++)
                 {
                     if (currentHeight >= regions[i].height)
                     {
                         colourMap[y * mapChunkSize + x] = regions[i].colour;
-                        
+
                     }
                     else
                     {
@@ -136,7 +136,7 @@ public class MapGenerator : MonoBehaviour
     }
     private void OnValidate()
     {
-        
+
         if (lacunarity < 1)
         {
             lacunarity = 1;
@@ -151,7 +151,7 @@ public class MapGenerator : MonoBehaviour
         public readonly Action<T> callback;
         public readonly T parameter;
 
-        public MapThreadInfo(Action<T> callback,T parameter)
+        public MapThreadInfo(Action<T> callback, T parameter)
         {
             this.callback = callback;
             this.parameter = parameter;
