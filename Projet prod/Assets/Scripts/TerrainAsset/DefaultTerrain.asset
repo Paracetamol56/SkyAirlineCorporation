@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c4a4cf6f8946b41846beef0899b999, type: 3}
   m_Name: DefaultTerrain
   m_EditorClassIdentifier: 
-  autoUpdate: 0
+  autoUpdate: 1
   uniformScale: 10
   meshHeightMultiplier: 40
   meshHeightCurve:
