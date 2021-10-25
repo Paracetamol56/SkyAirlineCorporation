@@ -18,7 +18,7 @@ public class PlaneController : MonoBehaviour
     private float maxThrottle = 200.0f;
     [SerializeField]
     [Tooltip("Minimum speed to keep the airplane in the air.\nWill be modified by angle of attack")]
-    private float averrageMinFlightSpeed = 75.0f;
+    private float averrageMinFlightSpeed = 70.0f;
     [SerializeField]
     [Tooltip("Auto stabilization rotate the plane into standard horizontal position.\n0 = not at all\n1 = normal stabilization")]
     private float autoStabilization = 1.0f;
@@ -27,7 +27,7 @@ public class PlaneController : MonoBehaviour
     private float throttleInputMultiplicator = 1.0f;
     [SerializeField]
     [Tooltip("Defines input sensitivity.")]
-    private float inputMultiplicator = 5.0f;
+    private float inputMultiplicator = 1.0f;
     [SerializeField]
     [Tooltip("This coefficient is used to compute the plane lift from the z velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
     private float liftCoefficient = 1000.0f;
