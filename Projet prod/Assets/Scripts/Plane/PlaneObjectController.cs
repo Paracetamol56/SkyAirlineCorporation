@@ -36,7 +36,6 @@ public class PlaneObjectController : MonoBehaviour
     [SerializeField]
     private float maxPropellerSpeed = 100.0f;
 
-
     /// <summary>
     /// Update rubber, elevators and ailerons angles
     /// </summary>
@@ -51,7 +50,6 @@ public class PlaneObjectController : MonoBehaviour
         leftAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
         rightAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
     }
-
 
     /// <summary>
     /// Update propeller rotation speed

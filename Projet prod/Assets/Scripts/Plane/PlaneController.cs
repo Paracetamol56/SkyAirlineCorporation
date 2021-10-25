@@ -76,7 +76,6 @@ public class PlaneController : MonoBehaviour
     }
 #endif
 
-
     /// <summary>
     /// Called once if the object wakes up correctly
     /// </summary>
@@ -85,7 +84,6 @@ public class PlaneController : MonoBehaviour
         planeRigidBody = GetComponent<Rigidbody>();
         planeObjectController = GetComponent<PlaneObjectController>();
     }
-
 
     /// <summary>
     /// Rendering computations
@@ -108,7 +106,6 @@ public class PlaneController : MonoBehaviour
 
         //UpdateUi();
     }
-
 
     /// <summary>
     /// Physic computations
@@ -151,7 +148,6 @@ public class PlaneController : MonoBehaviour
             planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
         }
     }
-
 
     /// <summary>
     /// Update the debugging UI
