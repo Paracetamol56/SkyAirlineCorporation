@@ -12,4 +12,4 @@ jobs:
       - name: Unity Auto Format
         uses: tyirvine/Unity-Actions-Autoformat@v1.0.5
         with:
-          path: 'Projet prod'/Assets/Scripts/
+          path: Projet\ prod/Assets/Scripts/
