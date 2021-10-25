@@ -30,7 +30,7 @@ public class PreGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPlaneShown.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed); 
+        currentPlaneShown.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
     }
 
     public void StartGame()
@@ -38,11 +38,11 @@ public class PreGame : MonoBehaviour
         SaveCurrentPlane();
 
         gm.SetSelectedPlane(currentPlaneType);
-        
+
         ms.SetMode(ManagerScene.GameMode.Freemode);
         ms.LoadGameScene();
     }
-    
+
     public void ExitGame()
     {
         Application.Quit();

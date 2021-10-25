@@ -10,7 +10,7 @@ public class ManagerScene : MonoBehaviour
 
     private void MakeSingleton()
     {
-        if (instance !=null)
+        if (instance != null)
         {
             Destroy(gameObject);
         }
@@ -23,7 +23,7 @@ public class ManagerScene : MonoBehaviour
 
     void Awake()
     {
-       MakeSingleton(); 
+        MakeSingleton();
     }
 
     /////////////////////////////////////
@@ -45,9 +45,9 @@ public class ManagerScene : MonoBehaviour
         Mode = GameMode.Freemode;
     }
 
-    public  void SetMode(GameMode value)
+    public void SetMode(GameMode value)
     {
-        Mode =  value;
+        Mode = value;
     }
 
     public GameMode GetMode()
@@ -57,9 +57,9 @@ public class ManagerScene : MonoBehaviour
 
     public void LoadGameScene()
     {
-        switch(Mode)
+        switch (Mode)
         {
-            case GameMode.Freemode: 
+            case GameMode.Freemode:
                 SceneManager.LoadScene("FreeMode");
                 break;
             case GameMode.Delivery:
@@ -71,5 +71,5 @@ public class ManagerScene : MonoBehaviour
             default:
                 break;
         }
-    }  
+    }
 }

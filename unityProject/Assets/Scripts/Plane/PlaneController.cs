@@ -136,7 +136,7 @@ public class PlaneController : MonoBehaviour
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
             if (angleOfAttack <= 15)
-                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);            
+                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);
 
             // Rigid body forces and torques
             planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);

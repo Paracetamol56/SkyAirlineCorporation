@@ -16,7 +16,7 @@ public class GlobalGameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("Double instance GlobalGameManager");
             return;
@@ -24,7 +24,8 @@ public class GlobalGameManager : MonoBehaviour
         instance = this;
     }
 
-    public static GlobalGameManager GetInstance() {
+    public static GlobalGameManager GetInstance()
+    {
         return instance;
     }
 
