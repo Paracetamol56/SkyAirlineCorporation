@@ -1,0 +1,15 @@
+name: Format Scripts
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Unity Auto Format
+        uses: tyirvine/Unity-Actions-Autoformat@1.0.6
+        with:
+          path: './unityProject/Assets/Scripts/'
