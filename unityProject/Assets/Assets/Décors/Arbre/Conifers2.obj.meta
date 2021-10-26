@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7881cd44044645f4ab3aa58b148ba007
+guid: b74eba0aab7085f4cab58eba3546c3b3
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: leafes_Mat.001
-    second: {fileID: 2100000, guid: 7a2053a20f6957f4d91ee24bbdf56d85, type: 2}
+      name: g1Mat
+    second: {fileID: 2100000, guid: 88560231f5c86ad469ea290069b5e30d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: trunk_Mat.001
-    second: {fileID: 2100000, guid: 88560231f5c86ad469ea290069b5e30d, type: 2}
+      name: g2Mat
+    second: {fileID: 2100000, guid: 7a2053a20f6957f4d91ee24bbdf56d85, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
