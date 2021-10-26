@@ -11,7 +11,7 @@ public class UpdatableData : ScriptableObject
         if (autoUpdate)
         {
             UnityEditor.EditorApplication.update += NotifyOfUpdatedValues;
-            
+
         }
     }
     public void NotifyOfUpdatedValues()

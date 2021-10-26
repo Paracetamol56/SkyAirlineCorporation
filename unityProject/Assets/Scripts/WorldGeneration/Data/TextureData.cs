@@ -5,9 +5,9 @@ using UnityEngine;
 public class TextureData : UpdatableData
 {
     public Color[] baseColours;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float[] baseStartHeights;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float[] baseBlends;
     float savedMinHeight;
     float savedMaxHeight;
@@ -16,7 +16,7 @@ public class TextureData : UpdatableData
         material.SetInt("baseColourCount", baseColours.Length);
         material.SetColorArray("baseColours", baseColours);
         material.SetFloatArray("baseStartHeights", baseStartHeights);
-        material.SetFloatArray("baseBlends",baseBlends);
+        material.SetFloatArray("baseBlends", baseBlends);
         UpdateMeshHeights(material, savedMinHeight, savedMaxHeight);
     }
     public void UpdateMeshHeights(Material material, float minHeight, float maxHeight)

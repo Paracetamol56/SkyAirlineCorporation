@@ -6,7 +6,7 @@ using System.Threading;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap,Mesh};
+    public enum DrawMode { NoiseMap, Mesh };
     public DrawMode drawMode;
 
     public TerrainData terrainData;
@@ -15,9 +15,9 @@ public class MapGenerator : MonoBehaviour
 
     public Material terrainMaterial;
 
-    [Range(0,6)]
+    [Range(0, 6)]
     public int editorPreviewLOD;
-   
+
     public bool autoUpdate;
 
 
@@ -146,7 +146,7 @@ public class MapGenerator : MonoBehaviour
             terrainData.OnValuesUpdated -= OnValuesUpdated;
             terrainData.OnValuesUpdated += OnValuesUpdated;
         }
-        if(noiseData != null)
+        if (noiseData != null)
         {
             noiseData.OnValuesUpdated -= OnValuesUpdated;
             noiseData.OnValuesUpdated += OnValuesUpdated;
