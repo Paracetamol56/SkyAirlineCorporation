@@ -78,7 +78,7 @@ public class ManagerScene : MonoBehaviour
         SceneManager.LoadScene("PreGameScene");
     }
 
-    
+
     public void ExitGame()
     {
         Application.Quit();
