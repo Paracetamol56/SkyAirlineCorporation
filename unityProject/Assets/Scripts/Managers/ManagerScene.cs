@@ -72,4 +72,15 @@ public class ManagerScene : MonoBehaviour
                 break;
         }
     }
+
+    public void BacktoMenu()
+    {
+        SceneManager.LoadScene("PreGameScene");
+    }
+
+    
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
