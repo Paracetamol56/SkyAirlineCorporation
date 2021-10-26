@@ -20,7 +20,7 @@ Shader "Custom/DefaultShader"
 		int baseColourCount;
 		float3 baseColours[maxColourCount];
 		float baseStartHeights[maxColourCount];
-		float  baseBlends[maxColourCount];
+		float baseBlends[maxColourCount];
 
 		float minHeight;
 		float maxHeight;
