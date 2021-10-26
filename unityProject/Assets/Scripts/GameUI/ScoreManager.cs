@@ -8,16 +8,16 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private Text textScore;
 
-    // TODO : mettre en place un système de sauvegarde du score
+    // TODO : mettre en place un systï¿½me de sauvegarde du score
     private int score = 0;
 
     private static ScoreManager instance;
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
-            Debug.LogError("ScoreManager déjà existant...");
+            Debug.LogError("ScoreManager dï¿½jï¿½ existant...");
             return;
         }
 
