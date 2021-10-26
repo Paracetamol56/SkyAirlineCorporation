@@ -6,7 +6,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/Paracetamol56/Projet-prod)
 ![GitHub contributors](https://img.shields.io/github/contributors/Paracetamol56/Projet-prod)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Paracetamol56/Projet-prod)
-![GitHub last commit](https://img.shields.io/badge/Unity%20version-2020.3%202f1-yellow)
+![GitHub last commit](https://img.shields.io/badge/Unity%20version-2020.3%2012f1-yellow)
 ![GitHub last commit](https://img.shields.io/badge/platform-Windows%20%7C%20MacOS%20%7C%20Linux-lightgrey)
 
 ## Team 👨‍👦‍👦
