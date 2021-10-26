@@ -11,6 +11,7 @@ public class PreGame : MonoBehaviour
     private int planeIndex = 0;
     private GameObject showPoint;
     private GlobalGameManager.listOfPlanes currentPlaneType;
+    private Quaternion planeAngle;
 
     // Instances of managers
     private GlobalGameManager gm;
@@ -31,6 +32,7 @@ public class PreGame : MonoBehaviour
     void Update()
     {
         currentPlaneShown.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
+        planeAngle = currentPlaneShown.transform.rotation;
     }
 
     public void StartGame()
@@ -45,7 +47,7 @@ public class PreGame : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        //ms.Quit();
     }
 
     public void NextPlane()
@@ -68,6 +70,7 @@ public class PreGame : MonoBehaviour
         currentPlaneShown = planesSelection[planeIndex];
         currentPlaneShown.transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(currentPlaneShown, showPoint.transform);
+        currentPlaneShown.transform.rotation = planeAngle;
 
         switch (planeIndex)
         {

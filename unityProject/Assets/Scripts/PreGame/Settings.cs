@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 
 public class Settings : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Dropdown resolutionDropdown;
-    [SerializeField] Dropdown qualityDropdown;
-    [SerializeField] Dropdown textureDropdown;
-    [SerializeField] Dropdown aaDropdown;
+    [SerializeField] TMP_Dropdown resolutionDropdown;
+    [SerializeField] TMP_Dropdown qualityDropdown;
+    [SerializeField] TMP_Dropdown textureDropdown;
+    [SerializeField] TMP_Dropdown aaDropdown;
     [SerializeField] Slider volumeSlider;
     private float currentVolume;
     private Resolution[] resolutions;
@@ -25,13 +26,13 @@ public class Settings : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " +
-                     resolutions[i].height;
+            string option = resolutions[i].width + "x" + resolutions[i].height + "" + resolutions[i].refreshRate + "Hz";
             options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width
                   && resolutions[i].height == Screen.currentResolution.height)
                 currentResolutionIndex = i;
         }
+
     }
 
     public void SetVolume(float volume)
