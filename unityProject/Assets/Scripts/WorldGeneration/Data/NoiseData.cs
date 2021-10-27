@@ -15,7 +15,7 @@ public class NoiseData : UpdatableData
     public Vector2 offset;
 
     public PerlinNoiseGenerator.NormalizeMode normalizeMode;
-
+    #if UNITY_EDITOR
     protected override void OnValidate()
     {
         if (lacunarity < 1)
@@ -28,4 +28,5 @@ public class NoiseData : UpdatableData
         }
         base.OnValidate();
     }
+    #endif
 }
