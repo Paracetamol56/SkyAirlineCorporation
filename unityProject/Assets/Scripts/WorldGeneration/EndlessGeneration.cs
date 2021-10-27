@@ -53,7 +53,7 @@ public class EndlessGeneration : MonoBehaviour
     void UpdateVisibleChunks()
     {
         HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
-        for (int i = visibleTerrainChunks.Count-1; i >=0; i--)
+        for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
         {
             alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
             visibleTerrainChunks[i].UpdateTerrainChunk();
@@ -177,7 +177,7 @@ public class EndlessGeneration : MonoBehaviour
                             lodMesh.RequestMesh(mapData);
                         }
                     }
-                    
+
                     visibleTerrainChunks.Add(this);
                 }
                 if (wasVisible != visible)
@@ -255,7 +255,7 @@ public class EndlessGeneration : MonoBehaviour
     [System.Serializable]
     public struct LODInfo
     {
-        [Range(0,MeshGenerator.numSupportedLODs - 1)]
+        [Range(0, MeshGenerator.numSupportedLODs - 1)]
         public int lod;
         public float visibleDstThreshold;
 
