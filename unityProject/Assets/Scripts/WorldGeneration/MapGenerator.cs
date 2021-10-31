@@ -79,7 +79,6 @@ public class MapGenerator : MonoBehaviour
 
     public void RequestMapData(Vector2 centre, Action<MapData> callback)
     {
-        //textureData.UpdateMeshHeights(terrainMaterial, terrainData.minHeight, terrainData.maxHeight);
         ThreadStart threadStart = delegate
         {
             MapDataThread(centre, callback);
