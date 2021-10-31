@@ -81,6 +81,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 3.54, z: 2.74}
   m_Center: {x: 0, y: 2.75, z: -7.65}
+--- !u!95 &1939342185162168536
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497446593010743804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6dd21cea3584e743826d47a23c5ac2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8259656919763234322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,25 +124,6 @@ MonoBehaviour:
   rightPropeller: {fileID: 6252423346406747510}
   minPropellerSpeed: 20
   maxPropellerSpeed: 100
---- !u!95 &1939342185162168536
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497446593010743804}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e6dd21cea3584e743826d47a23c5ac2f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &3813393956924829359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -208,15 +208,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523782845206345637, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523782845206345637, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523782845206345637, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523782845206345637, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: m_LocalPosition.x
