@@ -7,20 +7,32 @@ public class TrailsController : MonoBehaviour
     [SerializeField]
     private float minVelocity = 150.0f;
 
-    private TrailRenderer trailRenderer;
+    [SerializeField]
+    private List<TrailRenderer> trailRenderers;
+
     private Rigidbody rigidbody;
+    private bool isActive = false;
 
     private void Start()
     {
-        trailRenderer = GetComponent<TrailRenderer>();
-        rigidbody = GetComponentInParent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+        foreach (TrailRenderer elem in trailRenderers)
+            elem.enabled = false;
     }
 
     private void FixedUpdate()
     {
-        if (rigidbody.velocity.magnitude > minVelocity)
-            trailRenderer.enabled = true;
-        else
-            trailRenderer.enabled = false;
+        if (rigidbody.velocity.magnitude > minVelocity && !isActive)
+        {
+            isActive = true;
+            foreach (TrailRenderer elem in trailRenderers)
+                elem.enabled = true;
+        }
+        else if (rigidbody.velocity.magnitude < minVelocity && isActive)
+        {
+            isActive = false;
+            foreach (TrailRenderer elem in trailRenderers)
+                elem.enabled = false;
+        }
     }
 }

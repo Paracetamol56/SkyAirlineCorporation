@@ -124,6 +124,22 @@ MonoBehaviour:
   rightAilerons: {fileID: 6717165762054661357}
   leftPropeller: {fileID: 6288346110368954738}
   rightPropeller: {fileID: 6252423346406747510}
+--- !u!114 &4288241675410135243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497446593010743804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2c5d5780e60b245aee93c7df281265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minVelocity: 150
+  trailRenderers:
+  - {fileID: 8488750659162611046}
+  - {fileID: 0}
 --- !u!65 &3813393956924829359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220,6 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba43823780cc56f4eaae690f8f7623a2, type: 3}
+--- !u!96 &8488750659162611046 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 5449870305144050945, guid: ba43823780cc56f4eaae690f8f7623a2, type: 3}
+  m_PrefabInstance: {fileID: 4499040593410754663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6737424483263042787
 PrefabInstance:
   m_ObjectHideFlags: 0
