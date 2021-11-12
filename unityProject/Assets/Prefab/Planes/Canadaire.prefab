@@ -109,21 +109,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7497446593010743804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5883f6a707b49f4f99b20133f88f055, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dc5131cb48d9904da3c9103e20986e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rubber: {fileID: 8558834110244165269}
-  rubberAmplitude: 20
-  leftElevator: {fileID: 2115743461098524223}
-  rightElevator: {fileID: 3167146981185395783}
-  elevatorAmplitude: 30
-  leftAilerons: {fileID: 1589261424139352393}
-  rightAilerons: {fileID: 6717165762054661357}
-  aileronsAmplitude: 40
-  leftPropeller: {fileID: 6288346110368954738}
-  rightPropeller: {fileID: 6252423346406747510}
+  rubberAmplitude: 10
+  elevatorAmplitude: 20
+  aileronsAmplitude: 30
   minPropellerSpeed: 20
   maxPropellerSpeed: 100
+  rubber: {fileID: 8558834110244165269}
+  leftElevator: {fileID: 2115743461098524223}
+  rightElevator: {fileID: 3167146981185395783}
+  leftAilerons: {fileID: 1589261424139352393}
+  rightAilerons: {fileID: 6717165762054661357}
+  leftPropeller: {fileID: 6288346110368954738}
+  rightPropeller: {fileID: 6252423346406747510}
 --- !u!65 &3813393956924829359
 BoxCollider:
   m_ObjectHideFlags: 0
