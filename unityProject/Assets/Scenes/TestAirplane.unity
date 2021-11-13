@@ -740,10 +740,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Voltige
       objectReference: {fileID: 0}
-    - target: {fileID: 8914969010117116859, guid: c48fe0315c11e144ea311e13a913468d, type: 3}
-      propertyPath: averrageMinFlightSpeed
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 8949475349398931140, guid: c48fe0315c11e144ea311e13a913468d, type: 3}
       propertyPath: m_RootOrder
       value: 1

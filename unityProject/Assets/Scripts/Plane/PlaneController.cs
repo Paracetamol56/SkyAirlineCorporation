@@ -104,7 +104,7 @@ public class PlaneController : MonoBehaviour
         pitchAxis = Input.GetAxis("Pitch") * 2.0f;
         rollAxis = Input.GetAxis("Roll") * 5.0f;
 
-        objectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
+        objectController.UpdateAngles(new Vector3(Mathf.Clamp(pitchAxis * 3, -1, 1), Mathf.Clamp(yawAxis * 3, -1, 1), Mathf.Clamp(rollAxis, -1, 1)));
     }
 
     /// <summary>
@@ -124,8 +124,6 @@ public class PlaneController : MonoBehaviour
         if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f, 1 << LayerMask.NameToLayer("Ground")))
         {
             isGrounded = true;
-            Debug.Log(isGrounded);
-            Debug.DrawRay(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
 
             // Rigid body forces and torques
             planeRigidBody.AddRelativeTorque(new Vector3(0, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
@@ -134,8 +132,6 @@ public class PlaneController : MonoBehaviour
         else
         {
             isGrounded = false;
-            Debug.Log(isGrounded);
-            Debug.DrawRay(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down) * 2.0f, Color.white);
 
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
