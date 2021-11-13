@@ -17,17 +17,28 @@ public class VoltigeObjectController : ObjectController
     private Transform leftAileron;
     [SerializeField]
     private Transform rightAileron;
-    private Quaternion initialLeftAileron;
-    private Quaternion initialRightAileron;
 
     // Propellers
     [SerializeField]
     private Transform propeller;
 
-    private void Start()
+    // Fume generator
+    [SerializeField]
+    private ParticleSystem fumeGenerator;
+    private bool fumeOn = false;
+
+    private void Update()
     {
-        initialLeftAileron = leftAileron.rotation;
-        initialRightAileron = rightAileron.rotation;
+        // Landing gears input
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (fumeOn)
+                fumeOn = false;
+            else
+                fumeOn = true;
+            var emission = fumeGenerator.emission;
+            emission.enabled = fumeOn;
+        }
     }
 
     /// <summary>
