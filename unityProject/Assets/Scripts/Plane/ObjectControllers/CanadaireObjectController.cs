@@ -26,6 +26,29 @@ public class CanadaireObjectController : ObjectController
     [SerializeField]
     private Transform rightPropeller;
 
+    // Landing gears attributes
+    private bool landingGearsOut = true;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        animator.SetBool("landingGearsOut", landingGearsOut);
+    }
+
+    private void Update()
+    {
+        // Landing gears input
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (landingGearsOut)
+                landingGearsOut = false;
+            else
+                landingGearsOut = true;
+            animator.SetBool("landingGearsOut", landingGearsOut);
+        }
+    }
+
     /// <summary>
     /// Update rubber, elevators and ailerons angles
     /// </summary>

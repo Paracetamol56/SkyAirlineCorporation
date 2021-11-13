@@ -14,13 +14,21 @@ public class VoltigeObjectController : ObjectController
 
     // Roll axis
     [SerializeField]
-    private Transform leftAilerons;
+    private Transform leftAileron;
     [SerializeField]
-    private Transform rightAilerons;
+    private Transform rightAileron;
+    private Quaternion initialLeftAileron;
+    private Quaternion initialRightAileron;
 
     // Propellers
     [SerializeField]
     private Transform propeller;
+
+    private void Start()
+    {
+        initialLeftAileron = leftAileron.rotation;
+        initialRightAileron = rightAileron.rotation;
+    }
 
     /// <summary>
     /// Update rubber, elevators and ailerons angles
@@ -30,10 +38,11 @@ public class VoltigeObjectController : ObjectController
     {
         rubber.localRotation = Quaternion.Euler(-90, Mathf.Lerp(rubberAmplitude, -rubberAmplitude, (angles.y + 1) / 2), 0);
 
-        elevators.localRotation = Quaternion.Euler(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2) - 90, 0, 0);
+        
+        elevators.localRotation = Quaternion.AngleAxis( Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2), Vector3.forward) * Quaternion.AngleAxis(90, Vector3.right);
 
-        leftAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
-        rightAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
+        leftAileron.localRotation = Quaternion.Euler(90, 188.5f, 0) * Quaternion.AngleAxis(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2), Vector3.forward);
+        rightAileron.localRotation = Quaternion.Euler(-90, -8.5f, 0) * Quaternion.AngleAxis(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2), Vector3.forward);
     }
 
     /// <summary>
@@ -44,6 +53,6 @@ public class VoltigeObjectController : ObjectController
     {
         float rotationSpeed = Mathf.Lerp(minPropellerSpeed, maxPropellerSpeed, throttle);
 
-        propeller.Rotate(Vector3.forward, rotationSpeed);
+        propeller.Rotate(Vector3.right, rotationSpeed);
     }
 }
