@@ -28,8 +28,7 @@ public class Settings : MonoBehaviour
         {
             string option = resolutions[i].width + "x" + resolutions[i].height + "" + resolutions[i].refreshRate + "Hz";
             options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width
-                  && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 currentResolutionIndex = i;
         }
 
@@ -65,10 +64,11 @@ public class Settings : MonoBehaviour
 
     public void SetQuality(int qualityIndex)
     {
-        if (qualityIndex != 6) // if the user is not using 
-                               //any of the presets
+        if (qualityIndex != 6) // if the user is not using any of the preset
             QualitySettings.SetQualityLevel(qualityIndex);
-        switch (qualityIndex)
+
+        // Si on decommente ca en dessous le jeu crash
+        /*switch (qualityIndex)
         {
             case 0: // quality level - very low
                 textureDropdown.value = 3;
@@ -94,7 +94,7 @@ public class Settings : MonoBehaviour
                 textureDropdown.value = 0;
                 aaDropdown.value = 2;
                 break;
-        }
+        }*/
 
         qualityDropdown.value = qualityIndex;
     }
