@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoltigeObjectController : ObjectController 
+public class VoltigeObjectController : ObjectController
 {
     // Yaw axis
     [SerializeField]
@@ -38,7 +38,7 @@ public class VoltigeObjectController : ObjectController
     {
         rubber.localRotation = Quaternion.Euler(-90, Mathf.Lerp(rubberAmplitude, -rubberAmplitude, (angles.y + 1) / 2), 0);
 
-        elevators.localRotation = Quaternion.AngleAxis( Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2), Vector3.back) * Quaternion.AngleAxis(90, Vector3.right);
+        elevators.localRotation = Quaternion.AngleAxis(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2), Vector3.back) * Quaternion.AngleAxis(90, Vector3.right);
 
         leftAileron.localRotation = Quaternion.Euler(90, 188.5f, 0) * Quaternion.AngleAxis(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2), Vector3.down);
         rightAileron.localRotation = Quaternion.Euler(-90, -8.5f, 0) * Quaternion.AngleAxis(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2), Vector3.down);
