@@ -26,11 +26,11 @@ public abstract class ObjectController : MonoBehaviour
     /// Update rubber, elevators and ailerons angles
     /// </summary>
     /// <param name="angles">angles contains 3 floating number from input between -1 and 1</param>
-    public virtual void UpdateAngles(Vector3 angles) {}
+    public virtual void UpdateAngles(Vector3 angles) { }
 
     /// <summary>
     /// Update propeller rotation speed
     /// </summary>
     /// <param name="throttle">throttle is between 0 and 1</param>
-    public virtual void UpdateThrottle(float throttle) {}
+    public virtual void UpdateThrottle(float throttle) { }
 }
