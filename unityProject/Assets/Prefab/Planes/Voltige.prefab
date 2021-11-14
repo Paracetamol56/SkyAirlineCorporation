@@ -4941,7 +4941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4128971803599827674, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: liftCoefficient
-      value: 5000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4128971803599827674, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: autoStabilization
@@ -4949,7 +4949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4128971803599827674, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: inputMultiplicator
-      value: 3
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 4128971803599827674, guid: fce2c673b03dff34ab7dd00ca4fd8a92, type: 3}
       propertyPath: groundDetectionOffset
