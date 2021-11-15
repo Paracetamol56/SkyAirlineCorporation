@@ -447,7 +447,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722810186}
-  m_Mesh: {fileID: 1218931267}
+  m_Mesh: {fileID: 1143065708}
 --- !u!114 &722810190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4207a1e8ec202145a7671bab2074d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &1218931267
+--- !u!43 &1143065708
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -863,7 +863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057879501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 196.44171, y: 115.65063, z: 163.17673}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1765278732}
