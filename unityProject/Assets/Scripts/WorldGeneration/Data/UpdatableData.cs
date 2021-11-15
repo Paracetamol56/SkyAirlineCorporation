@@ -4,8 +4,8 @@ using System.Collections;
 public class UpdatableData : ScriptableObject
 {
 
-	public event System.Action OnValuesUpdated;
-	public bool autoUpdate;
+    public event System.Action OnValuesUpdated;
+    public bool autoUpdate;
 
 #if UNITY_EDITOR
 
