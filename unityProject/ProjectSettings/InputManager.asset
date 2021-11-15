@@ -11,9 +11,9 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: left
     positiveButton: right
-    altNegativeButton: a
-    altPositiveButton: d
-    gravity: 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
     sensitivity: 3
     snap: 1
@@ -27,9 +27,9 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: down
     positiveButton: up
-    altNegativeButton: s
-    altPositiveButton: w
-    gravity: 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
     sensitivity: 3
     snap: 1
@@ -41,11 +41,11 @@ InputManager:
     m_Name: Fire1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left ctrl
+    negativeButton: left ctrl
+    positiveButton: left shift
     altNegativeButton: 
-    altPositiveButton: mouse 0
-    gravity: 1000
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
     sensitivity: 1000
     snap: 0
@@ -57,11 +57,11 @@ InputManager:
     m_Name: Fire2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left alt
+    negativeButton: q
+    positiveButton: d
     altNegativeButton: 
-    altPositiveButton: mouse 1
-    gravity: 1000
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
     sensitivity: 1000
     snap: 0
@@ -73,11 +73,11 @@ InputManager:
     m_Name: Fire3
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left shift
+    negativeButton: s
+    positiveButton: z
     altNegativeButton: 
-    altPositiveButton: mouse 2
-    gravity: 1000
+    altPositiveButton: 
+    gravity: 0.5
     dead: 0.001
     sensitivity: 1000
     snap: 0
@@ -89,13 +89,45 @@ InputManager:
     m_Name: Jump
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: space
+    negativeButton: a
+    positiveButton: e
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 0.5
     dead: 0.001
     sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: CameraYaw
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: '[6]'
+    positiveButton: '[4]'
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.1
+    dead: 0.001
+    sensitivity: 0.1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: CameraPitch
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: '[2]'
+    positiveButton: '[8]'
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.1
+    dead: 0.001
+    sensitivity: 0.1
     snap: 0
     invert: 0
     type: 0
