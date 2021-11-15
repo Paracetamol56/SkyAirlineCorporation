@@ -1,31 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public static class TextureGenerator
 {
-    public static Texture2D TextureFromCoulourMap(Color[] colourMap, int largeur, int hauteur)
-    {
-        Texture2D texture = new Texture2D(largeur, hauteur);
-        texture.filterMode = FilterMode.Point;
-        texture.wrapMode = TextureWrapMode.Clamp;
-        texture.SetPixels(colourMap);
-        texture.Apply();
-        return texture;
-    }
-    public static Texture2D TextureFromHeightMap(float[,] heightmap)
-    {
-        int largeur = heightmap.GetLength(0);
-        int hauteur = heightmap.GetLength(1);
 
-        Color[] colorMap = new Color[largeur * hauteur];
-        for (int y = 0; y < hauteur; y++)
-            for (int x = 0; x < largeur; x++)
-            {
-                colorMap[(y * largeur) + x] = Color.Lerp(Color.black, Color.white, heightmap[x, y]);
-                //Debug.Log(noiseMap[x, y]);
-            }
+	public static Texture2D TextureFromColourMap(Color[] colourMap, int width, int height)
+	{
+		Texture2D texture = new Texture2D(width, height);
+		texture.filterMode = FilterMode.Point;
+		texture.wrapMode = TextureWrapMode.Clamp;
+		texture.SetPixels(colourMap);
+		texture.Apply();
+		return texture;
+	}
 
-        return TextureFromCoulourMap(colorMap, largeur, hauteur);
-    }
+
+	public static Texture2D TextureFromHeightMap(HeightMap heightMap)
+	{
+		int width = heightMap.values.GetLength(0);
+		int height = heightMap.values.GetLength(1);
+
+		Color[] colourMap = new Color[width * height];
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				colourMap[y * width + x] = Color.Lerp(Color.black, Color.white, Mathf.InverseLerp(heightMap.minValue, heightMap.maxValue, heightMap.values[x, y]));
+			}
+		}
+
+		return TextureFromColourMap(colourMap, width, height);
+	}
+
 }
