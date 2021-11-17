@@ -148,4 +148,13 @@ public class PlaneController : MonoBehaviour
             planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
         }
     }
+
+    /// <summary>
+    /// Used by DashboardUI
+    /// </summary>
+    /// <returns>throttle : the acceleration input</returns>
+    public float GetThrottle()
+    {
+        return throttle;
+    }
 }
