@@ -9074,12 +9074,45 @@ MonoBehaviour:
   compass: {fileID: 1255555388}
   orientationOffset: -90
   speedometer: {fileID: 1046696299}
-  speedText: {fileID: 166194207}
+  mappingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.22586755
+      outSlope: 0.22586755
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2004446
+      value: 0.04527393
+      inSlope: 0.70996934
+      outSlope: 1.1940712
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.1940712
+      outSlope: 1.1940712
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speedText: {fileID: 166194209}
   rpmCounter: {fileID: 1278890045}
   altivariometer: {fileID: 997794338}
   altimeterFirstHandPointer: {fileID: 1060013613}
   altimeterSecondHandPointer: {fileID: 1956061886}
-  altitudeText: {fileID: 1289706981}
+  altitudeText: {fileID: 1289706983}
 --- !u!1 &1894567375
 GameObject:
   m_ObjectHideFlags: 0

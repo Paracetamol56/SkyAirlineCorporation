@@ -22,7 +22,9 @@ public class DashboardUI : MonoBehaviour
     [SerializeField]
     private Image speedometer;
     [SerializeField]
-    private GameObject speedText;
+    AnimationCurve mappingCurve;
+    [SerializeField]
+    private TextMeshProUGUI speedText;
 
     // RPM counter reference
     [Header("RPM counter")]
@@ -41,7 +43,7 @@ public class DashboardUI : MonoBehaviour
     [SerializeField]
     private Image altimeterSecondHandPointer;
     [SerializeField]
-    private GameObject altitudeText;
+    private TextMeshProUGUI altitudeText;
 
     private Rigidbody airPlaneRigidbody;
     private Transform airPlaneTransform;
@@ -64,7 +66,9 @@ public class DashboardUI : MonoBehaviour
         compass.rectTransform.localRotation = Quaternion.Euler(0, 0, airPlaneTransform.rotation.eulerAngles.y + orientationOffset);
 
         // Speedometer
-
+        Debug.Log(airPlaneRigidbody.velocity.magnitude);
+        speedometer.rectTransform.localRotation = Quaternion.Euler(0, 0, (mappingCurve.Evaluate(Mathf.Clamp(airPlaneRigidbody.velocity.magnitude, 0.0f, 200.0f) / 200) * -335) - 5);
+        speedText.text = Mathf.Round(Mathf.Clamp(airPlaneRigidbody.velocity.magnitude, 0.0f, 200.0f)).ToString();
 
         // RPM counter
 
