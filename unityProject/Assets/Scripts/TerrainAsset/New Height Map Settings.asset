@@ -16,51 +16,51 @@ MonoBehaviour:
   noiseSettings:
     normalizeMode: 1
     scale: 50
-    octaves: 6
-    persistance: 0.509
-    lacunarity: 2
+    octaves: 8
+    persistance: 0.6
+    lacunarity: 1.5
     seed: 0
     offset: {x: 0, y: 0}
   useFalloff: 0
-  heightMultiplier: 1000
+  heightMultiplier: 4000
   heightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2.5565376
-      outSlope: 2.5565376
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.1340474
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.35307094
-      value: 0.31718987
-      inSlope: 0.30215174
-      outSlope: 0.30215174
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.20704977
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.72010297
-      value: 0.66174537
-      inSlope: 1.7513516
-      outSlope: 1.7513516
+      time: 0.3060757
+      value: 0.38673398
+      inSlope: 0.0012307018
+      outSlope: 0.0012307018
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.22856762
+      outWeight: 0.08409467
+    - serializedVersion: 3
+      time: 0.5234133
+      value: 0.45924807
+      inSlope: 0.5149289
+      outSlope: 0.5149289
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13909274
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.6705503
-      outSlope: 0.6705503
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.44694093
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
