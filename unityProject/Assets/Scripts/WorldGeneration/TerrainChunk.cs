@@ -44,6 +44,7 @@ public class TerrainChunk
 
 
         meshObject = new GameObject("Terrain Chunk");
+        meshObject.tag ="Ground";
         meshRenderer = meshObject.AddComponent<MeshRenderer>();
         meshFilter = meshObject.AddComponent<MeshFilter>();
         meshCollider = meshObject.AddComponent<MeshCollider>();
