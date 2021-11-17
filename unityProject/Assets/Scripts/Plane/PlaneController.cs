@@ -148,4 +148,18 @@ public class PlaneController : MonoBehaviour
             planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
         }
     }
+
+    /// <summary>
+    /// Freeze the plane and return its last position
+    /// </summary>
+    /// <returns>Plane last position</returns>
+    private Transform crash()
+    {
+        Transform returntransorm = transform;
+
+        planeRigidBody.velocity = Vector3.zero;
+        planeRigidBody.angularVelocity = Vector3.zero;
+
+        return returntransorm;
+    }
 }
