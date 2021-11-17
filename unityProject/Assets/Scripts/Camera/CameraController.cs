@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Input.GetAxis("CameraYaw"));
         orbitalRotation.y += Input.GetAxis("CameraYaw");
         orbitalRotation.x += Input.GetAxis("CameraPitch");
         if (Input.GetKeyDown(KeyCode.Keypad5))
@@ -38,5 +37,10 @@ public class CameraController : MonoBehaviour
 
         transform.position = position;
         //transform.rotation = rotation;
+    }
+
+    public void DestroyCam(Transform pos)
+    {
+        targetTransform = pos;
     }
 }
