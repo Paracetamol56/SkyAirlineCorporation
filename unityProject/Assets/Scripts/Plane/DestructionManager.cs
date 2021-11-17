@@ -15,19 +15,19 @@ public class DestructionManager : MonoBehaviour
     void Start()
     {
         PlanePos = this.GetComponent<Transform>();
-        rigidBody= this.GetComponent<Rigidbody>();
-        CamScript= camera.GetComponent<CameraController>();
-        
+        rigidBody = this.GetComponent<Rigidbody>();
+        CamScript = camera.GetComponent<CameraController>();
+
     }
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag=="Ground")
+        if (col.gameObject.tag == "Ground")
         {
             Instantiate(explosion, PlanePos.position, Quaternion.identity);
             rigidBody.velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             CamScript.DestroyCam(PlanePos);
-            
+
         }
     }
 }
