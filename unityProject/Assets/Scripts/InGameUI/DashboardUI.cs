@@ -72,7 +72,7 @@ public class DashboardUI : MonoBehaviour
         speedText.text = Mathf.Round(Mathf.Clamp(airPlaneRigidbody.velocity.magnitude, 0.0f, 200.0f)).ToString();
 
         // RPM counter
-        rpmCounter.rectTransform.localRotation = Quaternion.Euler(0, 0, airPlaneController.GetThrottle() / 200 * -252 + 126);
+        rpmCounter.rectTransform.localRotation = Quaternion.Euler(0, 0, ((airPlaneController.GetThrottle() / 200) * -252) + 126);
 
         // Altivariometer
         altivariometer.rectTransform.localRotation = Quaternion.Euler(0, 0, -airPlaneRigidbody.velocity.y + 90);
