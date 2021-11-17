@@ -78,6 +78,9 @@ public class DashboardUI : MonoBehaviour
         altivariometer.rectTransform.localRotation = Quaternion.Euler(0, 0, -airPlaneRigidbody.velocity.y + 90);
 
         // Altimeter
-        // 1 meter = 3.28 feet
+        float altitude = airPlaneTransform.position.y;
+        altimeterFirstHandPointer.rectTransform.localRotation = Quaternion.Euler(0, 0, altitude * -0.036f);
+        altimeterSecondHandPointer.rectTransform.localRotation = Quaternion.Euler(0, 0, altitude * -0.36f);
+        altitudeText.text = Mathf.Round(altitude).ToString();
     }
 }
