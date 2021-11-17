@@ -49,6 +49,9 @@ public static class Noise
                     float sampleY = (y - halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    //Debug.Log(perlinValue);
+                    //if()//utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
+                    //perlinValue = 0.5f * 2 - 1;
                     noiseHeight += perlinValue * amplitude;
 
                     amplitude *= settings.persistance;
@@ -103,6 +106,7 @@ public class NoiseSettings
 
     public int seed;
     public Vector2 offset;
+    public bool createSpawn;
 
     public void ValidateValues()
     {

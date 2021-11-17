@@ -55,6 +55,10 @@ public class TerrainChunk
         SetVisible(false);
 
         lodMeshes = new LODMesh[detailLevels.Length];
+        /*if (meshObject.transform.position.x == 0 && meshObject.transform.position.y == 0)
+        {
+
+        }*/
         for (int i = 0; i < detailLevels.Length; i++)
         {
             lodMeshes[i] = new LODMesh(detailLevels[i].lod);

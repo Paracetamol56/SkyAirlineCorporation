@@ -39,6 +39,7 @@ public class TerrainGenerator : MonoBehaviour
         chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize);
 
         UpdateVisibleChunks();
+
     }
 
     void Update()
@@ -107,7 +108,6 @@ public class TerrainGenerator : MonoBehaviour
             visibleTerrainChunks.Remove(chunk);
         }
     }
-
 }
 
 [System.Serializable]
