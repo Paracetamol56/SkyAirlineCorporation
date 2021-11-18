@@ -127,8 +127,6 @@ public class PlaneController : MonoBehaviour
                 isGrounded = true;
             else
                 isGrounded = false;
-
-            Debug.Log(isGrounded);
         }
         else
             isGrounded = false;
