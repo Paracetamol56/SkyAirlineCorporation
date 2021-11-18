@@ -43,6 +43,6 @@ public class CameraController : MonoBehaviour
     {
         targetTransform = pos;
         smoothness = 0.5f;
-        offsetPosition= new Vector3(0,50,-100);
+        offsetPosition = new Vector3(0, 50, -100);
     }
 }
