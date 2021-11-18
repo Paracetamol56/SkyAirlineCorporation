@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/PreGameScene.unity
     guid: 2fb57b819195b42799a7fa37af60b986
   - enabled: 1
-    path: Assets/Scenes/Presentation.unity
+    path: Assets/Scenes/Freemode.unity
     guid: 7228b73ed5e91fb43a851864c5bed4d6
   m_configObjects: {}
