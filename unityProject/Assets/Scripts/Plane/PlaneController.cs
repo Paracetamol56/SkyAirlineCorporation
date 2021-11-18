@@ -35,9 +35,9 @@ public class PlaneController : MonoBehaviour
     private float speed = 0.0f;
     private float speedRef;
     private bool isGrounded = false;
+    private bool landingGearsOut = true;
+    private Animator animator;
     private PlaneObjectController planeObjectController;
-
-    // RigidBody
     private Rigidbody planeRigidBody;
 
     // Debuging Canevas
@@ -81,6 +81,7 @@ public class PlaneController : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         planeRigidBody = GetComponent<Rigidbody>();
         planeObjectController = GetComponent<PlaneObjectController>();
     }
@@ -99,10 +100,23 @@ public class PlaneController : MonoBehaviour
             yawAxis = Input.GetAxis("Yaw") * 2.0f;
         else
             yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
+
         pitchAxis = Input.GetAxis("Pitch") * 2.0f;
         rollAxis = Input.GetAxis("Roll") * 5.0f;
 
         planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
+
+        // Landing gears input
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (!isGrounded)
+                landingGearsOut = !landingGearsOut;
+
+            if (landingGearsOut)
+                animator.SetBool("landingGearsOut", true);
+            else if (!landingGearsOut)
+                animator.SetBool("landingGearsOut", false);
+        }
 
         //UpdateUi();
     }
