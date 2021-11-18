@@ -12,22 +12,31 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 offsetPosition = new Vector3(0, 7, -18);
 
-    // Rotation parameter
-    [SerializeField]
-    private Vector3 offsetRotation = new Vector3(12, 0, 0);
-
     // Smoothing effect
     [SerializeField]
     private float smoothness;
 
     private Vector3 cameraVelocity;
+    private Vector3 orbitalRotation = new Vector3(0, 0, 0);
+
+    private void Update()
+    {
+        Debug.Log(Input.GetAxis("CameraYaw"));
+        orbitalRotation.y += Input.GetAxis("CameraYaw");
+        orbitalRotation.x += Input.GetAxis("CameraPitch");
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            orbitalRotation = new Vector3(0, 0, 0);
+        }
+    }
 
     private void FixedUpdate()
     {
-        Vector3 position = Vector3.SmoothDamp(transform.position, targetTransform.position + (targetTransform.rotation * offsetPosition), ref cameraVelocity, smoothness);
-        Quaternion rotation = targetTransform.rotation * Quaternion.Euler(offsetRotation);
+        Vector3 position = Vector3.SmoothDamp(transform.position, targetTransform.position + ((targetTransform.rotation * Quaternion.Euler(orbitalRotation)) * offsetPosition), ref cameraVelocity, smoothness);
+        // Quaternion rotation = targetTransform.rotation * Quaternion.Euler(offsetRotation);
+        transform.LookAt(targetTransform, targetTransform.up);
 
         transform.position = position;
-        transform.rotation = rotation;
+        //transform.rotation = rotation;
     }
 }

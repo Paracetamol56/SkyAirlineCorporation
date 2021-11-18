@@ -31,13 +31,14 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     [Tooltip("This coefficient is used to compute the plane lift from the z velocity.\nIn perfect flight, lift should be equal to 9.81 * mass in order to compensate plane weight.\nUsually defined experimentally using air density, wings area, shape and inclination. Here we are using a simplified version, so take what works the best.")]
     private float liftCoefficient = 1000.0f;
+    [SerializeField]
+    [Tooltip("Offset on Y axis to know where to start the raycast used for ground detections")]
+    private float groundDetectionOffset = 0.0f;
 
     private float speed = 0.0f;
     private float speedRef;
     private bool isGrounded = false;
-    private bool landingGearsOut = true;
-    private Animator animator;
-    private PlaneObjectController planeObjectController;
+    private ObjectController objectController;
     private Rigidbody planeRigidBody;
 
     // Debuging Canevas
@@ -81,9 +82,8 @@ public class PlaneController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        animator = gameObject.GetComponent<Animator>();
         planeRigidBody = GetComponent<Rigidbody>();
-        planeObjectController = GetComponent<PlaneObjectController>();
+        objectController = GetComponent<ObjectController>();
     }
 
     /// <summary>
@@ -93,32 +93,18 @@ public class PlaneController : MonoBehaviour
     {
         // Throttle input
         throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
-        planeObjectController.UpdateThrottle(throttle / maxThrottle);
+        objectController.UpdateThrottle(throttle / maxThrottle);
 
         // Axis inputs
         if (isGrounded)
-            yawAxis = Input.GetAxis("Yaw") * 2.0f;
+            yawAxis = Input.GetAxis("Yaw") * 2.0f * inputMultiplicator;
         else
-            yawAxis = Input.GetAxis("Yaw") * 50.0f / (speed + 1.0f);
+            yawAxis = (Input.GetAxis("Yaw") * 50.0f * inputMultiplicator) / (speed + 1.0f);
 
-        pitchAxis = Input.GetAxis("Pitch") * 2.0f;
-        rollAxis = Input.GetAxis("Roll") * 5.0f;
+        pitchAxis = Input.GetAxis("Pitch") * 2.0f * inputMultiplicator;
+        rollAxis = Input.GetAxis("Roll") * 5.0f * inputMultiplicator;
 
-        planeObjectController.UpdateAngles(new Vector3(Input.GetAxis("Pitch"), Input.GetAxis("Yaw"), Input.GetAxis("Roll")));
-
-        // Landing gears input
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (!isGrounded)
-                landingGearsOut = !landingGearsOut;
-
-            if (landingGearsOut)
-                animator.SetBool("landingGearsOut", true);
-            else if (!landingGearsOut)
-                animator.SetBool("landingGearsOut", false);
-        }
-
-        //UpdateUi();
+        objectController.UpdateAngles(new Vector3(Mathf.Clamp(pitchAxis * 3, -1, 1), Mathf.Clamp(yawAxis * 3, -1, 1), Mathf.Clamp(rollAxis, -1, 1)));
     }
 
     /// <summary>
@@ -135,7 +121,7 @@ public class PlaneController : MonoBehaviour
 
         // Ground verification (independant of isGrounded)
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2.0f, LayerMask.NameToLayer("Ground")))
+        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f, 1 << LayerMask.NameToLayer("Ground")))
         {
             isGrounded = true;
 
@@ -162,16 +148,4 @@ public class PlaneController : MonoBehaviour
             planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
         }
     }
-
-    /// <summary>
-    /// Update the debugging UI
-    /// </summary>
-    /*private void UpdateUi()
-    {
-        YawSlider.value = yawAxis / inputMultiplicator;
-        PitchSlider.value = pitchAxis / inputMultiplicator;
-        RollSlider.value = - rollAxis / inputMultiplicator;
-        ThrottleSlider.value = throttle / maxThrottle;
-        speedText.text = Vector3.Magnitude(planeRigidBody.velocity).ToString();
-    }*/
 }

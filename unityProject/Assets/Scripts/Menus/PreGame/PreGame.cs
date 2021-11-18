@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PreGame : MonoBehaviour
 {
@@ -39,10 +40,11 @@ public class PreGame : MonoBehaviour
     {
         SaveCurrentPlane();
 
-        gm.SetSelectedPlane(currentPlaneType);
+        //gm.SetSelectedPlane(currentPlaneType);
 
-        ms.SetMode(ManagerScene.GameMode.Freemode);
-        ms.LoadGameScene();
+        SceneManager.LoadScene("Presentation", LoadSceneMode.Single);
+        //ms.SetMode(ManagerScene.GameMode.Freemode);
+        //ms.LoadGameScene();
     }
 
     public void ExitGame()
