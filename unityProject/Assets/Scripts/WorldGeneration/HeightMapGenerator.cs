@@ -5,9 +5,9 @@ using UnityEngine;
 public static class HeightMapGenerator
 {
 
-    public static HeightMap GenerateHeightMap(int width, int height, HeightMapSettings settings, Vector2 sampleCentre,bool CreateSpawn)
+    public static HeightMap GenerateHeightMap(int width, int height, HeightMapSettings settings, Vector2 sampleCentre, bool CreateSpawn)
     {
-        float[,] values = Noise.GenerateNoiseMap(width, height,settings.noiseSettings, sampleCentre,CreateSpawn);
+        float[,] values = Noise.GenerateNoiseMap(width, height, settings.noiseSettings, sampleCentre, CreateSpawn);
         AnimationCurve heightCurve_threadsafe = new AnimationCurve(settings.heightCurve.keys);
 
         float minValue = float.MaxValue;
