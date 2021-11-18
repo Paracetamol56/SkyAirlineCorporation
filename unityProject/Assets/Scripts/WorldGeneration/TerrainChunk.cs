@@ -25,11 +25,15 @@ public class TerrainChunk
     bool hasSetCollider;
     float maxViewDst;
 
+    
     HeightMapSettings heightMapSettings;
     MeshSettings meshSettings;
     Transform viewer;
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material)
+    bool createSpawn;
+
+
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material,bool CreateSpawn)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -55,10 +59,10 @@ public class TerrainChunk
         SetVisible(false);
 
         lodMeshes = new LODMesh[detailLevels.Length];
-        /*if (meshObject.transform.position.x == 0 && meshObject.transform.position.y == 0)
+        if (CreateSpawn)
         {
-
-        }*/
+            createSpawn = true;
+        }
         for (int i = 0; i < detailLevels.Length; i++)
         {
             lodMeshes[i] = new LODMesh(detailLevels[i].lod);
@@ -75,7 +79,7 @@ public class TerrainChunk
 
     public void Load()
     {
-        ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), OnHeightMapReceived);
+        ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre,createSpawn), OnHeightMapReceived);
     }
 
 

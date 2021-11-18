@@ -66,6 +66,7 @@ public class TerrainGenerator : MonoBehaviour
         HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
         for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
         {
+            //Debug.Log(visibleTerrainChunks.Count);
             alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
             visibleTerrainChunks[i].UpdateTerrainChunk();
         }
@@ -86,7 +87,7 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial,false);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();
@@ -101,6 +102,7 @@ public class TerrainGenerator : MonoBehaviour
         HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
         for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
         {
+            Debug.Log(visibleTerrainChunks.Count);
             alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
             visibleTerrainChunks[i].UpdateTerrainChunk();
         }
@@ -121,7 +123,9 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial);
+                        Debug.Log("Ici");
+                        Debug.Log(heightMapSettings.noiseSettings.createSpawn);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial,heightMapSettings.noiseSettings.createSpawn);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();

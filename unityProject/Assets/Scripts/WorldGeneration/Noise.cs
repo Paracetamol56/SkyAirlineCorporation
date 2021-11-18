@@ -6,7 +6,7 @@ public static class Noise
 
     public enum NormalizeMode { Local, Global };
 
-    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre)
+    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight,NoiseSettings settings, Vector2 sampleCentre,bool CreateSpawn)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
 
@@ -50,7 +50,11 @@ public static class Noise
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
                     //Debug.Log(perlinValue);
-                    //if()//utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
+                    if (CreateSpawn&&sampleY+sampleX>500)
+                    {
+                        //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
+                        perlinValue = 0.5f * 2 - 1;
+                    }
                     //perlinValue = 0.5f * 2 - 1;
                     noiseHeight += perlinValue * amplitude;
 

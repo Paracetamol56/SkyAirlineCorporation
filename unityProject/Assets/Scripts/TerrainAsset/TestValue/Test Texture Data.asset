@@ -14,7 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoUpdate: 0
   layers:
+  - texture: {fileID: 2800000, guid: 41facf776ce486e4ea265b9a2f8e1d6b, type: 3}
+    tint: {r: 0, g: 0, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
+  - texture: {fileID: 2800000, guid: 273d4007f4489eb479f1814932ab734c, type: 3}
+    tint: {r: 0, g: 0, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
   - texture: {fileID: 2800000, guid: 943f57ccaa1084a438b958f9b063b04b, type: 3}
+    tint: {r: 0, g: 0, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
+  - texture: {fileID: 2800000, guid: 17763d20a5193864e9fda30c6addf605, type: 3}
+    tint: {r: 0, g: 0, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
+  - texture: {fileID: 2800000, guid: 462b35038099902408974e99440a65a1, type: 3}
+    tint: {r: 0, g: 0, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
+  - texture: {fileID: 2800000, guid: 3d75831374b8a8745a9267b813d8e068, type: 3}
     tint: {r: 0, g: 0, b: 0, a: 0}
     tintStrength: 0
     startHeight: 0
