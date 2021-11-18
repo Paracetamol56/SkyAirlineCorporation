@@ -23,7 +23,7 @@ public class DestructionManager : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Ground" && PlayerController.getSpeed()> 100.0f)
+        if (col.gameObject.tag == "Ground" && PlayerController.getSpeed() > 100.0f)
         {
             Instantiate(explosion, PlanePos.position, Quaternion.identity);
             rigidBody.velocity = Vector3.zero;
@@ -31,7 +31,7 @@ public class DestructionManager : MonoBehaviour
             CamScript.DestroyCam(PlanePos);
             gameObject.SetActive(false);
 
-            
+
         }
     }
 }
