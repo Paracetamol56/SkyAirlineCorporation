@@ -150,16 +150,11 @@ public class PlaneController : MonoBehaviour
     }
 
     /// <summary>
-    /// Freeze the plane and return its last position
+    /// Used by DashboardUI
     /// </summary>
-    /// <returns>Plane last position</returns>
-    private Transform crash()
+    /// <returns>throttle : the acceleration input</returns>
+    public float GetThrottle()
     {
-        Transform returntransorm = transform;
-
-        planeRigidBody.velocity = Vector3.zero;
-        planeRigidBody.angularVelocity = Vector3.zero;
-
-        return returntransorm;
+        return throttle;
     }
 }
