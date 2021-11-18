@@ -121,12 +121,14 @@ public class PlaneController : MonoBehaviour
 
         // Ground verification (independant of isGrounded)
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 1.0f))
+        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f))
         {
-            if (hit.collider.CompareTag("Ground"))
+            if (hit.collider.tag == "Ground")
                 isGrounded = true;
             else
                 isGrounded = false;
+
+            Debug.Log(isGrounded);
         }
         else
             isGrounded = false;
