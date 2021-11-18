@@ -42,5 +42,7 @@ public class CameraController : MonoBehaviour
     public void DestroyCam(Transform pos)
     {
         targetTransform = pos;
+        smoothness = 0.5f;
+        offsetPosition= new Vector3(0,50,-100);
     }
 }

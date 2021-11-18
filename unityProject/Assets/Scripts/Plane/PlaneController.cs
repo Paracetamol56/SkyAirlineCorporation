@@ -157,4 +157,9 @@ public class PlaneController : MonoBehaviour
     {
         return throttle;
     }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
 }
