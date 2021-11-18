@@ -19,7 +19,6 @@ public class MeshSettings : UpdatableData
     public int flatshadedChunkSizeIndex;
 
 
-    // num verts per line of mesh rendered at LOD = 0. Includes the 2 extra verts that are excluded from final mesh, but used for calculating normals
     public int numVertsPerLine
     {
         get
