@@ -121,18 +121,24 @@ public class PlaneController : MonoBehaviour
 
         // Ground verification (independant of isGrounded)
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f))
         {
-            isGrounded = true;
+            if (hit.collider.tag == "Ground")
+                isGrounded = true;
+            else
+                isGrounded = false;
+        }
+        else
+            isGrounded = false;
 
+        if (isGrounded)
+        {
             // Rigid body forces and torques
             planeRigidBody.AddRelativeTorque(new Vector3(0, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
             planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed), ForceMode.Acceleration);
         }
         else
         {
-            isGrounded = false;
-
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
             if (angleOfAttack <= 15)
@@ -156,5 +162,10 @@ public class PlaneController : MonoBehaviour
     public float GetThrottle()
     {
         return throttle;
+    }
+
+    public float getSpeed()
+    {
+        return planeRigidBody.velocity.magnitude;
     }
 }
