@@ -33,7 +33,6 @@ public static class Noise
         float halfWidth = mapWidth / 2f;
         float halfHeight = mapHeight / 2f;
 
-
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
@@ -50,10 +49,10 @@ public static class Noise
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
                     //Debug.Log(perlinValue);
-                    if (CreateSpawn&&sampleY+sampleX>500)
+                    if (CreateSpawn)
                     {
+                        perlinValue = SpawnGenerator.GenerateSpawnMap(ref perlinValue);
                         //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
-                        perlinValue = 0.5f * 2 - 1;
                     }
                     //perlinValue = 0.5f * 2 - 1;
                     noiseHeight += perlinValue * amplitude;
