@@ -8,15 +8,16 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
 
-    public Sound[] au_ListSounds;
+    public Sound[] ListSounds;
 
 
     private void Awake()
     {
+        instance = this;
         DontDestroyOnLoad(this);
-        foreach (Sound sound in au_ListSounds)
+        foreach (Sound sound in ListSounds)
         {
-            sound.au_source = gameObject.GetComponent<AudioSource>();
+            sound.au_source = gameObject.AddComponent<AudioSource>();
             sound.au_source.clip = sound.au_clip;
             sound.au_source.pitch = sound.f_pitch;
             sound.au_source.volume = sound.f_volume;
@@ -27,7 +28,7 @@ public class SoundManager : MonoBehaviour
     public void PlayAMusic(string name)
     {
 
-        foreach (Sound sound in au_ListSounds)
+        foreach (Sound sound in ListSounds)
         {
             if (sound.str_name == name)
             {
@@ -43,7 +44,7 @@ public class SoundManager : MonoBehaviour
 
     public void StopASong(string name)
     {
-        foreach (Sound sound in au_ListSounds)
+        foreach (Sound sound in ListSounds)
         {
             if (sound.str_name == name)
             {
@@ -54,7 +55,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayASound(string name)
     {
-        foreach (Sound sound in au_ListSounds)
+        foreach (Sound sound in ListSounds)
         {
             if (sound.str_name == name)
             {
