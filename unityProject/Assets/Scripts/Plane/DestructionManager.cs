@@ -12,11 +12,7 @@ public class DestructionManager : MonoBehaviour
     private CameraController CamScript;
     private PlaneController PlayerController;
 
-    [SerializeField]
-    float LandingErrorValue = 0.2f;
-
-    [SerializeField]
-    float LandingSpeedMax = 25.0f;
+    float LandingSpeedMax = 125.0f;
 
 
     void Start()
