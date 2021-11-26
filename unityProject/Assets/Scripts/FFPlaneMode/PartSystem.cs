@@ -24,7 +24,7 @@ public class PartSystem : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-        int i = 0;   
+        int i = 0;
 
 
         while (i < numCollisionEvents)
