@@ -37,7 +37,7 @@ public class Settings : MonoBehaviour
 
         KeyBinds = new Dictionary<string, KeyCode>();
         CheckKeys();
-        
+
 
     }
 
@@ -244,7 +244,7 @@ public class Settings : MonoBehaviour
 
     public void Reset()
     {
-       
+
     }
 
     public void SaveControls()
