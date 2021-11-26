@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.EventSystems;
 
 public class Settings : MonoBehaviour
 {
@@ -16,8 +15,6 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider volumeSlider;
     private float currentVolume;
     private Resolution[] resolutions;
-    private GameObject currentKey;
-    private Dictionary<string, KeyCode> KeyBinds;
 
     // Start is called before the first frame update
     void Start()

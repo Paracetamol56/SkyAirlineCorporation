@@ -92,17 +92,17 @@ public class PlaneController : MonoBehaviour
     private void Update()
     {
         // Throttle input
-        throttle = Mathf.Clamp(throttle + (CustomInput.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
+        throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
         objectController.UpdateThrottle(throttle / maxThrottle);
 
         // Axis inputs
         if (isGrounded)
-            yawAxis = CustomInput.GetAxis("Yaw") * 2.0f * inputMultiplicator;
+            yawAxis = Input.GetAxis("Yaw") * 2.0f * inputMultiplicator;
         else
-            yawAxis = (CustomInput.GetAxis("Yaw") * 50.0f * inputMultiplicator) / (speed + 1.0f);
+            yawAxis = (Input.GetAxis("Yaw") * 50.0f * inputMultiplicator) / (speed + 1.0f);
 
-        pitchAxis = CustomInput.GetAxis("Pitch") * 2.0f * inputMultiplicator;
-        rollAxis = CustomInput.GetAxis("Roll") * 5.0f * inputMultiplicator;
+        pitchAxis = Input.GetAxis("Pitch") * 2.0f * inputMultiplicator;
+        rollAxis = Input.GetAxis("Roll") * 5.0f * inputMultiplicator;
 
         objectController.UpdateAngles(new Vector3(Mathf.Clamp(pitchAxis * 3, -1, 1), Mathf.Clamp(yawAxis * 3, -1, 1), Mathf.Clamp(rollAxis, -1, 1)));
     }
