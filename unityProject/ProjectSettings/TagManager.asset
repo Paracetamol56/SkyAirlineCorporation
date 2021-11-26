@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Waypoint
+    uniqueID: 1134635929
+    locked: 0
