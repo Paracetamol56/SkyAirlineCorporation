@@ -37,6 +37,7 @@ public class ManagerScene : MonoBehaviour
     //enum
     public enum GameMode
     {
+<<<<<<< HEAD
         PreGameScene = 0,
         Presentation = 1,
         LoadingScreen = 2,
@@ -45,6 +46,16 @@ public class ManagerScene : MonoBehaviour
         //FFPlane = fire-fighting plane=canadair
         FFplane = 5
         
+=======
+        PreGameScene,
+        Presentation,
+        LoadingScreen,
+        Freemode,
+        Delivery,
+        //FFPlane = fire-fighting plane=canadair
+        FFplane
+
+>>>>>>> main
     }
 
     /*
