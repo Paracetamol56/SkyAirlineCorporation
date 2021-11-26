@@ -38,7 +38,7 @@ public class DestructionManager : MonoBehaviour
                 int nbExplosion = Random.Range(3, 6);
                 for (int i = 0; i < nbExplosion; ++i)
                 {
-                    Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15, Quaternion.identity));
+                    Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
                 }
                 rigidBody.velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
