@@ -26,6 +26,7 @@ public class PartSystem : MonoBehaviour
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
         int i = 0;   
 
+
         while (i < numCollisionEvents)
         {
             if (other.tag == "Fire")
