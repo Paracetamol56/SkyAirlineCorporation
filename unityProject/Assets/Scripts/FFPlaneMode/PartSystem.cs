@@ -13,18 +13,23 @@ public class PartSystem : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            part.Play();
+        }
+    }
+
     void OnParticleCollision(GameObject other)
     {
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-        int i = 0;
-        Debug.Log(other.tag);
-        
+        int i = 0;   
 
         while (i < numCollisionEvents)
         {
             if (other.tag == "Fire")
             {
-                Debug.Log("je suis touché");
                 other.SetActive(false);
             }
             i++;

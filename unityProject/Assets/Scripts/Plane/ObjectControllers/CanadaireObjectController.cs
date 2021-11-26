@@ -30,6 +30,9 @@ public class CanadaireObjectController : ObjectController
     private bool landingGearsOut = true;
     private Animator animator;
 
+    // Water Level
+    private float water;
+
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -74,5 +77,17 @@ public class CanadaireObjectController : ObjectController
 
         leftPropeller.Rotate(Vector3.forward, rotationSpeed);
         rightPropeller.Rotate(Vector3.forward, rotationSpeed);
+    }
+
+    public float setWater
+    {
+        get { return water; }
+        set
+        {
+            if (value < 0)
+                water = 0;
+            else
+                water = value;
+        }
     }
 }
