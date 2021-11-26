@@ -24,10 +24,6 @@ public class DestructionManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-    }
     void OnCollisionEnter(Collision col)
     {
         Vector3 planeNormal = PlanePos.up;
@@ -38,12 +34,11 @@ public class DestructionManager : MonoBehaviour
         {
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
             {
-
                 Debug.Log("Angle = " + DotProduct);
                 int nbExplosion = Random.Range(3, 6);
                 for (int i = 0; i < nbExplosion; ++i)
                 {
-                    Instantiate(explosion, PlanePos.position + Random.insideUnitSphere * 15, Quaternion.identity);
+                    Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15, Quaternion.identity));
                 }
                 rigidBody.velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
