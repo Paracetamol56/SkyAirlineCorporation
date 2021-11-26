@@ -123,8 +123,6 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Ici");
-                        Debug.Log(heightMapSettings.noiseSettings.createSpawn);
                         TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;

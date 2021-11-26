@@ -9,7 +9,6 @@ public static class Noise
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre, bool CreateSpawn)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
-
         System.Random prng = new System.Random(settings.seed);
         Vector2[] octaveOffsets = new Vector2[settings.octaves];
 
@@ -26,7 +25,6 @@ public static class Noise
             maxPossibleHeight += amplitude;
             amplitude *= settings.persistance;
         }
-
         float maxLocalNoiseHeight = float.MinValue;
         float minLocalNoiseHeight = float.MaxValue;
 
@@ -51,7 +49,7 @@ public static class Noise
                     //Debug.Log(perlinValue);
                     if (CreateSpawn)
                     {
-                        perlinValue = SpawnGenerator.GenerateSpawnMap(ref perlinValue);
+                        perlinValue = SpawnGenerator.GenerateSpawnMap(ref perlinValue, sampleCentre, x, y,mapWidth,mapHeight);
                         //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
                     }
                     //perlinValue = 0.5f * 2 - 1;

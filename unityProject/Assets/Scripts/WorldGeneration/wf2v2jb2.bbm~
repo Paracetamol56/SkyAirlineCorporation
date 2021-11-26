@@ -18,11 +18,11 @@ public static class SpawnGenerator
             }
             
         }
-        if (sampleCentre.x + sampleCentre.y == 125)
-        {
-            Debug.Log(mapWidth);
-            Debug.Log(mapHeight);
-        }
+        //if (sampleCentre.x + sampleCentre.y == 125)
+        //{
+        //    Debug.Log(mapWidth);
+        //    Debug.Log(mapHeight);
+        //}
 
         //return newPerlinValue;
         //for (int i = 0; i < size; i++)
