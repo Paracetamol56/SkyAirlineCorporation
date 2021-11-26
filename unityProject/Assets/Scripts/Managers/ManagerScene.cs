@@ -41,11 +41,11 @@ public class ManagerScene : MonoBehaviour
         PreGameScene = 0,
         Presentation = 1,
         LoadingScreen = 2,
-        Freemode = 3,        
+        Freemode = 3,
         Delivery = 4,
         //FFPlane = fire-fighting plane=canadair
         FFplane = 5
-        
+
 =======
         PreGameScene,
         Presentation,
@@ -117,13 +117,13 @@ public class ManagerScene : MonoBehaviour
     float totalSceneProgress;
     public IEnumerator GetSceneLoadProgress()
     {
-        for(int i = 0; i < scenesLoading.Count; i++)
+        for (int i = 0; i < scenesLoading.Count; i++)
         {
             while (!scenesLoading[i].isDone)
             {
                 totalSceneProgress = 0;
 
-                foreach(AsyncOperation operation in scenesLoading)
+                foreach (AsyncOperation operation in scenesLoading)
                 {
                     totalSceneProgress += operation.progress;
                 }
