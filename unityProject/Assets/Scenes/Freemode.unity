@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: 5d028565f79e270408884b995abc06ef, type: 3}
-  camera: {fileID: 867660961}
+  MainCamera: {fileID: 867660961}
 --- !u!4 &1108870490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8790526584942501210, guid: 66a3a1bbdeccead478d9889936432979, type: 3}

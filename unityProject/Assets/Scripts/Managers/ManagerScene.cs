@@ -10,7 +10,7 @@ public class ManagerScene : MonoBehaviour
     //////////////SingleTon/////////////
     public static ManagerScene instance;
     public GameObject loadingScreen;
-    public ProgressBar bar;
+    //public ProgressBar bar;
 
     private void MakeSingleton()
     {
@@ -37,7 +37,6 @@ public class ManagerScene : MonoBehaviour
     //enum
     public enum GameMode
     {
-<<<<<<< HEAD
         PreGameScene = 0,
         Presentation = 1,
         LoadingScreen = 2,
@@ -46,19 +45,9 @@ public class ManagerScene : MonoBehaviour
         //FFPlane = fire-fighting plane=canadair
         FFplane = 5
 
-=======
-        PreGameScene,
-        Presentation,
-        LoadingScreen,
-        Freemode,
-        Delivery,
-        //FFPlane = fire-fighting plane=canadair
-        FFplane
-
->>>>>>> main
     }
 
-    /*
+
     //variables
     public GameMode Mode;
 
@@ -100,7 +89,7 @@ public class ManagerScene : MonoBehaviour
             default:
                 break;
         }
-    }*/
+    }
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public void Loadgame()
@@ -130,7 +119,7 @@ public class ManagerScene : MonoBehaviour
 
                 totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
 
-                bar.current = Mathf.RoundToInt(totalSceneProgress);
+                //bar.current = Mathf.RoundToInt(totalSceneProgress);
 
                 yield return null;
             }

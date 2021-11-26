@@ -5132,9 +5132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: 5d028565f79e270408884b995abc06ef, type: 3}
-  camera: {fileID: 1479640071}
-  LandingErrorValue: 0
-  LandingSpeedMax: 200
+  MainCamera: {fileID: 1479640071}
 --- !u!1 &1060013611
 GameObject:
   m_ObjectHideFlags: 0

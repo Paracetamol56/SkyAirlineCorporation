@@ -8,7 +8,7 @@ public class DestructionManager : MonoBehaviour
     private Transform PlanePos;
     private Rigidbody rigidBody;
 
-    public Camera camera;
+    public Camera MainCamera;
     private CameraController CamScript;
     private PlaneController PlayerController;
 
@@ -19,7 +19,7 @@ public class DestructionManager : MonoBehaviour
     {
         PlanePos = this.GetComponent<Transform>();
         rigidBody = this.GetComponent<Rigidbody>();
-        CamScript = camera.GetComponent<CameraController>();
+        CamScript = MainCamera.GetComponent<CameraController>();
         PlayerController = gameObject.GetComponent<PlaneController>();
 
     }

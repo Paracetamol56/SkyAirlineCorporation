@@ -23,6 +23,12 @@ public class CustomInput : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogError("Double instance GlobalGameManager");
+            return;
+        }
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
