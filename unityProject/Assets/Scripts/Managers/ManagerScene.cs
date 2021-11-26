@@ -36,11 +36,11 @@ public class ManagerScene : MonoBehaviour
         PreGameScene,
         Presentation,
         LoadingScreen,
-        Freemode,        
+        Freemode,
         Delivery,
         //FFPlane = fire-fighting plane=canadair
         FFplane
-        
+
     }
 
     //variables
