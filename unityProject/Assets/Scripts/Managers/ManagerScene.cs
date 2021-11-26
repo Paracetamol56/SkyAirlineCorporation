@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ManagerScene : MonoBehaviour
 {
     //////////////SingleTon/////////////
     public static ManagerScene instance;
+    public GameObject loadingScreen;
+    public ProgressBar bar;
 
     private void MakeSingleton()
     {
@@ -33,16 +37,17 @@ public class ManagerScene : MonoBehaviour
     //enum
     public enum GameMode
     {
-        PreGameScene,
-        Presentation,
-        LoadingScreen,
-        Freemode,        
-        Delivery,
+        PreGameScene = 0,
+        Presentation = 1,
+        LoadingScreen = 2,
+        Freemode = 3,        
+        Delivery = 4,
         //FFPlane = fire-fighting plane=canadair
-        FFplane
+        FFplane = 5
         
     }
 
+    /*
     //variables
     public GameMode Mode;
 
@@ -84,23 +89,42 @@ public class ManagerScene : MonoBehaviour
             default:
                 break;
         }
-    }
+    }*/
 
-    public void BacktoMenu()
-    {
-        SceneManager.LoadScene("PreGameScene");
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-
+    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public void Loadgame()
     {
-        SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene);
-        SceneManager.LoadSceneAsync((int)GameMode.Presentation, LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive);
+        loadingScreen.gameObject.SetActive(true);
+
+        scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.Presentation, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
+    }
+
+    float totalSceneProgress;
+    public IEnumerator GetSceneLoadProgress()
+    {
+        for(int i = 0; i < scenesLoading.Count; i++)
+        {
+            while (!scenesLoading[i].isDone)
+            {
+                totalSceneProgress = 0;
+
+                foreach(AsyncOperation operation in scenesLoading)
+                {
+                    totalSceneProgress += operation.progress;
+                }
+
+                totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
+
+                bar.current = Mathf.RoundToInt(totalSceneProgress);
+
+                yield return null;
+            }
+        }
+
+        loadingScreen.gameObject.SetActive(false);
     }
 }
