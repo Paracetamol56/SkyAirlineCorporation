@@ -49,7 +49,7 @@ public static class Noise
                     //Debug.Log(perlinValue);
                     if (CreateSpawn)
                     {
-                        perlinValue = SpawnGenerator.GenerateSpawnMap(ref perlinValue, sampleCentre, x, y,mapWidth,mapHeight);
+                        perlinValue = SpawnGenerator.GenerateSpawnMap(ref perlinValue, sampleCentre, x, y, mapWidth, mapHeight);
                         //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
                     }
                     //perlinValue = 0.5f * 2 - 1;

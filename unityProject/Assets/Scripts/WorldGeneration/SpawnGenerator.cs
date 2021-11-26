@@ -4,19 +4,19 @@ using UnityEngine;
 
 public static class SpawnGenerator
 {
-    public static float GenerateSpawnMap(ref float perlinValue,Vector2 sampleCentre,int sampleX,int sampleY,int mapWidth,int mapHeight)
+    public static float GenerateSpawnMap(ref float perlinValue, Vector2 sampleCentre, int sampleX, int sampleY, int mapWidth, int mapHeight)
     {
 
         //int x;
         //int y;
-        if (Mathf.Abs(sampleY)+Mathf.Abs(sampleCentre.y)<100&&Mathf.Abs(sampleCentre.x)+Mathf.Abs(sampleX)<100)
+        if (Mathf.Abs(sampleY) + Mathf.Abs(sampleCentre.y) < 100 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(sampleX) < 100)
         {
             if (Mathf.Abs(sampleY) + Mathf.Abs(sampleCentre.y) > 25 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(sampleX) > 25)
             {
                 perlinValue = 0.5f * 2 - 1;
-                
+
             }
-            
+
         }
         if (sampleCentre.x + sampleCentre.y == 125)
         {
@@ -37,14 +37,14 @@ public static class SpawnGenerator
         //    }
         //}
         return perlinValue;
-	}
+    }
 
-	static float Evaluate(float value)
-	{
-		float a = 3;
-		float b = 2.2f;
+    static float Evaluate(float value)
+    {
+        float a = 3;
+        float b = 2.2f;
         //Debug.Log(Mathf.Pow(value, a) / (Mathf.Pow(value, a) + Mathf.Pow(b - b * value, a)));
-		return Mathf.Pow(value, a) / (Mathf.Pow(value, a) + Mathf.Pow(b - b * value, a));
-	}
+        return Mathf.Pow(value, a) / (Mathf.Pow(value, a) + Mathf.Pow(b - b * value, a));
+    }
 
 }
