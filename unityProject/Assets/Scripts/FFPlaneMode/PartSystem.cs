@@ -18,13 +18,13 @@ public class PartSystem : MonoBehaviour
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
         int i = 0;
         Debug.Log(other.tag);
-        
+
 
         while (i < numCollisionEvents)
         {
             if (other.tag == "Fire")
             {
-                Debug.Log("je suis touché");
+                Debug.Log("je suis touchï¿½");
                 other.SetActive(false);
             }
             i++;
