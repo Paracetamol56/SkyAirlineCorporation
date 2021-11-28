@@ -41,19 +41,6 @@ public class PlaneController : MonoBehaviour
     private ObjectController objectController;
     private Rigidbody planeRigidBody;
 
-    // Debuging Canevas
-    /*[Header("Debuging Canevas")]
-    [SerializeField]
-    private Slider YawSlider;
-    [SerializeField]
-    private Slider PitchSlider;
-    [SerializeField]
-    private Slider RollSlider;
-    [SerializeField]
-    private Slider ThrottleSlider;
-    [SerializeField]
-    private Text speedText;*/
-
 #if UNITY_EDITOR
     /// <summary>
     /// Inspector inputs verifications
@@ -134,8 +121,8 @@ public class PlaneController : MonoBehaviour
         if (isGrounded)
         {
             // Rigid body forces and torques
-            planeRigidBody.AddRelativeTorque(new Vector3(0, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
-            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift * 1.5f, speed), ForceMode.Acceleration);
         }
         else
         {
