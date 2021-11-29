@@ -19,7 +19,7 @@ MonoBehaviour:
     octaves: 8
     persistance: 0.6
     lacunarity: 1.5
-    seed: 0
+    seed: 16
     offset: {x: 0, y: 0}
     createSpawn: 1
   heightMultiplier: 4000

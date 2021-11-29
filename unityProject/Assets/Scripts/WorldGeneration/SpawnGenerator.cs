@@ -4,25 +4,45 @@ using UnityEngine;
 
 public static class SpawnGenerator
 {
+<<<<<<< Updated upstream
     public static float GenerateSpawnMap(ref float perlinValue, Vector2 sampleCentre, int sampleX, int sampleY, int mapWidth, int mapHeight)
+=======
+    public static float GenerateSpawnMap(ref float perlinValue,Vector2 sampleCentre,int coordX,int coordY,float sampleX,float sampleY)
+>>>>>>> Stashed changes
     {
 
         //int x;
         //int y;
+<<<<<<< Updated upstream
         if (Mathf.Abs(sampleY) + Mathf.Abs(sampleCentre.y) < 100 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(sampleX) < 100)
+=======
+        if (Mathf.Abs(coordY) +Mathf.Abs(sampleCentre.y)<110&&Mathf.Abs(sampleCentre.x)+Mathf.Abs(coordX) <110)
+>>>>>>> Stashed changes
         {
-            if (Mathf.Abs(sampleY) + Mathf.Abs(sampleCentre.y) > 25 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(sampleX) > 25)
+            if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) > 15 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) > 15)
             {
+<<<<<<< Updated upstream
                 perlinValue = 0.5f * 2 - 1;
 
+=======
+                Vector2 Centre = new Vector2(62, 62);
+                Vector2 currentPos = new Vector2(coordX, coordY);
+                float distCentrCurrent = (Vector2.Distance(Centre, currentPos) < 10) ? 10 : Vector2.Distance(Centre, currentPos);
+        //blending
+                perlinValue = (distCentrCurrent < 50) ? 0.5f*2-1 : Mathf.PerlinNoise(sampleX, sampleY)*2-1;
+        //perlinValue = ((0.5f*(10/ distCentrCurrent))/**Mathf.PerlinNoise(sampleX,sampleY)*Mathf.Clamp01(distCentrCurrent)*/) * 2- 1;
+        //Debug.Log(perlinValue);
+                //62 = milieux
+        //Debug.Log(39 / Mathf.Abs(Vector2.Distance(Centre, currentPos)));
+>>>>>>> Stashed changes
             }
 
         }
-        if (sampleCentre.x + sampleCentre.y == 125)
-        {
-            Debug.Log(mapWidth);
-            Debug.Log(mapHeight);
-        }
+        //if (sampleCentre.x + sampleCentre.y == 125)
+        //{
+        //    Debug.Log(mapWidth);
+        //    Debug.Log(mapHeight);
+        //}
 
         //return newPerlinValue;
         //for (int i = 0; i < size; i++)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 public class TerrainChunk
 {
@@ -7,13 +8,17 @@ public class TerrainChunk
     public event System.Action<TerrainChunk, bool> onVisibilityChanged;
     public Vector2 coord;
 
-    GameObject meshObject;
+    GameObject meshObject,waterObject;
     Vector2 sampleCentre;
     Bounds bounds;
 
     MeshRenderer meshRenderer;
     MeshFilter meshFilter;
     MeshCollider meshCollider;
+
+    MeshRenderer waterRenderer;
+    MeshFilter waterFilter;
+    MeshCollider waterCollider;
 
     LODInfo[] detailLevels;
     LODMesh[] lodMeshes;
@@ -57,6 +62,21 @@ public class TerrainChunk
         meshObject.transform.position = new Vector3(position.x, 0, position.y);
         meshObject.transform.parent = parent;
         SetVisible(false);
+
+        Vector3 test = new Vector3(10, 10, 10);
+        Vector3 pos = new Vector3(0, 0, 0);
+        waterObject = new Plane(test, pos);
+        waterObject.tag = "Water";
+        waterFilter = waterObject.AddComponent<MeshFilter>();
+        waterCollider = waterObject.AddComponent<MeshCollider>();
+        waterRenderer = waterObject.AddComponent<MeshRenderer>();
+        //waterRenderer.material = waterMaterial;
+        waterObject.transform.position = meshObject.transform.position;
+        waterObject.transform.parent = meshObject.transform;
+        //waterFilter = MeshFilter.
+        meshFilter.mesh = Plane;
+        //waterFilter.mesh = AssetDatabase.GetAssetPath(Plane);
+
 
         lodMeshes = new LODMesh[detailLevels.Length];
         if (CreateSpawn)
