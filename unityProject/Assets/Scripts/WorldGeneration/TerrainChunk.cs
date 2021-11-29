@@ -35,6 +35,8 @@ public class TerrainChunk
     MeshSettings meshSettings;
     Transform viewer;
 
+
+
     bool createSpawn;
 
 
@@ -63,9 +65,10 @@ public class TerrainChunk
         meshObject.transform.parent = parent;
         SetVisible(false);
 
-        Vector3 test = new Vector3(10, 10, 10);
-        Vector3 pos = new Vector3(0, 0, 0);
-        waterObject = new Plane(test, pos);
+        //Vector3 test = new Vector3(100, 100, 100);
+        //Vector3 pos = new Vector3(0, 0, 0);
+        //waterObject = new Plane(test, pos);
+        waterObject = new GameObject("Water Chunk");
         waterObject.tag = "Water";
         waterFilter = waterObject.AddComponent<MeshFilter>();
         waterCollider = waterObject.AddComponent<MeshCollider>();
@@ -74,8 +77,7 @@ public class TerrainChunk
         waterObject.transform.position = meshObject.transform.position;
         waterObject.transform.parent = meshObject.transform;
         //waterFilter = MeshFilter.
-        meshFilter.mesh = Plane;
-        //waterFilter.mesh = AssetDatabase.GetAssetPath(Plane);
+        //meshFilter.mesh = Plane;
 
 
         lodMeshes = new LODMesh[detailLevels.Length];

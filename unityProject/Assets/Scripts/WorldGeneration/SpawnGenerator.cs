@@ -4,40 +4,43 @@ using UnityEngine;
 
 public static class SpawnGenerator
 {
-<<<<<<< Updated upstream
-    public static float GenerateSpawnMap(ref float perlinValue, Vector2 sampleCentre, int sampleX, int sampleY, int mapWidth, int mapHeight)
-=======
-    public static float GenerateSpawnMap(ref float perlinValue,Vector2 sampleCentre,int coordX,int coordY,float sampleX,float sampleY)
->>>>>>> Stashed changes
+    public static float GenerateSpawnMap(Vector2 sampleCentre,int coordX,int coordY,float sampleX,float sampleY)
     {
-
+        float perlinValue;
+        Vector2 Centre = new Vector2(62, 62);
+        Vector2 currentPos = new Vector2(coordX+sampleCentre.x, coordY+sampleCentre.y);
+        float distCentrCurrent = (Vector2.Distance(Centre, currentPos) < 10) ? 10 : Vector2.Distance(Centre, currentPos);
+        float blendValue=1;
+        //Debug.Log(sampleCentre);
         //int x;
         //int y;
-<<<<<<< Updated upstream
-        if (Mathf.Abs(sampleY) + Mathf.Abs(sampleCentre.y) < 100 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(sampleX) < 100)
-=======
         if (Mathf.Abs(coordY) +Mathf.Abs(sampleCentre.y)<110&&Mathf.Abs(sampleCentre.x)+Mathf.Abs(coordX) <110)
->>>>>>> Stashed changes
         {
-            if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) > 15 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) > 15)
+            if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) > 12 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) > 12)
             {
-<<<<<<< Updated upstream
-                perlinValue = 0.5f * 2 - 1;
+                //perlinValue = 0.5f * 2 - 1;
 
-=======
-                Vector2 Centre = new Vector2(62, 62);
-                Vector2 currentPos = new Vector2(coordX, coordY);
-                float distCentrCurrent = (Vector2.Distance(Centre, currentPos) < 10) ? 10 : Vector2.Distance(Centre, currentPos);
+                
         //blending
-                perlinValue = (distCentrCurrent < 50) ? 0.5f*2-1 : Mathf.PerlinNoise(sampleX, sampleY)*2-1;
+                
+                
         //perlinValue = ((0.5f*(10/ distCentrCurrent))/**Mathf.PerlinNoise(sampleX,sampleY)*Mathf.Clamp01(distCentrCurrent)*/) * 2- 1;
         //Debug.Log(perlinValue);
                 //62 = milieux
         //Debug.Log(39 / Mathf.Abs(Vector2.Distance(Centre, currentPos)));
->>>>>>> Stashed changes
             }
 
         }
+        if (Mathf.Abs(Vector2.Distance(Centre, currentPos)) > 70.0f)
+        {
+            blendValue = 1;
+        }
+        else
+        {
+            blendValue = 50.0f / Mathf.Abs(Vector2.Distance(Centre, currentPos));
+        }
+        //Debug.Log(Evaluate(1f));
+        perlinValue = (distCentrCurrent < 60) ? 0 : ((1 - blendValue) * (-0.001f)) + ((Mathf.PerlinNoise(sampleX, sampleY)*2- 1) * blendValue);
         //if (sampleCentre.x + sampleCentre.y == 125)
         //{
         //    Debug.Log(mapWidth);
