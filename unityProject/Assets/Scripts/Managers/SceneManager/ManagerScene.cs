@@ -97,7 +97,7 @@ public class ManagerScene : MonoBehaviour
         loadingScreen.gameObject.SetActive(true);
 
         scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int)Mode, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.Presentation, LoadSceneMode.Additive));
         scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgress());

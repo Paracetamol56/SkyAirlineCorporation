@@ -687,4 +687,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0a3cd047d196d469fd7448df303c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 0}
+  progressBar: {fileID: 1878749199}
