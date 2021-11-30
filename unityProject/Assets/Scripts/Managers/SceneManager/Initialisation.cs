@@ -27,7 +27,7 @@ public class Initialisation : MonoBehaviour
     IEnumerator Spawn()
     {
         int count = 0;
-        while(count < pedestriansToSpawn)
+        while (count < pedestriansToSpawn)
         {
 
         }
