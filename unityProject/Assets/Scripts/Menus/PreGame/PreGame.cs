@@ -40,7 +40,7 @@ public class PreGame : MonoBehaviour
     {
         SaveCurrentPlane();
 
-        //gm.SetSelectedPlane(currentPlaneType);
+        gm.SetSelectedPlane(currentPlaneType);
 
         //SceneManager.LoadScene("Presentation", LoadSceneMode.Single);
 
