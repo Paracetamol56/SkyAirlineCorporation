@@ -6,6 +6,7 @@ public class PartSystem : MonoBehaviour
 {
     public List<ParticleCollisionEvent> collisionEvents;
     public ParticleSystem part;
+    private bool send;
 
     void Start()
     {
@@ -17,7 +18,18 @@ public class PartSystem : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            part.Play();
+            if (!send)
+            {
+                send = true;
+                part.Play();
+                part.enableEmission = true;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            send = false;
+            part.enableEmission = false;
         }
     }
 
