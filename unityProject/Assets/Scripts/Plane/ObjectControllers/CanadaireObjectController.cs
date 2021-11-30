@@ -52,6 +52,19 @@ public class CanadaireObjectController : ObjectController
         }
     }
 
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
+        {
+            if (hit.transform.tag == "Water")
+            {
+                
+            }
+        }
+    }
+
     /// <summary>
     /// Update rubber, elevators and ailerons angles
     /// </summary>
