@@ -1,29 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ManagerScene : MonoBehaviour
 {
     //////////////SingleTon/////////////
     public static ManagerScene instance;
+    public GameObject loadingScreen;
+    public Image progressBar;
 
-    private void MakeSingleton()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    //private void MakeSingleton()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //}
 
     void Awake()
     {
-        MakeSingleton();
+        //MakeSingleton();
+
+        SceneManager.LoadSceneAsync((int)GameMode.PreGameScene, LoadSceneMode.Additive);
     }
 
     /////////////////////////////////////
@@ -31,14 +37,19 @@ public class ManagerScene : MonoBehaviour
     //enum
     public enum GameMode
     {
-        Freemode,
-        Delivery,
+        PreGameScene = 0,
+        Presentation = 1,
+        LoadingScreen = 2,
+        Freemode = 3,
+        Delivery = 4,
         //FFPlane = fire-fighting plane=canadair
-        FFplane
+        FFplane = 5
+
     }
 
+
     //variables
-    private GameMode Mode;
+    public GameMode Mode;
 
     void Start()
     {
@@ -55,32 +66,65 @@ public class ManagerScene : MonoBehaviour
         return Mode;
     }
 
-    public void LoadGameScene()
+    public IEnumerator LoadGameScene()
     {
         switch (Mode)
         {
             case GameMode.Freemode:
+                yield return new WaitForSeconds(3.0f);
                 SceneManager.LoadScene("FreeMode");
                 break;
             case GameMode.Delivery:
+                yield return new WaitForSeconds(3.0f);
                 SceneManager.LoadScene("Delivery");
                 break;
             case GameMode.FFplane:
+                yield return new WaitForSeconds(3.0f);
                 SceneManager.LoadScene("FFPlane");
+                break;
+            case GameMode.Presentation:
+                yield return new WaitForSeconds(3.0f);
+                SceneManager.LoadScene("Presentation");
                 break;
             default:
                 break;
         }
     }
 
-    public void BacktoMenu()
+    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+    public void LoadGame()
     {
-        SceneManager.LoadScene("PreGameScene");
+        loadingScreen.gameObject.SetActive(true);
+
+        scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)Mode, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
     }
 
-
-    public void ExitGame()
+    float totalSceneProgress;
+    public IEnumerator GetSceneLoadProgress()
     {
-        Application.Quit();
+        for (int i = 0; i < scenesLoading.Count; i++)
+        {
+            while (!scenesLoading[i].isDone)
+            {
+                totalSceneProgress = 0;
+
+                foreach (AsyncOperation operation in scenesLoading)
+                {
+                    totalSceneProgress += operation.progress;
+                }
+
+                totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
+
+                progressBar.fillAmount = Mathf.RoundToInt(totalSceneProgress);
+
+                yield return null;
+            }
+        }
+
+        //loadingScreen.gameObject.SetActive(false);
     }
 }

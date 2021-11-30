@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class ObjectController : MonoBehaviour
 {
@@ -22,6 +21,15 @@ public abstract class ObjectController : MonoBehaviour
     [SerializeField]
     protected float maxPropellerSpeed = 100.0f;
 
+    // Fuel
+    [SerializeField]
+    protected Slider slider;
+    [SerializeField]
+    protected Gradient gradient;
+    [SerializeField]
+    protected Image fill;
+    protected float fuel;
+
     /// <summary>
     /// Update rubber, elevators and ailerons angles
     /// </summary>
@@ -33,4 +41,16 @@ public abstract class ObjectController : MonoBehaviour
     /// </summary>
     /// <param name="throttle">throttle is between 0 and 1</param>
     public virtual void UpdateThrottle(float throttle) { }
+
+    public float setFuel
+    {
+        get { return fuel; }
+        set
+        {
+            if (value < 0)
+                fuel = 0;
+            else
+                fuel = value;
+        }
+    }
 }

@@ -41,19 +41,6 @@ public class PlaneController : MonoBehaviour
     private ObjectController objectController;
     private Rigidbody planeRigidBody;
 
-    // Debuging Canevas
-    /*[Header("Debuging Canevas")]
-    [SerializeField]
-    private Slider YawSlider;
-    [SerializeField]
-    private Slider PitchSlider;
-    [SerializeField]
-    private Slider RollSlider;
-    [SerializeField]
-    private Slider ThrottleSlider;
-    [SerializeField]
-    private Text speedText;*/
-
 #if UNITY_EDITOR
     /// <summary>
     /// Inspector inputs verifications
@@ -121,18 +108,24 @@ public class PlaneController : MonoBehaviour
 
         // Ground verification (independant of isGrounded)
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics.Raycast(transform.position + new Vector3(0, groundDetectionOffset, 0), transform.TransformDirection(Vector3.down), out hit, 2.0f))
         {
-            isGrounded = true;
+            if (hit.collider.tag == "Ground")
+                isGrounded = true;
+            else
+                isGrounded = false;
+        }
+        else
+            isGrounded = false;
 
+        if (isGrounded)
+        {
             // Rigid body forces and torques
-            planeRigidBody.AddRelativeTorque(new Vector3(0, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
-            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift, speed), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis * Mathf.Sqrt(speed), 0), ForceMode.Acceleration);
+            planeRigidBody.AddRelativeForce(new Vector3(0.0f, lift * 1.5f, speed), ForceMode.Acceleration);
         }
         else
         {
-            isGrounded = false;
-
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
             if (angleOfAttack <= 15)
@@ -147,5 +140,19 @@ public class PlaneController : MonoBehaviour
             stabilizationTorque = Vector3.Project(stabilizationTorque, transform.forward);
             planeRigidBody.AddTorque(stabilizationTorque * autoStabilization, ForceMode.Acceleration);
         }
+    }
+
+    /// <summary>
+    /// Used by DashboardUI
+    /// </summary>
+    /// <returns>throttle : the acceleration input</returns>
+    public float GetThrottle()
+    {
+        return throttle;
+    }
+
+    public float getSpeed()
+    {
+        return planeRigidBody.velocity.magnitude;
     }
 }
