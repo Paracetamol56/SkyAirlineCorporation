@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 public class TerrainChunk
 {
@@ -7,13 +8,17 @@ public class TerrainChunk
     public event System.Action<TerrainChunk, bool> onVisibilityChanged;
     public Vector2 coord;
 
-    GameObject meshObject;
+    GameObject meshObject, waterObject;
     Vector2 sampleCentre;
     Bounds bounds;
 
     MeshRenderer meshRenderer;
     MeshFilter meshFilter;
     MeshCollider meshCollider;
+
+    MeshRenderer waterRenderer;
+    MeshFilter waterFilter;
+    MeshCollider waterCollider;
 
     LODInfo[] detailLevels;
     LODMesh[] lodMeshes;
@@ -25,11 +30,17 @@ public class TerrainChunk
     bool hasSetCollider;
     float maxViewDst;
 
+
     HeightMapSettings heightMapSettings;
     MeshSettings meshSettings;
     Transform viewer;
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material)
+
+
+    bool createSpawn;
+
+
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -54,7 +65,26 @@ public class TerrainChunk
         meshObject.transform.parent = parent;
         SetVisible(false);
 
+        //Vector3 test = new Vector3(100, 100, 100);
+        //Vector3 pos = new Vector3(0, 0, 0);
+        //waterObject = new Plane(test, pos);
+        waterObject = new GameObject("Water Chunk");
+        waterObject.tag = "Water";
+        waterFilter = waterObject.AddComponent<MeshFilter>();
+        waterCollider = waterObject.AddComponent<MeshCollider>();
+        waterRenderer = waterObject.AddComponent<MeshRenderer>();
+        //waterRenderer.material = waterMaterial;
+        waterObject.transform.position = meshObject.transform.position;
+        waterObject.transform.parent = meshObject.transform;
+        //waterFilter = MeshFilter.
+        //meshFilter.mesh = Plane;
+
+
         lodMeshes = new LODMesh[detailLevels.Length];
+        if (CreateSpawn)
+        {
+            createSpawn = true;
+        }
         for (int i = 0; i < detailLevels.Length; i++)
         {
             lodMeshes[i] = new LODMesh(detailLevels[i].lod);
@@ -71,7 +101,7 @@ public class TerrainChunk
 
     public void Load()
     {
-        ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), OnHeightMapReceived);
+        ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre, createSpawn), OnHeightMapReceived);
     }
 
 

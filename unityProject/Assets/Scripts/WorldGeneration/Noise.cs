@@ -6,10 +6,9 @@ public static class Noise
 
     public enum NormalizeMode { Local, Global };
 
-    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre)
+    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre, bool CreateSpawn)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
-
         System.Random prng = new System.Random(settings.seed);
         Vector2[] octaveOffsets = new Vector2[settings.octaves];
 
@@ -26,13 +25,11 @@ public static class Noise
             maxPossibleHeight += amplitude;
             amplitude *= settings.persistance;
         }
-
         float maxLocalNoiseHeight = float.MinValue;
         float minLocalNoiseHeight = float.MaxValue;
 
         float halfWidth = mapWidth / 2f;
         float halfHeight = mapHeight / 2f;
-
 
         for (int y = 0; y < mapHeight; y++)
         {
@@ -48,7 +45,18 @@ public static class Noise
                     float sampleX = (x - halfWidth + octaveOffsets[i].x) / settings.scale * frequency;
                     float sampleY = (y - halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
 
-                    float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    float perlinValue;
+                    //Debug.Log(perlinValue);
+                    if (CreateSpawn)
+                    {
+                        perlinValue = SpawnGenerator.GenerateSpawnMap(sampleCentre, x, y, sampleX, sampleY);
+                        //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
+                    }
+                    else
+                    {
+                        perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    }
+                    //perlinValue = 0.5f * 2 - 1;
                     noiseHeight += perlinValue * amplitude;
 
                     amplitude *= settings.persistance;
@@ -103,6 +111,7 @@ public class NoiseSettings
 
     public int seed;
     public Vector2 offset;
+    public bool createSpawn;
 
     public void ValidateValues()
     {

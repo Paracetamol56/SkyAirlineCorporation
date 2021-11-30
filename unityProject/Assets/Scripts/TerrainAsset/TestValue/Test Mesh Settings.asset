@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Mesh Settings
   m_EditorClassIdentifier: 
   autoUpdate: 0
-  meshScale: 2.5
+  meshScale: 50
   useFlatShading: 0
   chunkSizeIndex: 8
   flatshadedChunkSizeIndex: 0
