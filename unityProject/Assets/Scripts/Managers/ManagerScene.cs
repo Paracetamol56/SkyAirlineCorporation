@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class ManagerScene : MonoBehaviour
 {
-    //////////////SingleTon/////////////
+    ////////////SingleTon/////////////
     public static ManagerScene instance;
-    public Image progressBar;
-    public TextMeshProUGUI textField;
+    //public Image progressBar;
+    //public TextMeshProUGUI textField;
 
     private void MakeSingleton()
     {
@@ -47,13 +47,12 @@ public class ManagerScene : MonoBehaviour
 
     }
 
-
     //variables
     public GameMode Mode;
 
     void Start()
     {
-        Mode = GameMode.Freemode;
+        Mode = GameMode.Presentation;
     }
 
     public void SetMode(GameMode value)
@@ -71,19 +70,19 @@ public class ManagerScene : MonoBehaviour
     //    switch (Mode)
     //    {
     //        case GameMode.Freemode:
-    //            yield return new WaitForSeconds(3.0f);
+    //            yield return new WaitForSeconds(.1f);
     //            SceneManager.LoadScene("FreeMode");
     //            break;
     //        case GameMode.Delivery:
-    //            yield return new WaitForSeconds(3.0f);
+    //            yield return new WaitForSeconds(.1f);
     //            SceneManager.LoadScene("Delivery");
     //            break;
     //        case GameMode.FFplane:
-    //            yield return new WaitForSeconds(3.0f);
+    //            yield return new WaitForSeconds(.1f);
     //            SceneManager.LoadScene("FFPlane");
     //            break;
     //        case GameMode.Presentation:
-    //            yield return new WaitForSeconds(3.0f);
+    //            yield return new WaitForSeconds(.1f);
     //            SceneManager.LoadScene("Presentation");
     //            break;
     //        default:
@@ -91,48 +90,39 @@ public class ManagerScene : MonoBehaviour
     //    }
     //}
 
+
+    //////////Test Nouveau SceneManager n�1/////////////
+
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public IEnumerator LoadGame()
     {
         switch (Mode)
         {
             case GameMode.Freemode:
-                yield return new WaitForSeconds(3.0f);
-                SceneManager.LoadScene("FreeMode");
-
+                yield return new WaitForSeconds(.1f);
                 scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.Freemode, LoadSceneMode.Additive));
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
 
                 StartCoroutine(GetSceneLoadProgress());
                 break;
             case GameMode.Delivery:
-                yield return new WaitForSeconds(3.0f);
-                SceneManager.LoadScene("Delivery");
-
+                yield return new WaitForSeconds(.1f);
                 scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.Delivery, LoadSceneMode.Additive));
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
 
                 StartCoroutine(GetSceneLoadProgress());
                 break;
             case GameMode.FFplane:
-                yield return new WaitForSeconds(3.0f);
-                SceneManager.LoadScene("FFPlane");
-
+                yield return new WaitForSeconds(.1f);
                 scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.FFplane, LoadSceneMode.Additive));
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
 
                 StartCoroutine(GetSceneLoadProgress());
                 break;
             case GameMode.Presentation:
-                yield return new WaitForSeconds(3.0f);
-                SceneManager.LoadScene("Presentation");
-
+                yield return new WaitForSeconds(.1f);
                 scenesLoading.Add(SceneManager.UnloadSceneAsync((int)GameMode.PreGameScene));
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.Presentation, LoadSceneMode.Additive));
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)GameMode.LoadingScreen, LoadSceneMode.Additive));
 
                 StartCoroutine(GetSceneLoadProgress());
                 break;
@@ -157,9 +147,9 @@ public class ManagerScene : MonoBehaviour
 
                 totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
 
-                progressBar.fillAmount = Mathf.RoundToInt(totalSceneProgress);
+                //progressBar.fillAmount = Mathf.RoundToInt(totalSceneProgress);
 
-                textField.text = string.Format("Loading Environments: {0}%", totalSceneProgress);
+                //textField.text = string.Format("Loading Environments: {0}%", totalSceneProgress);
 
                 yield return null;
             }

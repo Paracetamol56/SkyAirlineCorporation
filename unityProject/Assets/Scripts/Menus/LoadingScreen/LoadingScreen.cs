@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
 {
+    ///////Test n�1//////////////
     [SerializeField]
     private Image progressBar;
 
@@ -23,9 +24,9 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator LoadAsyncOperation()
     {
         //decommenter quand il y aura les modes de jeux
-        //AsyncOperation gameLevel = SceneManager.LoadSceneAsync((int)ms.GetMode());
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync((int)ms.GetMode());
 
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1);
+        //AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1);
 
         while (!gameLevel.isDone)
         {
@@ -33,7 +34,6 @@ public class LoadingScreen : MonoBehaviour
             progressBar.fillAmount = progress;
             yield return new WaitForEndOfFrame();
         }
-
 
     }
 }
