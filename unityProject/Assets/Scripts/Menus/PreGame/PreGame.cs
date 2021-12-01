@@ -25,7 +25,7 @@ public class PreGame : MonoBehaviour
         planesSelection[planeIndex].transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(planesSelection[planeIndex], showPoint.transform);
 
-        gm = GlobalGameManager.GetInstance();
+        //gm = GlobalGameManager.GetInstance();
         //ms = ManagerScene.instance;
     }
 
@@ -40,11 +40,10 @@ public class PreGame : MonoBehaviour
     {
         SaveCurrentPlane();
 
-        gm.SetSelectedPlane(currentPlaneType);
+        //gm.SetSelectedPlane(currentPlaneType);
 
-        ms.SetMode(ManagerScene.GameMode.Presentation);
-        ms.LoadGameScene();
-
+        //ms.LoadGameScene();
+        SceneManager.LoadScene("Freemode", LoadSceneMode.Single);
         //ms.SetMode(ManagerScene.GameMode.Freemode);
         //ms.LoadGameScene();
     }
