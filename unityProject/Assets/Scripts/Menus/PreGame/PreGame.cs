@@ -26,7 +26,7 @@ public class PreGame : MonoBehaviour
         currentPlaneShown = Instantiate(planesSelection[planeIndex], showPoint.transform);
 
         gm = GlobalGameManager.GetInstance();
-        ms = ManagerScene.instance;
+        //ms = ManagerScene.instance;
     }
 
     // Update is called once per frame
@@ -42,14 +42,9 @@ public class PreGame : MonoBehaviour
 
         gm.SetSelectedPlane(currentPlaneType);
 
-        //SceneManager.LoadScene("Presentation", LoadSceneMode.Single);
-
         ms.SetMode(ManagerScene.GameMode.Presentation);
         //ms.LoadGameScene();
         ms.LoadGame();
-
-        //ms.SetMode(ManagerScene.GameMode.Freemode);
-        //ms.LoadGameScene();
     }
 
     public void ExitGame()
