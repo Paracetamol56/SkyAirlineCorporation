@@ -155,7 +155,7 @@ public class Settings : MonoBehaviour
             volumeSlider.value =
                         PlayerPrefs.GetFloat("VolumePreference");
     }
-    
+
     public void CheckKeys()
     {
         if (!PlayerPrefs.HasKey("NegThrottle"))

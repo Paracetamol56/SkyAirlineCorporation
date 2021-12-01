@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomInput : MonoBehaviour
-{ 
+{
     private static float ThrottleAxis;
     private static float YawAxis;
     private static float PitchAxis;
