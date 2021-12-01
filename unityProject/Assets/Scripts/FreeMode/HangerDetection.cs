@@ -36,7 +36,8 @@ public class HangerDetection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter) && canJoin)
         {
             // call the fonction loadGameScene of SceneManager
-            ManagerScene.instance.LoadGameScene();
+            //ManagerScene.instance.LoadGameScene();
+            ManagerScene.instance.LoadGame();
             Debug.Log("waw je lance le jeu");
         }
     }

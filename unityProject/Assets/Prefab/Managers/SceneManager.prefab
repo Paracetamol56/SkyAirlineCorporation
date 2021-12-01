@@ -40,6 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6415274828719958344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d25623698d1524646a9f96f31dd77936, type: 3}
+  m_Script: {fileID: 11500000, guid: fdbe7fda368489745bb924318304fc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  progressBar: {fileID: 0}
+  Mode: 0
