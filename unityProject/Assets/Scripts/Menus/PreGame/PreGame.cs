@@ -45,8 +45,7 @@ public class PreGame : MonoBehaviour
         //SceneManager.LoadScene("Presentation", LoadSceneMode.Single);
 
         ms.SetMode(ManagerScene.GameMode.Presentation);
-        //ms.LoadGameScene();
-        ms.LoadGame();
+        ms.LoadGameScene();
 
         //ms.SetMode(ManagerScene.GameMode.Freemode);
         //ms.LoadGameScene();
