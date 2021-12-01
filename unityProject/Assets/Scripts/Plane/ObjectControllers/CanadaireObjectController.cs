@@ -4,103 +4,103 @@ using UnityEngine;
 
 public class CanadaireObjectController : ObjectController
 {
-    // Yaw axis
-    [SerializeField]
-    private Transform rubber;
+  // Yaw axis
+  [SerializeField]
+  private Transform rubber;
 
-    // Pitch axis
-    [SerializeField]
-    private Transform leftElevator;
-    [SerializeField]
-    private Transform rightElevator;
+  // Pitch axis
+  [SerializeField]
+  private Transform leftElevator;
+  [SerializeField]
+  private Transform rightElevator;
 
-    // Roll axis
-    [SerializeField]
-    private Transform leftAilerons;
-    [SerializeField]
-    private Transform rightAilerons;
+  // Roll axis
+  [SerializeField]
+  private Transform leftAilerons;
+  [SerializeField]
+  private Transform rightAilerons;
 
-    // Propellers
-    [SerializeField]
-    private Transform leftPropeller;
-    [SerializeField]
-    private Transform rightPropeller;
+  // Propellers
+  [SerializeField]
+  private Transform leftPropeller;
+  [SerializeField]
+  private Transform rightPropeller;
 
-    // Landing gears attributes
-    private bool landingGearsOut = true;
-    private Animator animator;
+  // Landing gears attributes
+  private bool landingGearsOut = true;
+  private Animator animator;
 
-    // Water Level
-    private float water;
+  // Water Level
+  private float water;
 
-    private void Start()
+  private void Start()
+  {
+    animator = gameObject.GetComponent<Animator>();
+    animator.SetBool("landingGearsOut", landingGearsOut);
+  }
+
+  private void Update()
+  {
+    // Landing gears input
+    if (Input.GetKeyDown(KeyCode.G))
     {
-        animator = gameObject.GetComponent<Animator>();
-        animator.SetBool("landingGearsOut", landingGearsOut);
+      if (landingGearsOut)
+        landingGearsOut = false;
+      else
+        landingGearsOut = true;
+      animator.SetBool("landingGearsOut", landingGearsOut);
     }
+  }
 
-    private void Update()
+  private void FixedUpdate()
+  {
+    RaycastHit hit;
+
+    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 5.0f))
     {
-        // Landing gears input
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (landingGearsOut)
-                landingGearsOut = false;
-            else
-                landingGearsOut = true;
-            animator.SetBool("landingGearsOut", landingGearsOut);
-        }
+      if (hit.transform.tag == "Water")
+      {
+        water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
+      }
     }
+  }
 
-    private void FixedUpdate()
+  /// <summary>
+  /// Update rubber, elevators and ailerons angles
+  /// </summary>
+  /// <param name="angles">angles contains 3 floating number from input between -1 and 1</param>
+  public override void UpdateAngles(Vector3 angles)
+  {
+    rubber.localRotation = Quaternion.Euler(-90, Mathf.Lerp(rubberAmplitude, -rubberAmplitude, (angles.y + 1) / 2), 0);
+
+    leftElevator.localRotation = Quaternion.Euler(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2) - 90, 0, 0);
+    rightElevator.localRotation = Quaternion.Euler(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2) - 90, 0, 0);
+
+    leftAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
+    rightAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
+  }
+
+  /// <summary>
+  /// Update propeller rotation speed
+  /// </summary>
+  /// <param name="throttle">throttle is between 0 and 1</param>
+  public override void UpdateThrottle(float throttle)
+  {
+    float rotationSpeed = Mathf.Lerp(minPropellerSpeed, maxPropellerSpeed, throttle);
+
+    leftPropeller.Rotate(Vector3.forward, rotationSpeed);
+    rightPropeller.Rotate(Vector3.forward, rotationSpeed);
+  }
+
+  public float setWater
+  {
+    get { return water; }
+    set
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
-        {
-            if (hit.transform.tag == "Water")
-            {
-
-            }
-        }
+      if (value < 0)
+        water = 0;
+      else
+        water = value;
     }
-
-    /// <summary>
-    /// Update rubber, elevators and ailerons angles
-    /// </summary>
-    /// <param name="angles">angles contains 3 floating number from input between -1 and 1</param>
-    public override void UpdateAngles(Vector3 angles)
-    {
-        rubber.localRotation = Quaternion.Euler(-90, Mathf.Lerp(rubberAmplitude, -rubberAmplitude, (angles.y + 1) / 2), 0);
-
-        leftElevator.localRotation = Quaternion.Euler(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2) - 90, 0, 0);
-        rightElevator.localRotation = Quaternion.Euler(Mathf.Lerp(-elevatorAmplitude, elevatorAmplitude, (angles.x + 1) / 2) - 90, 0, 0);
-
-        leftAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(-aileronsAmplitude, aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
-        rightAilerons.localRotation = Quaternion.Euler(Mathf.Lerp(aileronsAmplitude, -aileronsAmplitude, (angles.z + 1) / 2) - 90, 0, 0);
-    }
-
-    /// <summary>
-    /// Update propeller rotation speed
-    /// </summary>
-    /// <param name="throttle">throttle is between 0 and 1</param>
-    public override void UpdateThrottle(float throttle)
-    {
-        float rotationSpeed = Mathf.Lerp(minPropellerSpeed, maxPropellerSpeed, throttle);
-
-        leftPropeller.Rotate(Vector3.forward, rotationSpeed);
-        rightPropeller.Rotate(Vector3.forward, rotationSpeed);
-    }
-
-    public float setWater
-    {
-        get { return water; }
-        set
-        {
-            if (value < 0)
-                water = 0;
-            else
-                water = value;
-        }
-    }
+  }
 }
