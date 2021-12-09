@@ -40,7 +40,7 @@ public class TerrainChunk : MonoBehaviour
     bool createSpawn;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject waterObject,bool activateWater)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject waterObject, bool activateWater)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
