@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class TerrainChunk
+public class TerrainChunk : MonoBehaviour
 {
 
     const float colliderGenerationDistanceThreshold = 5;
@@ -40,7 +40,7 @@ public class TerrainChunk
     bool createSpawn;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject waterObject,bool activateWater)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -68,14 +68,21 @@ public class TerrainChunk
         //Vector3 test = new Vector3(100, 100, 100);
         //Vector3 pos = new Vector3(0, 0, 0);
         //waterObject = new Plane(test, pos);
-        waterObject = new GameObject("Water Chunk");
-        waterObject.tag = "Water";
-        waterFilter = waterObject.AddComponent<MeshFilter>();
+        if (activateWater)
+        {
+            GameObject water = Instantiate(waterObject, meshObject.transform);
+            water.name = "WaterChunk";
+            water.tag = "Water";
+            water.transform.localScale = new Vector3(146, 1, 146);
+
+            water.transform.localPosition = new Vector3(0, 327, 0);
+        }
+        /*waterFilter = waterObject.AddComponent<MeshFilter>();
         waterCollider = waterObject.AddComponent<MeshCollider>();
-        waterRenderer = waterObject.AddComponent<MeshRenderer>();
+        waterRenderer = waterObject.AddComponent<MeshRenderer>();*/
         //waterRenderer.material = waterMaterial;
-        waterObject.transform.position = meshObject.transform.position;
-        waterObject.transform.parent = meshObject.transform;
+        /*water.transform.position = meshObject.transform.position;
+        water.transform.parent = meshObject.transform;*/
         //waterFilter = MeshFilter.
         //meshFilter.mesh = Plane;
 
