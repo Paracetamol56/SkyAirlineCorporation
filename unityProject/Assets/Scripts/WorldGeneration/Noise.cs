@@ -94,7 +94,7 @@ public static class Noise
 
         return noiseMap;
     }
-    public static float GetPosZ(float xSearch, float ySearch,NoiseSettings settings, int mapWidth, int mapHeight, Vector2 sampleCentre)
+    public static float GetPosZ(float xSearch, float ySearch, NoiseSettings settings, int mapWidth, int mapHeight, Vector2 sampleCentre)
     {
 
         float[,] noiseMap = new float[mapWidth, mapHeight];
@@ -104,7 +104,7 @@ public static class Noise
         float maxPossibleHeight = 0;
         float amplitude = 1;
         float frequency = 1;
-        float res=-40000;
+        float res = -40000;
 
         for (int i = 0; i < settings.octaves; i++)
         {
@@ -153,7 +153,7 @@ public static class Noise
                 }
                 noiseMap[x, y] = noiseHeight;
 
-                
+
 
                 if (settings.normalizeMode == NormalizeMode.Global)
                 {
@@ -162,7 +162,7 @@ public static class Noise
                 }
                 if (x == xSearch && ySearch == y)
                 {
-                    res = noiseMap[x,y];
+                    res = noiseMap[x, y];
                 }
             }
         }
@@ -180,7 +180,7 @@ public static class Noise
 
         return res;
     }
-    
+
 }
 
 [System.Serializable]
@@ -206,5 +206,5 @@ public class NoiseSettings
         lacunarity = Mathf.Max(lacunarity, 1);
         persistance = Mathf.Clamp01(persistance);
     }
-    
+
 }
