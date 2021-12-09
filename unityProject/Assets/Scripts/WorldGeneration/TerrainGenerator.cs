@@ -5,182 +5,182 @@ using System.Collections.Generic;
 public class TerrainGenerator : MonoBehaviour
 {
 
-  const float viewerMoveThresholdForChunkUpdate = 25f;
-  const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
+    const float viewerMoveThresholdForChunkUpdate = 25f;
+    const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
 
 
-  public int colliderLODIndex;
-  public LODInfo[] detailLevels;
+    public int colliderLODIndex;
+    public LODInfo[] detailLevels;
 
-  public MeshSettings meshSettings;
-  public HeightMapSettings heightMapSettings;
-  public TextureData textureSettings;
+    public MeshSettings meshSettings;
+    public HeightMapSettings heightMapSettings;
+    public TextureData textureSettings;
 
-  public Transform viewer;
-  public Material mapMaterial;
+    public Transform viewer;
+    public Material mapMaterial;
 
-  public GameObject waterObject;
-  public bool activateWater;
+    public GameObject waterObject;
+    public bool activateWater;
 
-  Vector2 viewerPosition;
-  Vector2 viewerPositionOld;
+    Vector2 viewerPosition;
+    Vector2 viewerPositionOld;
 
-  float meshWorldSize;
-  int chunksVisibleInViewDst;
+    float meshWorldSize;
+    int chunksVisibleInViewDst;
 
-  Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
-  List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
+    Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
+    List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
-  void Awake()
-  {
-    // Check water material
-    if (waterObject != null)
+    void Awake()
     {
-      activateWater = false;
-    }
-}
-
-
-  void Start()
-  {
-
-    textureSettings.ApplyToMaterial(mapMaterial);
-    textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
-
-    float maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
-    meshWorldSize = meshSettings.meshWorldSize;
-    chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize);
-
-    FirstChunk();
-
-}
-
-void Update()
-{
-    viewerPosition = new Vector2(viewer.position.x, viewer.position.z);
-
-    if (viewerPosition != viewerPositionOld)
-    {
-        foreach (TerrainChunk chunk in visibleTerrainChunks)
+        // Check water material
+        if (waterObject != null)
         {
-            chunk.UpdateCollisionMesh();
+            activateWater = false;
         }
     }
 
-    if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
+
+    void Start()
     {
-        viewerPositionOld = viewerPosition;
+
+        textureSettings.ApplyToMaterial(mapMaterial);
+        textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
+
+        float maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
+        meshWorldSize = meshSettings.meshWorldSize;
+        chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize);
+
+        FirstChunk();
+
+    }
+
+    void Update()
+    {
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z);
+
+        if (viewerPosition != viewerPositionOld)
+        {
+            foreach (TerrainChunk chunk in visibleTerrainChunks)
+            {
+                chunk.UpdateCollisionMesh();
+            }
+        }
+
+        if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
+        {
+            viewerPositionOld = viewerPosition;
+            UpdateVisibleChunks();
+        }
+    }
+
+    void UpdateVisibleChunks()
+    {
+        HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
+        for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
+        {
+            //Debug.Log(visibleTerrainChunks.Count);
+            alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
+            visibleTerrainChunks[i].UpdateTerrainChunk();
+        }
+
+        int currentChunkCoordX = Mathf.RoundToInt(viewerPosition.x / meshWorldSize);
+        int currentChunkCoordY = Mathf.RoundToInt(viewerPosition.y / meshWorldSize);
+
+        for (int yOffset = -chunksVisibleInViewDst; yOffset <= chunksVisibleInViewDst; yOffset++)
+        {
+            for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++)
+            {
+                Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
+                if (!alreadyUpdatedChunkCoords.Contains(viewedChunkCoord))
+                {
+                    if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
+                    {
+                        terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
+                    }
+                    else
+                    {
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false, waterObject, activateWater);
+                        terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
+                        newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
+                        newChunk.Load();
+                    }
+                }
+
+            }
+        }
+    }
+    void FirstChunk()
+    {
+        HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
+        for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
+        {
+            Debug.Log(visibleTerrainChunks.Count);
+            alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
+            visibleTerrainChunks[i].UpdateTerrainChunk();
+        }
+
+        int currentChunkCoordX = Mathf.RoundToInt(viewerPosition.x / meshWorldSize);
+        int currentChunkCoordY = Mathf.RoundToInt(viewerPosition.y / meshWorldSize);
+
+        for (int yOffset = -chunksVisibleInViewDst; yOffset <= chunksVisibleInViewDst; yOffset++)
+        {
+            for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++)
+            {
+                Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
+                if (!alreadyUpdatedChunkCoords.Contains(viewedChunkCoord))
+                {
+                    if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
+                    {
+                        terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
+                    }
+                    else
+                    {
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn, waterObject, activateWater);
+                        terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
+                        newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
+                        newChunk.Load();
+                    }
+                }
+
+            }
+        }
         UpdateVisibleChunks();
     }
-}
 
-void UpdateVisibleChunks()
-{
-    HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
-    for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
+    void OnTerrainChunkVisibilityChanged(TerrainChunk chunk, bool isVisible)
     {
-        //Debug.Log(visibleTerrainChunks.Count);
-        alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
-        visibleTerrainChunks[i].UpdateTerrainChunk();
-    }
-
-    int currentChunkCoordX = Mathf.RoundToInt(viewerPosition.x / meshWorldSize);
-    int currentChunkCoordY = Mathf.RoundToInt(viewerPosition.y / meshWorldSize);
-
-    for (int yOffset = -chunksVisibleInViewDst; yOffset <= chunksVisibleInViewDst; yOffset++)
-    {
-        for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++)
+        if (isVisible)
         {
-            Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
-            if (!alreadyUpdatedChunkCoords.Contains(viewedChunkCoord))
-            {
-                if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
-                {
-                    terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
-                }
-                else
-                {
-                    TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false, waterObject, activateWater);
-                    terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
-                    newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
-                    newChunk.Load();
-                }
-            }
-
+            visibleTerrainChunks.Add(chunk);
+        }
+        else
+        {
+            visibleTerrainChunks.Remove(chunk);
         }
     }
-}
-void FirstChunk()
-{
-    HashSet<Vector2> alreadyUpdatedChunkCoords = new HashSet<Vector2>();
-    for (int i = visibleTerrainChunks.Count - 1; i >= 0; i--)
-    {
-        Debug.Log(visibleTerrainChunks.Count);
-        alreadyUpdatedChunkCoords.Add(visibleTerrainChunks[i].coord);
-        visibleTerrainChunks[i].UpdateTerrainChunk();
-    }
 
-    int currentChunkCoordX = Mathf.RoundToInt(viewerPosition.x / meshWorldSize);
-    int currentChunkCoordY = Mathf.RoundToInt(viewerPosition.y / meshWorldSize);
-
-    for (int yOffset = -chunksVisibleInViewDst; yOffset <= chunksVisibleInViewDst; yOffset++)
+    float BlackBox(float x, float y, Vector2 sampleCentre)
     {
-        for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++)
+        float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
+
+        // Raycast test
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(x, y, 10000), Vector3.down, out hit, 50000))
         {
-            Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
-            if (!alreadyUpdatedChunkCoords.Contains(viewedChunkCoord))
-            {
-                if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
-                {
-                    terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
-                }
-                else
-                {
-                    TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn, waterObject, activateWater);
-                    terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
-                    newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
-                    newChunk.Load();
-                }
-            }
-
+            float raycastDistance = hit.distance;
+            raycastDistance = 1000 - raycastDistance;
+            // Debug raycast result and mathematical result
+            Debug.Log("Raycast hit at " + hit.point + " with height " + raycastDistance);
+            Debug.Log("Math result is " + res);
         }
-    }
-    UpdateVisibleChunks();
-}
+        else
+        {
+            Debug.LogError("Raycast missed");
+        }
 
-void OnTerrainChunkVisibilityChanged(TerrainChunk chunk, bool isVisible)
-{
-    if (isVisible)
-    {
-        visibleTerrainChunks.Add(chunk);
+        return res;
     }
-    else
-    {
-        visibleTerrainChunks.Remove(chunk);
-    }
-}
-
-float BlackBox(float x, float y, Vector2 sampleCentre)
-{
-    float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
-
-    // Raycast test
-    RaycastHit hit;
-    if (Physics.Raycast(new Vector3(x, y, 10000), Vector3.down, out hit, 50000))
-    {
-        float raycastDistance = hit.distance;
-        raycastDistance = 1000 - raycastDistance;
-        // Debug raycast result and mathematical result
-        Debug.Log("Raycast hit at " + hit.point + " with height " + raycastDistance);
-        Debug.Log("Math result is " + res);
-    }
-    else
-    {
-        Debug.LogError("Raycast missed");
-    }
-
-    return res;
-}
 }
 
 [System.Serializable]
