@@ -9,7 +9,7 @@ public class MapPreviewEditor : Editor
 	public override void OnInspectorGUI()
 	{
 		MapPreview mapPreview = (MapPreview)target;
-
+		TerrainGenerator terrain = (TerrainGenerator)target;
 		if (DrawDefaultInspector())
 		{
 			if (mapPreview.autoUpdate)
@@ -22,5 +22,9 @@ public class MapPreviewEditor : Editor
 		{
 			mapPreview.DrawMapInEditor();
 		}
+		if (GUILayout.Button("Test"))
+        {
+			terrain.BlackBox(40,60,new Vector2(0,0));
+        }
 	}
 }
