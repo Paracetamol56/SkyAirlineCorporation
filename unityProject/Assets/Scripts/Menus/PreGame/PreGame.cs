@@ -43,7 +43,7 @@ public class PreGame : MonoBehaviour
         gm.SetSelectedPlane(currentPlaneType);
 
         ms.SetMode(ManagerScene.GameMode.Presentation);
-        ms.LoadGameScene();
+        //ms.LoadGameScene();
 
         //ms.SetMode(ManagerScene.GameMode.Freemode);
         //ms.LoadGameScene();
