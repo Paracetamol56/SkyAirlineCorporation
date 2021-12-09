@@ -6,25 +6,22 @@ using UnityEditor;
 public class MapPreviewEditor : Editor
 {
 
-  public override void OnInspectorGUI()
-  {
-    MapPreview mapPreview = (MapPreview)target;
-    TerrainGenerator terrain = (TerrainGenerator)target;
-    if (DrawDefaultInspector())
-    {
-      if (mapPreview.autoUpdate)
-      {
-        mapPreview.DrawMapInEditor();
-      }
-    }
+	public override void OnInspectorGUI()
+	{
+		MapPreview mapPreview = (MapPreview)target;
+		
+		if (DrawDefaultInspector())
+		{
+			if (mapPreview.autoUpdate)
+			{
+				mapPreview.DrawMapInEditor();
+			}
+		}
 
-    if (GUILayout.Button("Generate"))
-    {
-      mapPreview.DrawMapInEditor();
-    }
-    if (GUILayout.Button("Test"))
-    {
-      terrain.BlackBox(40, 60, new Vector2(0, 0));
-    }
-  }
+		if (GUILayout.Button("Generate"))
+		{
+			mapPreview.DrawMapInEditor();
+		}
+		
+	}
 }
