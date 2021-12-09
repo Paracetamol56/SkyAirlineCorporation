@@ -59,8 +59,8 @@ public class ManagerScene : MonoBehaviour
     //////////Test Nouveau SceneManager n�1/////////////
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-   public IEnumerator LoadGame(SceneIndex Level)
-   {
+    public IEnumerator LoadGame(SceneIndex Level)
+    {
         Debug.Log("changement vers " + (int)Level);
 
         loadingScreen.gameObject.SetActive(true);
@@ -79,24 +79,24 @@ public class ManagerScene : MonoBehaviour
                 Debug.Log("branlette");
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
                 StartCoroutine(GetSceneLoadProgress());
-                break;           
+                break;
 
             case SceneIndex.Delivery:
-               scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));          
-               StartCoroutine(GetSceneLoadProgress());
-               break;
+                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));
+                StartCoroutine(GetSceneLoadProgress());
+                break;
 
-           case SceneIndex.FFplane:
-               scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));        
-               StartCoroutine(GetSceneLoadProgress());
-               break;
+            case SceneIndex.FFplane:
+                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));
+                StartCoroutine(GetSceneLoadProgress());
+                break;
 
-           case SceneIndex.Presentation:
-               scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
-               StartCoroutine(GetSceneLoadProgress());
-               break;
+            case SceneIndex.Presentation:
+                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
+                StartCoroutine(GetSceneLoadProgress());
+                break;
 
-           default:
+            default:
                 scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
                 StartCoroutine(GetSceneLoadProgress());
                 break;
@@ -104,33 +104,33 @@ public class ManagerScene : MonoBehaviour
 
         yield return new WaitForSeconds(0f);
     }
-   
-   float totalSceneProgress;
-   public IEnumerator GetSceneLoadProgress()
-   {
-       for (int i = 0; i < scenesLoading.Count; i++)
-       {
-           while (!scenesLoading[i].isDone)
-           {
-               totalSceneProgress = 0;
-   
-               foreach (AsyncOperation operation in scenesLoading)
-               {
-                   totalSceneProgress += operation.progress;
-               }
-   
-               totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
-   
+
+    float totalSceneProgress;
+    public IEnumerator GetSceneLoadProgress()
+    {
+        for (int i = 0; i < scenesLoading.Count; i++)
+        {
+            while (!scenesLoading[i].isDone)
+            {
+                totalSceneProgress = 0;
+
+                foreach (AsyncOperation operation in scenesLoading)
+                {
+                    totalSceneProgress += operation.progress;
+                }
+
+                totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
+
                 bar.value = Mathf.RoundToInt(totalSceneProgress);
-   
-               textField.text = string.Format("Loading Environments: {0}%", totalSceneProgress);
-   
-               yield return null;
-           }
-       }
+
+                textField.text = string.Format("Loading Environments: {0}%", totalSceneProgress);
+
+                yield return null;
+            }
+        }
 
         loadingScreen.gameObject.SetActive(false);
-   }
+    }
 
 
 
