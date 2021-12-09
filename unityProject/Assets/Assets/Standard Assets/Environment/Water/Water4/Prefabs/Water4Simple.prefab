@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedMaterial: {fileID: 2100000, guid: 656fde119942645aa8e062e04c119aa1, type: 2}
   waterQuality: 2
-  edgeBlend: 1
+  edgeBlend: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 0

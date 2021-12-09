@@ -31,7 +31,10 @@ public class TerrainGenerator : MonoBehaviour
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
     List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
-    void Awake()
+  void Awake()
+  {
+    // Check water material
+    if (waterObject == null)
     {
         // Check water material
         if (waterObject != null)
