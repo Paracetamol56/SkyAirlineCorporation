@@ -93,32 +93,32 @@ public class ManagerScene : MonoBehaviour
                 StartCoroutine(GetSceneLoadProgress());
                 break;
 
-            //Loader Asynchrone
-            //case SceneIndex.Freemode:
-            //    Debug.Log("branlette");
-            //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
-            //    StartCoroutine(GetSceneLoadProgress());
-            //    break;           
-            //
-            //case SceneIndex.Delivery:
-            //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));          
-            //   StartCoroutine(GetSceneLoadProgress());
-            //   break;
-            //
-            //case SceneIndex.FFplane:
-            //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));        
-            //   StartCoroutine(GetSceneLoadProgress());
-            //   break;
-            //
-            //case SceneIndex.Presentation:
-            //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
-            //   StartCoroutine(GetSceneLoadProgress());
-            //   break;
-            //
-            //default:
-            //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
-            //    StartCoroutine(GetSceneLoadProgress());
-            //    break;
+                //Loader Asynchrone
+                //case SceneIndex.Freemode:
+                //    Debug.Log("branlette");
+                //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
+                //    StartCoroutine(GetSceneLoadProgress());
+                //    break;           
+                //
+                //case SceneIndex.Delivery:
+                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));          
+                //   StartCoroutine(GetSceneLoadProgress());
+                //   break;
+                //
+                //case SceneIndex.FFplane:
+                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));        
+                //   StartCoroutine(GetSceneLoadProgress());
+                //   break;
+                //
+                //case SceneIndex.Presentation:
+                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
+                //   StartCoroutine(GetSceneLoadProgress());
+                //   break;
+                //
+                //default:
+                //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
+                //    StartCoroutine(GetSceneLoadProgress());
+                //    break;
         }
 
         yield return new WaitForSeconds(1f);
