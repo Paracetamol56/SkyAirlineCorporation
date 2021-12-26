@@ -51,7 +51,7 @@ public class PreGame : MonoBehaviour
             primeColor.color = CPprime.TheColor;
             secondColor.color = CPsecond.TheColor;
         }
-        
+
     }
 
     public void StartGame()
@@ -122,8 +122,8 @@ public class PreGame : MonoBehaviour
 
     void OnMouseDown()
     {
-       
-        
+
+
     }
 
     public void ChangeColor()

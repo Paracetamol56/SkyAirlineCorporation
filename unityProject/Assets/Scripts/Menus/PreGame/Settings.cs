@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class Settings : MonoBehaviour
 {
-    
+
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] TMP_Dropdown qualityDropdown;
