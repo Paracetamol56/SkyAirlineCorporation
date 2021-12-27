@@ -42,24 +42,24 @@ public class TerrainGenerator : MonoBehaviour
                 activateWater = false;
             }
         }
+    }
 
+    void Start()
+    {
 
-        void Start()
-        {
+        textureSettings.ApplyToMaterial(mapMaterial);
+        textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
 
-            textureSettings.ApplyToMaterial(mapMaterial);
-            textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
+        float maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
+        meshWorldSize = meshSettings.meshWorldSize;
+        chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize);
 
-            float maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
-            meshWorldSize = meshSettings.meshWorldSize;
-            chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize);
+        FirstChunk();
 
-            FirstChunk();
+    }
 
-        }
-
-        void Update()
-        {
+    void Update()
+    {
             viewerPosition = new Vector2(viewer.position.x, viewer.position.z);
 
             if (viewerPosition != viewerPositionOld)
