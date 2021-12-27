@@ -155,4 +155,9 @@ public class PlaneController : MonoBehaviour
     {
         return planeRigidBody.velocity.magnitude;
     }
+
+    public float getMaxSpeed()
+    {
+        return maxThrottle;
+    }
 }
