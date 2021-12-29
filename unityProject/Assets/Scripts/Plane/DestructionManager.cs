@@ -76,7 +76,7 @@ public class DestructionManager : MonoBehaviour
     {
         if (drowned)
         {
-            PlayerController.SetThrottleAverageSpeed(0f,0f);
+            PlayerController.SetThrottleAverageSpeed(0f, 0f);
             StartCoroutine(SoundDown());
         }
     }
