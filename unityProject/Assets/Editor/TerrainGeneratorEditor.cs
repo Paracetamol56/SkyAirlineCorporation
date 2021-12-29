@@ -14,9 +14,9 @@ public class TerrainGeneratorEditor : Editor
     {
 
     }
-    if (GUILayout.Button("Test"))
+    /*if (GUILayout.Button("Test"))
     {
       generator.BlackBox(3000, -3000, new Vector2(0, 0));
-    }
+    }*/
   }
 }

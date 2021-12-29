@@ -162,7 +162,7 @@ public class TerrainGenerator : MonoBehaviour
             visibleTerrainChunks.Remove(chunk);
         }
     }
-
+    /*
     public float BlackBox(float x, float y, Vector2 sampleCentre)
     {
         float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
@@ -183,7 +183,7 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         return res;
-    }
+    }*/
 }
 
 [System.Serializable]
