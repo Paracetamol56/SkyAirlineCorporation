@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlaneController : MonoBehaviour
 {
     // Input axis
+    [SerializeField]
     private float throttle = 0.0f;
     private float yawAxis = 0.0f;
     private float pitchAxis = 0.0f;
@@ -159,5 +160,11 @@ public class PlaneController : MonoBehaviour
     public float getMaxSpeed()
     {
         return maxThrottle;
+    }
+
+    public void SetThrottleAverageSpeed(float newthrottle,float newAverageSpeed)
+    {
+        throttle=newthrottle;
+        averrageMinFlightSpeed = newAverageSpeed;
     }
 }

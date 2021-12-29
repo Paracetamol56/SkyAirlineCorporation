@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestructionManager : MonoBehaviour
 {
     public GameObject explosion;
+    public bool drowned=false;
     public GameObject ExplosionSound;
     private Transform PlanePos;
     private Rigidbody rigidBody;
@@ -50,4 +51,30 @@ public class DestructionManager : MonoBehaviour
 
         }
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Water")
+        {
+            Debug.Log("Water Damage");
+            drowned = true;
+            while(PlayerController.GetThrottle()!=0)
+            {
+                PlayerController.SetThrottleAverageSpeed(PlayerController.GetThrottle()- Time.deltaTime,0f);
+                if (PlayerController.GetThrottle()<0)
+                {
+                    PlayerController.SetThrottleAverageSpeed(0f,0f);
+                }
+            }
+        }
+    }
+
+    void Update()
+    {
+        if(drowned)
+        {
+            PlayerController.SetThrottleAverageSpeed(0f,0f);
+        }
+    }
+
 }
