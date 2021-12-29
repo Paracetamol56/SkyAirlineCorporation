@@ -162,9 +162,9 @@ public class PlaneController : MonoBehaviour
         return maxThrottle;
     }
 
-    public void SetThrottleAverageSpeed(float newthrottle,float newAverageSpeed)
+    public void SetThrottleAverageSpeed(float newthrottle, float newAverageSpeed)
     {
-        throttle=newthrottle;
+        throttle = newthrottle;
         averrageMinFlightSpeed = newAverageSpeed;
     }
 }
