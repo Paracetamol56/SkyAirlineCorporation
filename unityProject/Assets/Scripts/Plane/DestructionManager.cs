@@ -16,6 +16,8 @@ public class DestructionManager : MonoBehaviour
 
     float LandingSpeedMax = 125.0f;
 
+    private AudioSource audio;
+
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class DestructionManager : MonoBehaviour
         rigidBody = this.GetComponent<Rigidbody>();
         CamScript = MainCamera.GetComponent<CameraController>();
         PlayerController = gameObject.GetComponent<PlaneController>();
+        audio = gameObject.GetComponent<AudioSource>();
 
     }
 
@@ -73,8 +76,16 @@ public class DestructionManager : MonoBehaviour
     {
         if (drowned)
         {
-            PlayerController.SetThrottleAverageSpeed(0f, 0f);
+            PlayerController.SetThrottleAverageSpeed(0f,0f);
+            StartCoroutine(SoundDown());
         }
+    }
+
+
+    IEnumerator SoundDown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        audio.volume -= 0.01f;
     }
 
 }
