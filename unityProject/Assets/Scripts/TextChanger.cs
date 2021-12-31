@@ -19,7 +19,7 @@ public class TextChanger : MonoBehaviour
                 message.text = "Start Voltige GameMode\nComing Soon";
             if (gameObject.name == "AeroportLivraison")
                 message.text = "Start Livraison GameMode\nComing Soon";
-            
+
         }
     }
     void OnTriggerExit(Collider col)
