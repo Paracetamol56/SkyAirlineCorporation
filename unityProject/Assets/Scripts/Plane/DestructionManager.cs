@@ -35,7 +35,6 @@ public class DestructionManager : MonoBehaviour
         Vector3 planeNormal = PlanePos.up;
         Vector3 ContactSol = col.contacts[0].normal;
         float DotProduct = Vector3.Dot(planeNormal, ContactSol);
-        Debug.Log("Vitesse = " + rigidBody.velocity.magnitude);
         if (col.gameObject.tag == "Ground")
         {
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
@@ -60,7 +59,6 @@ public class DestructionManager : MonoBehaviour
     {
         if (col.gameObject.tag == "Water")
         {
-            Debug.Log("Water Damage");
             drowned = true;
             Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
             while (PlayerController.GetThrottle() != 0)
