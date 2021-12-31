@@ -22,4 +22,9 @@ public class PlaneSound : MonoBehaviour
     {
         audioSource.volume = Mathf.InverseLerp(0f, Controller.getMaxSpeed() * 2, Controller.getSpeed());
     }
+
+    public void PlayPlouf()
+    {
+        
+    }
 }

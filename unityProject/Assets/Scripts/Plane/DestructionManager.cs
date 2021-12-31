@@ -7,6 +7,7 @@ public class DestructionManager : MonoBehaviour
     public GameObject explosion;
     public bool drowned = false;
     public GameObject ExplosionSound;
+    public GameObject SplashSound;
     private Transform PlanePos;
     private Rigidbody rigidBody;
 
@@ -61,6 +62,7 @@ public class DestructionManager : MonoBehaviour
         {
             Debug.Log("Water Damage");
             drowned = true;
+            Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
             while (PlayerController.GetThrottle() != 0)
             {
                 PlayerController.SetThrottleAverageSpeed(PlayerController.GetThrottle() - Time.deltaTime, 0f);
