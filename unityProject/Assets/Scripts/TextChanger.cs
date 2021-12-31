@@ -13,7 +13,13 @@ public class TextChanger : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            message.text = "Start FireFighting GameMode\n(press F)";
+            if (gameObject.name == "AeroportFFPlane")
+                message.text = "Start FireFighting GameMode\n(press F)";
+            if (gameObject.name == "AeroportVoltige")
+                message.text = "Start Voltige GameMode\nComing Soon";
+            if (gameObject.name == "AeroportLivraison")
+                message.text = "Start Livraison GameMode\nComing Soon";
+            
         }
     }
     void OnTriggerExit(Collider col)
