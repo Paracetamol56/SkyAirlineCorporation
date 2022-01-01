@@ -88,7 +88,7 @@ public class DestructionManager : MonoBehaviour
             gameObject.transform.position = new Vector3(0, 1000, 0);
             gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
             PlayerController.SetThrottleAverageSpeed(0f, 70f);
-
+            gameObject.GetComponent<AudioSource>().volume = 0.08f;
         }
     }
 
