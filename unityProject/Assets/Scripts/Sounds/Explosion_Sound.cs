@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplashSound : MonoBehaviour
+public class Explosion_Sound : MonoBehaviour
 {
 
     [SerializeField]
@@ -16,5 +16,12 @@ public class SplashSound : MonoBehaviour
         int randIndex = Random.Range(0, Clips.Count);
         audiosource.clip = Clips[randIndex];
         audiosource.Play();
+       StartCoroutine(DestroyInstance());
+    }
+
+    IEnumerator DestroyInstance()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 }
