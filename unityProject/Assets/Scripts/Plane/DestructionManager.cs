@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DestructionManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DestructionManager : MonoBehaviour
     float LandingSpeedMax = 125.0f;
 
     private AudioSource audio;
+
 
 
     void Start()
@@ -79,6 +81,13 @@ public class DestructionManager : MonoBehaviour
             PlayerController.SetThrottleAverageSpeed(0f, 0f);
             StartCoroutine(SoundDown());
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.transform.position = new Vector3(0,1000,0);
+            gameObject.transform.rotation = new Quaternion(0,0,0,0);
+            PlayerController.SetThrottleAverageSpeed(0f, 70f);
+        }
     }
 
 
@@ -87,5 +96,6 @@ public class DestructionManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         audio.volume -= 0.01f;
     }
+
 
 }
