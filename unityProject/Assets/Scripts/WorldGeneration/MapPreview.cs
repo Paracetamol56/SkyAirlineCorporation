@@ -9,7 +9,7 @@ public class MapPreview : MonoBehaviour
     public MeshRenderer meshRenderer;
 
 
-    public enum DrawMode { NoiseMap, Mesh, CreateSpawn };
+    public enum DrawMode { NoiseMap, Mesh/*, CreateSpawn */};
     public DrawMode drawMode;
 
     public MeshSettings meshSettings;
@@ -42,10 +42,10 @@ public class MapPreview : MonoBehaviour
         {
             DrawMesh(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
         }
-        else if (drawMode == DrawMode.CreateSpawn)
-        {
-            DrawMesh(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
-        }
+        //else if (drawMode == DrawMode.CreateSpawn)
+        //{
+        //    DrawMesh(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
+        //}
     }
 
 

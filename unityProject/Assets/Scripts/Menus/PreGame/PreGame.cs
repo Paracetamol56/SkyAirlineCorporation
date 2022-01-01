@@ -38,23 +38,23 @@ public class PreGame : MonoBehaviour
 
     public void StartGame()
     {
+        SceneIndex Level;
+
         SaveCurrentPlane();
 
         gm.SetSelectedPlane(currentPlaneType);
 
-        //SceneManager.LoadScene("Presentation", LoadSceneMode.Single);
+        ms.SetMode(SceneIndex.Freemode);
 
-        ms.SetMode(ManagerScene.GameMode.Presentation);
-        //ms.LoadGameScene();
-        ms.LoadGame();
+        Level = ms.GetMode();
 
-        //ms.SetMode(ManagerScene.GameMode.Freemode);
-        //ms.LoadGameScene();
+        Debug.Log(Level);
+        StartCoroutine(ms.LoadGame(Level));
     }
 
     public void ExitGame()
     {
-        //ms.Quit();
+        ms.Quit();
     }
 
     public void NextPlane()
