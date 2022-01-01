@@ -19,6 +19,9 @@ public class TerrainGenerator : MonoBehaviour
     public Transform viewer;
     public Material mapMaterial;
 
+    public GameObject waterObject;
+    public bool activateWater;
+
     Vector2 viewerPosition;
     Vector2 viewerPositionOld;
 
@@ -27,6 +30,19 @@ public class TerrainGenerator : MonoBehaviour
 
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
     List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
+
+    void Awake()
+    {
+        // Check water material
+        if (waterObject == null)
+        {
+            // Check water material
+            if (waterObject != null)
+            {
+                activateWater = false;
+            }
+        }
+    }
 
     void Start()
     {
@@ -87,7 +103,7 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false, waterObject, activateWater);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();
@@ -123,7 +139,7 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn, waterObject, activateWater);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();
@@ -146,6 +162,28 @@ public class TerrainGenerator : MonoBehaviour
             visibleTerrainChunks.Remove(chunk);
         }
     }
+    /*
+    public float BlackBox(float x, float y, Vector2 sampleCentre)
+    {
+        float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
+
+        // Raycast test
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(x, 10000, y), Vector3.down, out hit, 50000))
+        {
+            float raycastDistance = hit.distance;
+            raycastDistance = 10000 - raycastDistance;
+            // Debug raycast result and mathematical result
+            Debug.Log("Raycast hit at " + hit.point + " with height " + raycastDistance);
+            Debug.Log("Math result is " + res);
+        }
+        else
+        {
+            Debug.LogError("Raycast missed");
+        }
+
+        return res;
+    }*/
 }
 
 [System.Serializable]

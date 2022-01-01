@@ -14,9 +14,9 @@ public static class SpawnGenerator
         //Debug.Log(sampleCentre);
         //int x;
         //int y;
-        if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) < 110 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) < 110)
+        if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) < 60 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) < 60)
         {
-            if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) > 12 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) > 12)
+            if (Mathf.Abs(coordY) + Mathf.Abs(sampleCentre.y) > 10 && Mathf.Abs(sampleCentre.x) + Mathf.Abs(coordX) > 10)
             {
                 //perlinValue = 0.5f * 2 - 1;
 
@@ -31,7 +31,7 @@ public static class SpawnGenerator
             }
 
         }
-        if (Mathf.Abs(Vector2.Distance(Centre, currentPos)) > 70.0f)
+        if (Mathf.Abs(Vector2.Distance(Centre, currentPos)) > 45.0f)
         {
             blendValue = 1;
         }
@@ -40,7 +40,7 @@ public static class SpawnGenerator
             blendValue = 50.0f / Mathf.Abs(Vector2.Distance(Centre, currentPos));
         }
         //Debug.Log(Evaluate(1f));
-        perlinValue = (distCentrCurrent < 60) ? 0 : ((1 - blendValue) * (-0.001f)) + ((Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1) * blendValue);
+        perlinValue = (distCentrCurrent < 45) ? 0 : ((1 - blendValue) * (-0.001f)) + ((Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1) * blendValue);
         //if (sampleCentre.x + sampleCentre.y == 125)
         //{
         //    Debug.Log(mapWidth);
