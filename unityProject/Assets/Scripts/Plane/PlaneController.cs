@@ -42,26 +42,26 @@ public class PlaneController : MonoBehaviour
     private Rigidbody planeRigidBody;
 
 #if UNITY_EDITOR
-    /// <summary>
-    /// Inspector inputs verifications
-    /// </summary>
-    private void OnValidate()
-    {
-        if (maxThrottle <= 0.0f)
-            maxThrottle = 1.0f;
+  /// <summary>
+  /// Inspector inputs verifications
+  /// </summary>
+  private void OnValidate()
+  {
+    if (maxThrottle <= 0.0f)
+      maxThrottle = 1.0f;
 
-        if (autoStabilization <= 0.0f)
-            autoStabilization = 1.0f;
+    if (autoStabilization <= 0.0f)
+      autoStabilization = 1.0f;
 
-        if (throttleInputMultiplicator <= 0.0f)
-            throttleInputMultiplicator = 1.0f;
+    if (throttleInputMultiplicator <= 0.0f)
+      throttleInputMultiplicator = 1.0f;
 
-        if (inputMultiplicator <= 0.0f)
-            inputMultiplicator = 1.0f;
+    if (inputMultiplicator <= 0.0f)
+      inputMultiplicator = 1.0f;
 
-        if (liftCoefficient <= 0.0f)
-            liftCoefficient = 0.01f;
-    }
+    if (liftCoefficient <= 0.0f)
+      liftCoefficient = 0.01f;
+  }
 #endif
 
     /// <summary>
@@ -129,7 +129,7 @@ public class PlaneController : MonoBehaviour
             // Apply minFlightSpeed if plane is in the air
             float angleOfAttack = transform.localRotation.x * 180f;
             if (angleOfAttack <= 15)
-                speed = Mathf.Max(averrageMinFlightSpeed + angleOfAttack, speed);
+                speed = Mathf.Max(averrageMinFlightSpeed - angleOfAttack, speed);
 
             // Rigid body forces and torques
             planeRigidBody.AddRelativeTorque(new Vector3(pitchAxis, yawAxis, rollAxis - yawAxis), ForceMode.Acceleration);

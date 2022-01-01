@@ -56,11 +56,11 @@ public class CanadaireObjectController : ObjectController
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 5.0f))
         {
             if (hit.transform.tag == "Water")
             {
-
+                water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
             }
         }
     }
