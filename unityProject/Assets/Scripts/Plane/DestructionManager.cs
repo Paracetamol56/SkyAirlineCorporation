@@ -84,8 +84,8 @@ public class DestructionManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            gameObject.transform.position = new Vector3(0,1000,0);
-            gameObject.transform.rotation = new Quaternion(0,0,0,0);
+            gameObject.transform.position = new Vector3(0, 1000, 0);
+            gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
             PlayerController.SetThrottleAverageSpeed(0f, 70f);
         }
     }
