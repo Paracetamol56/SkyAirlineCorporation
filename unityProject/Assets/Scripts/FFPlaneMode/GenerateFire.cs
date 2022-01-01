@@ -59,7 +59,7 @@ public class GenerateFire : MonoBehaviour
 
     public void FireUnspawn()
     {
-        foreach(GameObject fire in fireList)
+        foreach (GameObject fire in fireList)
         {
             Destroy(fire);
         }
