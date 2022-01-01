@@ -16,7 +16,7 @@ public class Explosion_Sound : MonoBehaviour
         int randIndex = Random.Range(0, Clips.Count);
         audiosource.clip = Clips[randIndex];
         audiosource.Play();
-       StartCoroutine(DestroyInstance());
+        StartCoroutine(DestroyInstance());
     }
 
     IEnumerator DestroyInstance()
