@@ -13,7 +13,7 @@ public class GenerateFire : MonoBehaviour
 
     public void FireSpawn()
     {
-        for(int i = 0; i < nbOfFire; ++i)
+        for (int i = 0; i < nbOfFire; ++i)
         {
             Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.z / 2, -size.z / 2));
             Instantiate(firePrefab, pos, Quaternion.identity);

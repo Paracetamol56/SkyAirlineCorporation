@@ -14,7 +14,7 @@ public class RayDetect : MonoBehaviour
 
     private RayDetect()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("RayDetect existe deja");
             return;
@@ -26,7 +26,7 @@ public class RayDetect : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(wayPoint, Vector3.down, out hit, 1000))
+        if (Physics.Raycast(wayPoint, Vector3.down, out hit, 1000))
         {
             lastHit = hit.transform.gameObject;
             collision = hit.point;
