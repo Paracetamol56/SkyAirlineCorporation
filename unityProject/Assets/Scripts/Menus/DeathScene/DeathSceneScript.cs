@@ -15,8 +15,8 @@ public class DeathSceneScript : MonoBehaviour
     public void RestartGame()
     {
 
-        //ms.SetMode(ms.GetMode());
-        ms.SetMode(SceneIndex.Freemode);
+        ms.SetMode(ms.GetMode());
+        //ms.SetMode(SceneIndex.Freemode);
 
         Level = ms.GetMode();
         Debug.Log(Level);

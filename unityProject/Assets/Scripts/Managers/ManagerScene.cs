@@ -63,39 +63,34 @@ public class ManagerScene : MonoBehaviour
     {
         Debug.Log("changement vers " + (int)Level);
 
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
+        loadingScreen.SetActive(false);
 
         switch (Level)
         {
             //Loader Synchrone
             case SceneIndex.Freemode:
                 SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
-                StartCoroutine(GetSceneLoadProgress());
                 break;
 
-            case SceneIndex.Delivery:
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));
-                StartCoroutine(GetSceneLoadProgress());
-                break;
-
-            case SceneIndex.FFplane:
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));
-                StartCoroutine(GetSceneLoadProgress());
-                break;
-
-            case SceneIndex.Presentation:
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
-                StartCoroutine(GetSceneLoadProgress());
-                break;
+            //case SceneIndex.Delivery:
+            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Delivery);
+            //    break;
+            //
+            //case SceneIndex.FFplane:
+            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
+            //    break;
+            //
+            //case SceneIndex.Presentation:
+            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Presentation);
+            //    break;
 
             default:
-                scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
-                StartCoroutine(GetSceneLoadProgress());
+                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
                 break;
 
                 //Loader Asynchrone
                 //case SceneIndex.Freemode:
-                //    Debug.Log("branlette");
                 //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
                 //    StartCoroutine(GetSceneLoadProgress());
                 //    break;           
@@ -148,7 +143,7 @@ public class ManagerScene : MonoBehaviour
             }
         }
 
-        loadingScreen.gameObject.SetActive(false);
+        loadingScreen.SetActive(false);
     }
 
 
