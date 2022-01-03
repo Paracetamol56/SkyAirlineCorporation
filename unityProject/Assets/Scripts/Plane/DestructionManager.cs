@@ -63,14 +63,6 @@ public class DestructionManager : MonoBehaviour
         {
             drowned = true;
             Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-            while (PlayerController.GetThrottle() != 0)
-            {
-                PlayerController.SetThrottleAverageSpeed(PlayerController.GetThrottle() - Time.deltaTime, 0f);
-                if (PlayerController.GetThrottle() < 0)
-                {
-                    PlayerController.SetThrottleAverageSpeed(0f, 0f);
-                }
-            }
         }
     }
 
