@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Settings : MonoBehaviour
 {
+
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] TMP_Dropdown qualityDropdown;
@@ -15,6 +17,9 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider volumeSlider;
     private float currentVolume;
     private Resolution[] resolutions;
+
+    private Dictionary<string, KeyCode> KeyBinds;
+    private GameObject currentKey;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +36,9 @@ public class Settings : MonoBehaviour
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 currentResolutionIndex = i;
         }
+
+        KeyBinds = new Dictionary<string, KeyCode>();
+        CheckKeys();
     }
 
     public void SetVolume(float volume)
@@ -148,118 +156,128 @@ public class Settings : MonoBehaviour
             volumeSlider.value =
                         PlayerPrefs.GetFloat("VolumePreference");
     }
-    /*
-        public void CheckKeys()
+
+    public void CheckKeys()
+    {
+        if (!PlayerPrefs.HasKey("NegThrottle"))
         {
-            if (!PlayerPrefs.HasKey("NegThrottle"))
-            {
-                PlayerPrefs.SetInt("NegThrottle", (int)KeyCode.LeftControl);
-                KeyBinds.Add("NegThrottle", KeyCode.LeftControl);
-            }
-            else
-            {
-                KeyBinds["NegThrottle"] = (KeyCode)PlayerPrefs.GetInt("NegThrottle");
-            }
-
-            if (!PlayerPrefs.HasKey("PosThrottle"))
-            {
-                PlayerPrefs.SetInt("PosThrottle", (int)KeyCode.LeftShift);
-                KeyBinds.Add("PosThrottle", KeyCode.LeftShift);
-            }
-            else
-            {
-                KeyBinds["PosThrottle"] = (KeyCode)PlayerPrefs.GetInt("PosThrottle");
-            }
-
-            if (!PlayerPrefs.HasKey("NegYaw"))
-            {
-                PlayerPrefs.SetInt("NegYaw", (int)KeyCode.Q);
-                KeyBinds.Add("NegYaw", KeyCode.Q);
-            }
-            else
-            {
-                KeyBinds["NegYaw"] = (KeyCode)PlayerPrefs.GetInt("NegYaw");
-            }
-            if (!PlayerPrefs.HasKey("PosYaw"))
-            {
-                PlayerPrefs.SetInt("PosYaw", (int)KeyCode.D);
-                KeyBinds.Add("PosYaw", KeyCode.D);
-            }
-            else
-            {
-                KeyBinds["PosYaw"] = (KeyCode)PlayerPrefs.GetInt("PosYaw");
-            }
-
-            if (!PlayerPrefs.HasKey("NegPitch"))
-            {
-                PlayerPrefs.SetInt("NegPitch", (int)KeyCode.S);
-                KeyBinds.Add("NegPitch", KeyCode.S);
-            }
-            else
-            {
-                KeyBinds["NegPitch"] = (KeyCode)PlayerPrefs.GetInt("NegPitch");
-            }
-            if (!PlayerPrefs.HasKey("PosPitch"))
-            {
-                PlayerPrefs.SetInt("PosPitch", (int)KeyCode.Z);
-                KeyBinds.Add("PosPitch", KeyCode.Z);
-            }
-            else
-            {
-                KeyBinds["PosPitch"] = (KeyCode)PlayerPrefs.GetInt("PosPitch");
-            }
-
-            if (!PlayerPrefs.HasKey("NegRoll"))
-            {
-                PlayerPrefs.SetInt("NegRoll", (int)KeyCode.A);
-                KeyBinds.Add("NegRoll", KeyCode.A);
-            }
-            else
-            {
-                KeyBinds["NegRoll"] = (KeyCode)PlayerPrefs.GetInt("NegRoll");
-            }
-            if (!PlayerPrefs.HasKey("PosRoll"))
-            {
-                PlayerPrefs.SetInt("PosRoll", (int)KeyCode.E);
-                KeyBinds.Add("PosRoll", KeyCode.E);
-            }
-            else
-            {
-                KeyBinds["PosRoll"] = (KeyCode)PlayerPrefs.GetInt("PosRoll");
-            }
+            PlayerPrefs.SetInt("NegThrottle", (int)KeyCode.LeftControl);
+            KeyBinds.Add("NegThrottle", KeyCode.LeftControl);
+        }
+        else
+        {
+            KeyBinds["NegThrottle"] = (KeyCode)PlayerPrefs.GetInt("NegThrottle");
         }
 
-        public void ChangeKey(GameObject clicked)
+        if (!PlayerPrefs.HasKey("PosThrottle"))
         {
-            currentKey = clicked;
+            PlayerPrefs.SetInt("PosThrottle", (int)KeyCode.LeftShift);
+            KeyBinds.Add("PosThrottle", KeyCode.LeftShift);
+        }
+        else
+        {
+            KeyBinds["PosThrottle"] = (KeyCode)PlayerPrefs.GetInt("PosThrottle");
         }
 
-        public void Reset()
+        if (!PlayerPrefs.HasKey("NegYaw"))
         {
-
+            PlayerPrefs.SetInt("NegYaw", (int)KeyCode.Q);
+            KeyBinds.Add("NegYaw", KeyCode.Q);
+        }
+        else
+        {
+            KeyBinds["NegYaw"] = (KeyCode)PlayerPrefs.GetInt("NegYaw");
+        }
+        if (!PlayerPrefs.HasKey("PosYaw"))
+        {
+            PlayerPrefs.SetInt("PosYaw", (int)KeyCode.D);
+            KeyBinds.Add("PosYaw", KeyCode.D);
+        }
+        else
+        {
+            KeyBinds["PosYaw"] = (KeyCode)PlayerPrefs.GetInt("PosYaw");
         }
 
-        public void SaveControls()
+        if (!PlayerPrefs.HasKey("NegPitch"))
         {
-            foreach (var Key in KeyBinds)
+            PlayerPrefs.SetInt("NegPitch", (int)KeyCode.S);
+            KeyBinds.Add("NegPitch", KeyCode.S);
+        }
+        else
+        {
+            KeyBinds["NegPitch"] = (KeyCode)PlayerPrefs.GetInt("NegPitch");
+        }
+        if (!PlayerPrefs.HasKey("PosPitch"))
+        {
+            PlayerPrefs.SetInt("PosPitch", (int)KeyCode.Z);
+            KeyBinds.Add("PosPitch", KeyCode.Z);
+        }
+        else
+        {
+            KeyBinds["PosPitch"] = (KeyCode)PlayerPrefs.GetInt("PosPitch");
+        }
+
+        if (!PlayerPrefs.HasKey("NegRoll"))
+        {
+            PlayerPrefs.SetInt("NegRoll", (int)KeyCode.A);
+            KeyBinds.Add("NegRoll", KeyCode.A);
+        }
+        else
+        {
+            KeyBinds["NegRoll"] = (KeyCode)PlayerPrefs.GetInt("NegRoll");
+        }
+        if (!PlayerPrefs.HasKey("PosRoll"))
+        {
+            PlayerPrefs.SetInt("PosRoll", (int)KeyCode.E);
+            KeyBinds.Add("PosRoll", KeyCode.E);
+        }
+        else
+        {
+            KeyBinds["PosRoll"] = (KeyCode)PlayerPrefs.GetInt("PosRoll");
+        }
+    }
+
+    public void ChangeKey(GameObject clicked)
+    {
+        currentKey = clicked;
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.SetInt("NegThrottle", (int)KeyCode.LeftControl);
+        PlayerPrefs.SetInt("PosThrottle", (int)KeyCode.LeftShift);
+
+        PlayerPrefs.SetInt("NegYaw", (int)KeyCode.Q);
+        PlayerPrefs.SetInt("PosYaw", (int)KeyCode.D);
+
+        PlayerPrefs.SetInt("NegPitch", (int)KeyCode.S);
+        PlayerPrefs.SetInt("PosPitch", (int)KeyCode.Z);
+
+        PlayerPrefs.SetInt("NegRoll", (int)KeyCode.A);
+        PlayerPrefs.SetInt("PosRoll", (int)KeyCode.E);
+    }
+
+    public void SaveControls()
+    {
+        foreach (var Key in KeyBinds)
+        {
+            PlayerPrefs.SetInt(Key.Key, (int)Key.Value);
+        }
+        CustomInput.RefreshKeys();
+    }
+
+    void OnGUI()
+    {
+        if (currentKey != null)
+        {
+            Event e = Event.current;
+            if (e.isKey)
             {
-                PlayerPrefs.SetInt(Key.Key, (int)Key.Value);
+                KeyBinds[currentKey.name] = e.keyCode;
+                currentKey.transform.GetChild(0).GetComponent<TMP_Text>().text = e.keyCode.ToString();
+                EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+                currentKey = null;
             }
-            CustomInput.RefreshKeys();
         }
-
-        void OnGUI()
-        {
-            if (currentKey != null)
-            {
-                Event e = Event.current;
-                if (e.isKey)
-                {
-                    KeyBinds[currentKey.name] = e.keyCode;
-                    currentKey.transform.GetChild(0).GetComponent<TMP_Text>().text = e.keyCode.ToString();
-                    EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
-                    currentKey = null;
-                }
-            }
-        }*/
+    }
 }

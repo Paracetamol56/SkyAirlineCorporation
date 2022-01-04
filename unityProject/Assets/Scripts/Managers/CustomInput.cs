@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CustomInput : MonoBehaviour
 {
-
-    static public CustomInput instance;
-
     private static float ThrottleAxis;
     private static float YawAxis;
     private static float PitchAxis;
@@ -38,7 +35,7 @@ public class CustomInput : MonoBehaviour
         ThrottleAxis = Input.GetKey(NegativeThrottle) ? -1.0f : Input.GetKey(PositiveThrottle) ? 1.0f : 0.0f;
         YawAxis = Input.GetKey(NegativeYaw) ? -1.0f : Input.GetKey(PositiveYaw) ? 1.0f : 0.0f;
         PitchAxis = Input.GetKey(NegativePitch) ? -1.0f : Input.GetKey(PositivePitch) ? 1.0f : 0.0f;
-        RollAxis = Input.GetKey(NegativeRoll) ? -1.0f : Input.GetKey(PositiveRoll) ? 1.0f : 0.0f;
+        RollAxis = Input.GetKey(NegativeRoll) ? 1.0f : Input.GetKey(PositiveRoll) ? -1.0f : 0.0f;
     }
 
     public static float GetAxis(string axis)
