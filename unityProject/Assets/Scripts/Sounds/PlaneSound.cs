@@ -21,7 +21,7 @@ public class PlaneSound : MonoBehaviour
     void UpdateSound()
     {
         audioSource.pitch = Mathf.InverseLerp(0.0f, Controller.getMaxThrottle(), Controller.GetThrottle()) * 0.6f + 0.5f;
-        
+
     }
 
 }

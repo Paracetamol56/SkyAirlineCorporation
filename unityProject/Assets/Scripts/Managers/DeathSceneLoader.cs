@@ -8,7 +8,8 @@ public class DeathSceneLoader : MonoBehaviour
 
     // Update is called once per frame
 
-    void Start(){
+    void Start()
+    {
         ms = ManagerScene.instance;
         StartCoroutine(DeathLoading());
     }
