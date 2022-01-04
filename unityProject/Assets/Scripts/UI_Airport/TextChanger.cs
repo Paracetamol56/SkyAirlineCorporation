@@ -14,11 +14,23 @@ public class TextChanger : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             if (gameObject.name == "AeroportFFPlane")
+            {
                 message.text = "Start FireFighting GameMode\n(press F)";
+                gameObject.GetComponent<SceneCaller>().CanChangeScene = true;
+                gameObject.GetComponent<SceneCaller>().mode = SceneIndex.FFplane;
+            }
             if (gameObject.name == "AeroportVoltige")
+            {
                 message.text = "Start Voltige GameMode\nComing Soon";
+                //gameObject.GetComponent<SceneCaller>().CanChangeScene = true;
+                //gameObject.GetComponent<SceneCaller>().mode = SceneIndex.Voltige;
+            }
             if (gameObject.name == "AeroportLivraison")
+            {
                 message.text = "Start Livraison GameMode\nComing Soon";
+                //gameObject.GetComponent<SceneCaller>().CanChangeScene = true;
+                //gameObject.GetComponent<SceneCaller>().mode = SceneIndex.Delivery;
+            }
 
         }
     }
@@ -27,6 +39,8 @@ public class TextChanger : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             message.text = "";
+            gameObject.GetComponent<SceneCaller>().CanChangeScene = false;
+            gameObject.GetComponent<SceneCaller>().mode = SceneIndex.Freemode;
         }
     }
 }

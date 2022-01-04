@@ -9,9 +9,7 @@ public class ManagerScene : MonoBehaviour
 {
     ////////////SingleTon/////////////
     public static ManagerScene instance;
-    public GameObject loadingScreen;
-    public Slider bar;
-    public TextMeshProUGUI textField;
+    
 
     private void MakeSingleton()
     {
@@ -33,7 +31,6 @@ public class ManagerScene : MonoBehaviour
 
     public void Start()
     {
-        loadingScreen.SetActive(false);
         SetMode(SceneIndex.PreGameScene);
     }
 
@@ -63,92 +60,38 @@ public class ManagerScene : MonoBehaviour
     {
         Debug.Log("changement vers " + (int)Level);
 
-        //loadingScreen.SetActive(true);
-        loadingScreen.SetActive(false);
-
         switch (Level)
         {
+            
             //Loader Synchrone
-            case SceneIndex.Freemode:
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
+            case SceneIndex.PreGameScene:
+                SetMode(SceneIndex.PreGameScene);
+                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.PreGameScene);
                 break;
 
-            //case SceneIndex.Delivery:
-            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Delivery);
-            //    break;
-            //
-            //case SceneIndex.FFplane:
-            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
-            //    break;
-            //
-            //case SceneIndex.Presentation:
-            //    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Presentation);
-            //    break;
+            case SceneIndex.Freemode:
+                SetMode(SceneIndex.Freemode);
+                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
 
+                break;
+
+            case SceneIndex.FFplane:
+                SetMode(SceneIndex.FFplane);
+                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
+                break;
+
+            case SceneIndex.DeathScene:
+                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
+                break;
+            
             default:
                 SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
                 break;
 
-                //Loader Asynchrone
-                //case SceneIndex.Freemode:
-                //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
-                //    StartCoroutine(GetSceneLoadProgress());
-                //    break;           
-                //
-                //case SceneIndex.Delivery:
-                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Delivery, LoadSceneMode.Additive));          
-                //   StartCoroutine(GetSceneLoadProgress());
-                //   break;
-                //
-                //case SceneIndex.FFplane:
-                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FFplane, LoadSceneMode.Additive));        
-                //   StartCoroutine(GetSceneLoadProgress());
-                //   break;
-                //
-                //case SceneIndex.Presentation:
-                //   scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Presentation, LoadSceneMode.Additive));
-                //   StartCoroutine(GetSceneLoadProgress());
-                //   break;
-                //
-                //default:
-                //    scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.Freemode, LoadSceneMode.Additive));
-                //    StartCoroutine(GetSceneLoadProgress());
-                //    break;
         }
 
         yield return new WaitForSeconds(1f);
     }
-
-    float totalSceneProgress;
-    public IEnumerator GetSceneLoadProgress()
-    {
-        for (int i = 0; i < scenesLoading.Count; i++)
-        {
-            while (!scenesLoading[i].isDone)
-            {
-                totalSceneProgress = 0;
-
-                foreach (AsyncOperation operation in scenesLoading)
-                {
-                    totalSceneProgress += operation.progress;
-                }
-
-                totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
-
-                bar.value = Mathf.RoundToInt(totalSceneProgress);
-
-                textField.text = string.Format("Loading Environments: {0}%", totalSceneProgress);
-
-                yield return null;
-            }
-        }
-
-        loadingScreen.SetActive(false);
-    }
-
-
-
-
 
 
 

@@ -42,7 +42,7 @@ public class PreGame : MonoBehaviour
 
         SaveCurrentPlane();
 
-        gm.SetSelectedPlane(currentPlaneType);
+        //gm.SetSelectedPlane(currentPlaneType);
 
         ms.SetMode(SceneIndex.Freemode);
 

@@ -9,6 +9,7 @@ public class DestructionManager : MonoBehaviour
     public bool drowned = false;
     public GameObject ExplosionSound;
     public GameObject SplashSound;
+    public GameObject DeathLoader;
     private Transform PlanePos;
     private Rigidbody rigidBody;
 
@@ -44,6 +45,7 @@ public class DestructionManager : MonoBehaviour
                 Debug.Log("Angle = " + DotProduct);
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
+                Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
                 for (int i = 0; i < nbExplosion; ++i)
                 {
                     Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
@@ -63,6 +65,7 @@ public class DestructionManager : MonoBehaviour
         {
             drowned = true;
             Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
+            Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
         }
     }
 
