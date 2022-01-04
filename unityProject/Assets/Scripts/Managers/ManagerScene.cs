@@ -9,7 +9,7 @@ public class ManagerScene : MonoBehaviour
 {
     ////////////SingleTon/////////////
     public static ManagerScene instance;
-    
+
 
     private void MakeSingleton()
     {
@@ -62,7 +62,7 @@ public class ManagerScene : MonoBehaviour
 
         switch (Level)
         {
-            
+
             //Loader Synchrone
             case SceneIndex.PreGameScene:
                 SetMode(SceneIndex.PreGameScene);
@@ -83,7 +83,7 @@ public class ManagerScene : MonoBehaviour
             case SceneIndex.DeathScene:
                 SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
                 break;
-            
+
             default:
                 SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
                 break;

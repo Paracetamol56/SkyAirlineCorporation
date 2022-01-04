@@ -11,14 +11,15 @@ public class SceneCaller : MonoBehaviour
 
     // Update is called once per frame
 
-    void Start(){
+    void Start()
+    {
         ms = ManagerScene.instance;
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(CanChangeScene == true)
+            if (CanChangeScene == true)
             {
                 SceneIndex Level;
                 ms.SetMode(mode);
