@@ -42,7 +42,6 @@ public class DestructionManager : MonoBehaviour
         {
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
             {
-                Debug.Log("Angle = " + DotProduct);
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
                 Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
