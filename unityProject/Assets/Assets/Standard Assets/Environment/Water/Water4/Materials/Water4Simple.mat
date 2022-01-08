@@ -60,14 +60,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _FresnelScale: 0.3897143
+    - _FresnelScale: 0.43
     - _GerstnerIntensity: 1
     - _HeightDisplacement: 2.3370318
     - _NormalsDisplacement: 72.72728
-    - _Shininess: 349.13794
+    - _Shininess: 241
     m_Colors:
     - _AnimationDirection: {r: 2, g: 1, b: -1, a: 1}
-    - _AnimationTiling: {r: 0.4, g: 0.39099997, b: 0.56, a: 0.7}
+    - _AnimationTiling: {r: -0.8, g: -0.06, b: 0.07, a: 0.7}
     - _BaseColor: {r: 0.17275561, g: 0.224076, b: 0.24626863, a: 0.5058824}
     - _BumpDirection: {r: 1, g: 30, b: 20, a: -20}
     - _BumpTiling: {r: 0.04, g: 0.04, b: 0.04, a: 0.08}
