@@ -19,9 +19,6 @@ public class TerrainGenerator : MonoBehaviour
     public Transform viewer;
     public Material mapMaterial;
 
-    public GameObject waterObject;
-    public bool activateWater;
-
     Vector2 viewerPosition;
     Vector2 viewerPositionOld;
 
@@ -30,19 +27,6 @@ public class TerrainGenerator : MonoBehaviour
 
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
     List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
-
-    void Awake()
-    {
-        // Check water material
-        if (waterObject == null)
-        {
-            // Check water material
-            if (waterObject != null)
-            {
-                activateWater = false;
-            }
-        }
-    }
 
     void Start()
     {
@@ -103,7 +87,7 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false, waterObject, activateWater);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();
@@ -139,7 +123,7 @@ public class TerrainGenerator : MonoBehaviour
                     }
                     else
                     {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn, waterObject, activateWater);
+                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, heightMapSettings.noiseSettings.createSpawn);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();

@@ -13,6 +13,7 @@ class Waypoint : MonoBehaviour
     [SerializeField]
     private float heightOffset = 0.0f;
     [SerializeField]
+    [Tooltip("The distance from the waypoint to the camera in miles")]
     private float maxDistance = 1.0f;
     [SerializeField]
     private Color waypointColor = Color.red;
@@ -21,7 +22,7 @@ class Waypoint : MonoBehaviour
 
     private TextMeshProUGUI distanceText;
 
-    private void Awake()
+    private void Start()
     {
         // Get canevas object
         GameObject canvas = GameObject.Find("Canvas");

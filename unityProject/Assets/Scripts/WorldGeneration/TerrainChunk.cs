@@ -8,7 +8,7 @@ public class TerrainChunk : MonoBehaviour
     public event System.Action<TerrainChunk, bool> onVisibilityChanged;
     public Vector2 coord;
 
-    GameObject meshObject, waterObject;
+    GameObject meshObject;
     Vector2 sampleCentre;
     Bounds bounds;
 
@@ -40,7 +40,7 @@ public class TerrainChunk : MonoBehaviour
     bool createSpawn;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject waterObject, bool activateWater)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -64,28 +64,6 @@ public class TerrainChunk : MonoBehaviour
         meshObject.transform.position = new Vector3(position.x, 0, position.y);
         meshObject.transform.parent = parent;
         SetVisible(false);
-
-        //Vector3 test = new Vector3(100, 100, 100);
-        //Vector3 pos = new Vector3(0, 0, 0);
-        //waterObject = new Plane(test, pos);
-        if (activateWater)
-        {
-            GameObject water = Instantiate(waterObject, meshObject.transform);
-            water.name = "WaterChunk";
-            water.tag = "Water";
-            water.transform.localScale = new Vector3(146, 1, 146);
-
-            water.transform.localPosition = new Vector3(0, 327, 0);
-        }
-        /*waterFilter = waterObject.AddComponent<MeshFilter>();
-        waterCollider = waterObject.AddComponent<MeshCollider>();
-        waterRenderer = waterObject.AddComponent<MeshRenderer>();*/
-        //waterRenderer.material = waterMaterial;
-        /*water.transform.position = meshObject.transform.position;
-        water.transform.parent = meshObject.transform;*/
-        //waterFilter = MeshFilter.
-        //meshFilter.mesh = Plane;
-
 
         lodMeshes = new LODMesh[detailLevels.Length];
         if (CreateSpawn)
