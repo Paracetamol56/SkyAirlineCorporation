@@ -20,7 +20,7 @@ public class ManagerPause : MonoBehaviour
         {
             PauseCanvas.GetComponent<PauseMenu>().Pause();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && PauseCanvas.activeSelf == true )
+        else if (Input.GetKeyDown(KeyCode.Escape) && PauseCanvas.activeSelf == true)
         {
             PauseCanvas.GetComponent<PauseMenu>().Resume();
         }
