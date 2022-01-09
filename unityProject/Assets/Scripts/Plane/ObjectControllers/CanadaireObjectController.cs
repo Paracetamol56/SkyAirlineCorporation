@@ -55,14 +55,15 @@ public class CanadaireObjectController : ObjectController
     private void FixedUpdate()
     {
         RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 5.0f))
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 100f, Color.green);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 10.0f))
         {
             if (hit.transform.tag == "Water")
             {
                 water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
             }
         }
+        
     }
 
     /// <summary>

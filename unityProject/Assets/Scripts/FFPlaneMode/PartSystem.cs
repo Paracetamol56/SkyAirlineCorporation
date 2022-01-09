@@ -24,12 +24,11 @@ public class PartSystem : MonoBehaviour
                 part.Play();
                 part.enableEmission = true;
             }
-        }
-
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            send = false;
-            part.enableEmission = false;
+            else
+            {
+               send = false;
+                part.enableEmission = false; 
+            }
         }
     }
 
