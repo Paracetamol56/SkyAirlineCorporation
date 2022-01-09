@@ -15,21 +15,22 @@ public class GenerateFire : MonoBehaviour
     private Vector3 center;
     private Vector3 size;
 
-    private int nbMinOfFire = 4;
-    private int nbMaxOfFire = 8;
-    private bool chunckIsLoad = false;
+  private bool chunckIsLoad = false;
 
     private List<GameObject> fireList = new List<GameObject>();
 
-    void Start()
-    {
-        center = transform.position;
-        size = transform.localScale * 10;
+  void Start()
+  {
+    center = transform.position;
+    size = transform.localScale * 50;
 
         ChangeWaypoint();
     }
 
-    public void FireSpawn()
+  public void FireSpawn()
+  {
+    //                  \/ Here is fire count
+    for (int i = 0; i < 50; ++i)
     {
         int nbOfFire = Random.Range(nbMinOfFire, nbMaxOfFire);
         for (int i = 0; i < nbOfFire; ++i)
