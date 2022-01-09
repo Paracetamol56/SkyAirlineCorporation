@@ -9,7 +9,7 @@ public class MuteMusic : MonoBehaviour
 
     public void Mute()
     {
-        if(muted)
+        if (muted)
         {
             muted = false;
         }
@@ -21,7 +21,7 @@ public class MuteMusic : MonoBehaviour
 
     void Update()
     {
-        if(muted)
+        if (muted)
         {
             music.volume = 0f;
         }

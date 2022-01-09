@@ -22,14 +22,14 @@ public class PartSystem : MonoBehaviour
         float waterlvl = canadaire.getWater();
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!send && waterlvl>0)
+            if (!send && waterlvl > 0)
             {
                 send = true;
                 part.Play();
                 part.enableEmission = true;
-                
+
             }
-            else if(send)
+            else if (send)
             {
                 send = false;
                 part.enableEmission = false;
@@ -37,10 +37,10 @@ public class PartSystem : MonoBehaviour
         }
         if (waterlvl > 0 && send == true)
         {
-            canadaire.SetWater(waterlvl-0.1f);
+            canadaire.SetWater(waterlvl - 0.1f);
         }
 
-        if(waterlvl<0f)
+        if (waterlvl < 0f)
         {
             canadaire.SetWater(0f);
             part.Stop();
