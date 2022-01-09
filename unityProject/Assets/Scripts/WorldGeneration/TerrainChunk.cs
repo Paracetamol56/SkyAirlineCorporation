@@ -4,7 +4,7 @@ using UnityEditor;
 public class TerrainChunk : MonoBehaviour
 {
 
-    const float colliderGenerationDistanceThreshold = 5;
+    const float colliderGenerationDistanceThreshold = 10;
     public event System.Action<TerrainChunk, bool> onVisibilityChanged;
     public Vector2 coord;
 

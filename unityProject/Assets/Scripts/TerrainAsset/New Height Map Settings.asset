@@ -16,9 +16,9 @@ MonoBehaviour:
   noiseSettings:
     normalizeMode: 1
     scale: 50
-    octaves: 8
+    octaves: 10
     persistance: 0.6
-    lacunarity: 1.5
+    lacunarity: 1.36
     seed: 16
     offset: {x: 0, y: 0}
     createSpawn: 1

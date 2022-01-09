@@ -16,9 +16,15 @@ public class ManagerPause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && PauseCanvas.activeSelf == false)
         {
             PauseCanvas.GetComponent<PauseMenu>().Pause();
         }
+        else if (Input.GetKeyDown(KeyCode.Escape) && PauseCanvas.activeSelf == true)
+        {
+            PauseCanvas.GetComponent<PauseMenu>().Resume();
+        }
+
+
     }
 }
