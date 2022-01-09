@@ -73,6 +73,8 @@ public class GenerateFire : MonoBehaviour
       Debug.Log("Raycast hit at " + hit.point + " with height " + raycastDistance);
       return raycastDistance;
     }
+    Debug.Log("Raycast missed");
+    return 0;
   }
 
   public void FireUnspawn()
