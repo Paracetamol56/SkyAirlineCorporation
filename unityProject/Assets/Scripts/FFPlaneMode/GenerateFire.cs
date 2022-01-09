@@ -30,6 +30,7 @@ public class GenerateFire : MonoBehaviour
         else if (chunckIsLoad)
         {
             chunckIsLoad = false;
+            FireUnspawn();
         }
     }
 
