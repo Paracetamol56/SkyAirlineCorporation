@@ -14,19 +14,19 @@ public class VolumeControl : MonoBehaviour
     [SerializeField] float sliderValue;
     [SerializeField] private float multiplier = 30f;
     // Start is called before the first frame update
-    
+
     private void Awake()
     {
         slider.onValueChanged.AddListener(HandleSliderValueChanged);
     }
-    
+
     private void OnDisable()
     {
-        PlayerPrefs.SetFloat(volumeParameter,slider.value);
+        PlayerPrefs.SetFloat(volumeParameter, slider.value);
     }
     private void HandleSliderValueChanged(float value)
     {
-        mixer.SetFloat(volumeParameter,Mathf.Log10(value)* multiplier);
+        mixer.SetFloat(volumeParameter, Mathf.Log10(value) * multiplier);
     }
     void Start()
     {
@@ -36,6 +36,6 @@ public class VolumeControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

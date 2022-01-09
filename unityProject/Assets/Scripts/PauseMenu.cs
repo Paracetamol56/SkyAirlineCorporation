@@ -20,10 +20,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        
+
         Time.timeScale = 0;
         gameObject.SetActive(true);
-        
+
     }
 
     public void Resume()
