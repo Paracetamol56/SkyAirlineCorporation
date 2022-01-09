@@ -7,28 +7,44 @@ public class PartSystem : MonoBehaviour
     public List<ParticleCollisionEvent> collisionEvents;
     public ParticleSystem part;
     private bool send;
+    public GameObject Player;
+    private CanadaireObjectController canadaire;
 
     void Start()
     {
         part = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
+        canadaire = Player.GetComponent<CanadaireObjectController>();
     }
 
     private void Update()
     {
+        float waterlvl = canadaire.getWater();
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!send)
+            if (!send && waterlvl>0)
             {
                 send = true;
                 part.Play();
                 part.enableEmission = true;
+                
             }
-            else
+            else if(send)
             {
                 send = false;
                 part.enableEmission = false;
             }
+        }
+        if (waterlvl > 0 && send == true)
+        {
+            canadaire.SetWater(waterlvl-0.1f);
+        }
+
+        if(waterlvl<0f)
+        {
+            canadaire.SetWater(0f);
+            part.Stop();
+            part.enableEmission = false;
         }
     }
 

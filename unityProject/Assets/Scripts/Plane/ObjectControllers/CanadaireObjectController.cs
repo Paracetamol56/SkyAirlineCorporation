@@ -31,7 +31,7 @@ public class CanadaireObjectController : ObjectController
     private Animator animator;
 
     // Water Level
-    private float water;
+    private float water = 100f;
 
     private void Start()
     {
@@ -60,7 +60,7 @@ public class CanadaireObjectController : ObjectController
         {
             if (hit.transform.tag == "Water")
             {
-                water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
+                //water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
             }
         }
 
@@ -70,6 +70,7 @@ public class CanadaireObjectController : ObjectController
     /// Update rubber, elevators and ailerons angles
     /// </summary>
     /// <param name="angles">angles contains 3 floating number from input between -1 and 1</param>
+
     public override void UpdateAngles(Vector3 angles)
     {
         rubber.localRotation = Quaternion.Euler(-90, Mathf.Lerp(rubberAmplitude, -rubberAmplitude, (angles.y + 1) / 2), 0);
@@ -103,5 +104,15 @@ public class CanadaireObjectController : ObjectController
             else
                 water = value;
         }
+    }
+
+    public float getWater()
+    {
+        return water;
+    }
+
+    public void SetWater(float lvl)
+    {
+        water = lvl;
     }
 }
