@@ -63,7 +63,7 @@ public class CanadaireObjectController : ObjectController
                 water = Mathf.Clamp(water + Time.fixedDeltaTime * 0.1f, 0, 1);
             }
         }
-        
+
     }
 
     /// <summary>

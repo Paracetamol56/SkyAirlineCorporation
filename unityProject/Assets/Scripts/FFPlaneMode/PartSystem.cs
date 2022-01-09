@@ -26,8 +26,8 @@ public class PartSystem : MonoBehaviour
             }
             else
             {
-               send = false;
-                part.enableEmission = false; 
+                send = false;
+                part.enableEmission = false;
             }
         }
     }
