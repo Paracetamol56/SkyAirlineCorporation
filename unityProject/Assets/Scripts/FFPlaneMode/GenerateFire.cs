@@ -21,10 +21,10 @@ public class GenerateFire : MonoBehaviour
 
     private List<GameObject> fireList = new List<GameObject>();
 
-  void Start()
-  {
-    center = transform.position;
-    size = transform.localScale * 10;
+    void Start()
+    {
+        center = transform.position;
+        size = transform.localScale * 10;
 
         ChangeWaypoint();
     }
@@ -42,8 +42,8 @@ public class GenerateFire : MonoBehaviour
 
     public void ChangeWaypoint()
     {
-      randomPos = Random.insideUnitCircle * 5000;
-      altitude = GetAltitude(randomPos.x, randomPos.y);
+        randomPos = Random.insideUnitCircle * 5000;
+        altitude = GetAltitude(randomPos.x, randomPos.y);
     }
 
     public float GetAltitude(float x, float z)
