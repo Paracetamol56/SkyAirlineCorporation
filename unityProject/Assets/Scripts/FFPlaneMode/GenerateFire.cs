@@ -21,10 +21,10 @@ public class GenerateFire : MonoBehaviour
 
     private List<GameObject> fireList = new List<GameObject>();
 
-    void Start()
-    {
-        center = transform.position;
-        size = transform.localScale;
+  void Start()
+  {
+    center = transform.position;
+    size = transform.localScale * 10;
 
         ChangeWaypoint();
     }
@@ -42,21 +42,8 @@ public class GenerateFire : MonoBehaviour
 
     public void ChangeWaypoint()
     {
-        Debug.Log("All the fire are desactived");
-        // Generate random position inside a circle of radius 3000 and center at the current position while the altitude is not between min and max altitude
-        Vector2 randomPos;
-        float altitude;
-        do
-        {
-            randomPos = Random.insideUnitCircle * 1000;
-            altitude = GetAltitude(randomPos.x, randomPos.y);
-        }
-        while (altitude < minAltitude || altitude > maxAltitude);
-
-        Vector3 newPos = new Vector3(randomPos.x, 1000, randomPos.y);
-        transform.position = newPos;
-        center = new Vector3(randomPos.x, altitude, randomPos.y);
-        FireSpawn();
+      randomPos = Random.insideUnitCircle * 5000;
+      altitude = GetAltitude(randomPos.x, randomPos.y);
     }
 
     public float GetAltitude(float x, float z)
