@@ -87,4 +87,9 @@ public class GenerateFire : MonoBehaviour
             Destroy(fire);
         }
     }
+
+    public int ListLenght()
+    {
+        return fireList.Count;
+    }
 }
