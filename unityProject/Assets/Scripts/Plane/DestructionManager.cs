@@ -58,24 +58,27 @@ public class DestructionManager : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Water")
-        {
-            drowned = true;
-            Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-            Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
-        }
-    }
-
     void Update()
     {
+        if (PlanePos.position.y < 310f)
+        {
+            if(drowned == false)
+                SpawnDrownGameObject();
+        }
+
         if (drowned)
         {
             PlayerController.SetThrottleAverageSpeed(0f, 0f);
             StartCoroutine(SoundDown());
         }
 
+    }
+
+    void SpawnDrownGameObject()
+    {
+            drowned = true;
+            Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
+            Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
     }
 
 
