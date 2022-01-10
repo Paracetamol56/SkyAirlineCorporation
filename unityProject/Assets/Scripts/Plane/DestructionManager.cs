@@ -62,7 +62,7 @@ public class DestructionManager : MonoBehaviour
     {
         if (PlanePos.position.y < 310f)
         {
-            if(drowned == false)
+            if (drowned == false)
                 SpawnDrownGameObject();
         }
 
@@ -76,9 +76,9 @@ public class DestructionManager : MonoBehaviour
 
     void SpawnDrownGameObject()
     {
-            drowned = true;
-            Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-            Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
+        drowned = true;
+        Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
+        Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
     }
 
 

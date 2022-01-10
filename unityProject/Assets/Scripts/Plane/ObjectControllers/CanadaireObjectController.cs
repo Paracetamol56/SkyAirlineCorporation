@@ -61,7 +61,7 @@ public class CanadaireObjectController : ObjectController
             {
                 water += 0.5f;
             }
-            if(water >100f)
+            if (water > 100f)
             {
                 water = 100f;
             }
