@@ -13,7 +13,7 @@ public class GenerateFire : MonoBehaviour
     private GameObject firePrefab;
 
     private bool chunckIsLoad = false;
-    public int nbflames=0;
+    public int nbflames = 0;
 
     // starting corouting
     public IEnumerator Start()
@@ -82,5 +82,5 @@ public class GenerateFire : MonoBehaviour
         return 1000;
     }
 
-    
+
 }
