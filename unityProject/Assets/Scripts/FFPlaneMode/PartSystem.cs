@@ -10,6 +10,8 @@ public class PartSystem : MonoBehaviour
     public GameObject Player;
     private CanadaireObjectController canadaire;
 
+    public GenerateFire flammegenerator;
+
     void Start()
     {
         part = GetComponent<ParticleSystem>();
@@ -59,7 +61,8 @@ public class PartSystem : MonoBehaviour
         {
             if (other.tag == "Fire")
             {
-                other.SetActive(false);
+                flammegenerator.nbflames--;
+                Destroy(other.gameObject);
             }
             i++;
         }

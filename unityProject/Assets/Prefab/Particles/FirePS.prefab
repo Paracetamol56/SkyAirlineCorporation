@@ -19275,7 +19275,7 @@ GameObject:
   - component: {fileID: 3726652250208563355}
   - component: {fileID: 3559882354699206561}
   - component: {fileID: 3559110687282884019}
-  - component: {fileID: 3722130859420653249}
+  - component: {fileID: 5066223873716788964}
   m_Layer: 0
   m_Name: FirePS
   m_TagString: Fire
@@ -19291,7 +19291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3721057352602329009}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 695.46, y: 5, z: -174.1}
+  m_LocalPosition: {x: 695.46, y: 7.029116, z: -172.93324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3722647069374760729}
@@ -19300,7 +19300,7 @@ Transform:
   - {fileID: 3726338677067361299}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &3559882354699206561
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -19374,7 +19374,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -24080,17 +24080,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!136 &3722130859420653249
-CapsuleCollider:
+--- !u!65 &5066223873716788964
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3721057352602329009}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 4.4744453
-  m_Height: 8.948891
-  m_Direction: 2
-  m_Center: {x: -0.03, y: 0.4, z: 1.58}
+  serializedVersion: 2
+  m_Size: {x: 4.8789673, y: 5.9168415, z: 1.2916032}
+  m_Center: {x: -0.03640747, y: -0.71, z: -1.14}

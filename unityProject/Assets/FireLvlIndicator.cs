@@ -15,10 +15,10 @@ public class FireLvlIndicator : MonoBehaviour
 
     public void Update()
     {
-        int size = scriptFire.ListLenght();
+        int Nbflames = scriptFire.nbflames;
         int max = 50;
 
-        int pourcentage = size*100/max;
+        int pourcentage = Nbflames*100/max;
         int affichage = 100- pourcentage;
         GetComponent<Text>().text = "Feu éteint à "+affichage+ " %";
 

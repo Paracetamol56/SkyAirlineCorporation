@@ -13,8 +13,7 @@ public class GenerateFire : MonoBehaviour
     private GameObject firePrefab;
 
     private bool chunckIsLoad = false;
-
-    private List<GameObject> fireList = new List<GameObject>();
+    public int nbflames=0;
 
     // starting corouting
     public IEnumerator Start()
@@ -37,7 +36,7 @@ public class GenerateFire : MonoBehaviour
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
             GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.identity);
             fireCreated.transform.parent = transform;
-            fireList.Add(fireCreated);
+            nbflames++;
         }
     }
 
@@ -83,16 +82,5 @@ public class GenerateFire : MonoBehaviour
         return 1000;
     }
 
-    public void FireUnspawn()
-    {
-        foreach (GameObject fire in fireList)
-        {
-            Destroy(fire);
-        }
-    }
-
-    public int ListLenght()
-    {
-        return fireList.Count;
-    }
+    
 }
