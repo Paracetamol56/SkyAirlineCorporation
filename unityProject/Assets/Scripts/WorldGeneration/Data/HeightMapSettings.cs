@@ -7,8 +7,6 @@ public class HeightMapSettings : UpdatableData
 
     public NoiseSettings noiseSettings;
 
-    //public bool createSpawn;
-
     public float heightMultiplier;
     public AnimationCurve heightCurve;
 
@@ -30,11 +28,11 @@ public class HeightMapSettings : UpdatableData
 
 #if UNITY_EDITOR
 
-	protected override void OnValidate()
-	{
-		noiseSettings.ValidateValues();
-		base.OnValidate();
-	}
+    protected override void OnValidate()
+    {
+        noiseSettings.ValidateValues();
+        base.OnValidate();
+    }
 #endif
 
 }
