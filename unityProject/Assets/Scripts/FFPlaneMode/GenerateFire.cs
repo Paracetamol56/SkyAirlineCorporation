@@ -44,7 +44,7 @@ public class GenerateFire : MonoBehaviour
     {
         // Generate random position inside a circle of radius 3000 and center at the current position while the altitude is not between min and max altitude
 
-        Vector2 randomPos = Random.insideUnitCircle * 1000;
+        Vector2 randomPos = Random.insideUnitCircle * 10000;
         float altitude = GetAltitude(randomPos.x, randomPos.y);
 
         Debug.Log("randomPos : " + randomPos);
