@@ -21,7 +21,6 @@ MonoBehaviour:
     lacunarity: 1.36
     seed: 16
     offset: {x: 0, y: 0}
-    createSpawn: 1
   heightMultiplier: 4000
   heightCurve:
     serializedVersion: 2

@@ -197,7 +197,6 @@ public class NoiseSettings
 
     public int seed;
     public Vector2 offset;
-    public bool createSpawn;
 
     public void ValidateValues()
     {
