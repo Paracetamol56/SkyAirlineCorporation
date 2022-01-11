@@ -1836,10 +1836,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 730052361}
   lines:
-  - "Les feux sont indiqu\xE9s par un waypoint."
-  - "Pour lancer/arr\xEAter l'eau, utilisez sur ESPACE."
-  - "Pour recharger votre jauge d'eau vous devez voler pr\xE8s de l'eau."
-  - 'Pour atterrir cliquez sur G afin d''ouvrir les train d''atterrissage '
+  - 'Wild fires are indicated by a waypoint '
+  - "Use SPACE to 33 / 5\u202F000 R\xE9sultats de traduction start/stop the water
+    release "
+  - 'To refill the water, fly closely over a water area '
+  - To land, press G to deploy the landing gear.
   textSpeed: 0.05
 --- !u!114 &730052361
 MonoBehaviour:
