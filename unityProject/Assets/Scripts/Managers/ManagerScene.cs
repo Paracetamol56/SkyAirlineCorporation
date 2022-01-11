@@ -10,6 +10,14 @@ public class ManagerScene : MonoBehaviour
     ////////////SingleTon/////////////
     public static ManagerScene instance;
 
+    // Plane material
+    [SerializeField]
+    private Material PrimaryMaterial;
+    [SerializeField]
+    private Material SecondaryMaterial;
+
+    private Color PrimaryColor;
+    private Color SecondaryColor;
 
     private void MakeSingleton()
     {
@@ -32,6 +40,9 @@ public class ManagerScene : MonoBehaviour
     public void Start()
     {
         SetMode(SceneIndex.PreGameScene);
+
+        PrimaryColor = PrimaryMaterial.color;
+        SecondaryColor = SecondaryMaterial.color;
     }
 
     //variables
@@ -60,6 +71,10 @@ public class ManagerScene : MonoBehaviour
     {
         Debug.Log("changement vers " + (int)Level);
 
+        // Material reset
+        PrimaryMaterial.color = PrimaryColor;
+        SecondaryMaterial.color = SecondaryColor;
+
         switch (Level)
         {
 
@@ -78,6 +93,12 @@ public class ManagerScene : MonoBehaviour
             case SceneIndex.FFplane:
                 SetMode(SceneIndex.FFplane);
                 SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
+                // Changement de la couleur des material
+                {
+                    // Change the material color
+                    PrimaryMaterial.color = Color.yellow;
+                    SecondaryMaterial.color = Color.red;
+                }
                 break;
 
             case SceneIndex.DeathScene:
