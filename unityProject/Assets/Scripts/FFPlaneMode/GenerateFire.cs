@@ -34,7 +34,7 @@ public class GenerateFire : MonoBehaviour
             Vector2 randomCircle = Random.insideUnitCircle * 20;
             randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
-            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.identity);
+            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.Euler(-90, 0, 0));
             fireCreated.transform.parent = transform;
             nbflames++;
         }
