@@ -36,6 +36,7 @@ public class GenerateFire : MonoBehaviour
             randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
             GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.identity);
+            fireCreated.transform.parent = transform;
             fireList.Add(fireCreated);
         }
     }
@@ -44,9 +45,14 @@ public class GenerateFire : MonoBehaviour
     {
         // Generate random position inside a circle of radius 3000 and center at the current position while the altitude is not between min and max altitude
 
-        Vector2 randomPos = Random.insideUnitCircle * 10000;
-        float altitude = GetAltitude(randomPos.x, randomPos.y);
-
+        Vector2 randomPos;
+        float altitude;
+        do
+        {
+            randomPos = Random.insideUnitCircle * 10000;
+            altitude = GetAltitude(randomPos.x, randomPos.y);
+        }
+        while (altitude < minAltitude || altitude > maxAltitude);
         Debug.Log("randomPos : " + randomPos);
 
         transform.position = new Vector3(randomPos.x, 1000, randomPos.y);
@@ -57,6 +63,7 @@ public class GenerateFire : MonoBehaviour
     public float GetAltitude(float x, float z)
     {
         // Get the altitude of the terrain at the given position
+
         // Mask to get only the ground layer
         int mask = 1 << 3;
 
