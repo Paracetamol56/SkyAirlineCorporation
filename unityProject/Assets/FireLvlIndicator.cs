@@ -20,6 +20,7 @@ public class FireLvlIndicator : MonoBehaviour
 
         int pourcentage = Nbflames*100/max;
         int affichage = 100- pourcentage;
+        if(affichage < 0) affichage=0;
         GetComponent<Text>().text = "Feu éteint à "+affichage+ " %";
 
     }
