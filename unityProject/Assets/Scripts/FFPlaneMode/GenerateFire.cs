@@ -14,6 +14,7 @@ public class GenerateFire : MonoBehaviour
 
     private bool chunckIsLoad = false;
     public int nbflames = 0;
+    public GameObject FireGen;
 
     // starting corouting
     public IEnumerator Start()
@@ -25,6 +26,14 @@ public class GenerateFire : MonoBehaviour
         ChangeWaypoint();
     }
 
+    void Update()
+    {
+        if(FireGen.GetComponent<Transform>().childCount-1 == 0)
+        {
+            ChangeWaypoint();
+        }
+    }
+
     public void FireSpawn()
     {
         //                  \/ Here is fire count
@@ -34,7 +43,7 @@ public class GenerateFire : MonoBehaviour
             Vector2 randomCircle = Random.insideUnitCircle * 20;
             randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
-            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.identity);
+            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.Euler(-90,0,0));
             fireCreated.transform.parent = transform;
             nbflames++;
         }

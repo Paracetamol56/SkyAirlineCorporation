@@ -11,6 +11,7 @@ public class PartSystem : MonoBehaviour
     private CanadaireObjectController canadaire;
 
     public GenerateFire flammegenerator;
+    public GameObject flammegeneratorGO;
 
     void Start()
     {
@@ -61,7 +62,8 @@ public class PartSystem : MonoBehaviour
         {
             if (other.tag == "Fire")
             {
-                flammegenerator.nbflames--;
+                flammegenerator.nbflames = flammegeneratorGO.GetComponent<Transform>().childCount-1;
+                if(flammegenerator.nbflames<0)flammegenerator.nbflames = 0;
                 Destroy(other.gameObject);
             }
             i++;
