@@ -28,7 +28,7 @@ public class GenerateFire : MonoBehaviour
 
     void Update()
     {
-        if(FireGen.GetComponent<Transform>().childCount-1 == 0)
+        if (FireGen.GetComponent<Transform>().childCount - 1 == 0)
         {
             ChangeWaypoint();
         }
@@ -43,7 +43,7 @@ public class GenerateFire : MonoBehaviour
             Vector2 randomCircle = Random.insideUnitCircle * 20;
             randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
-            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.Euler(-90,0,0));
+            GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.Euler(-90, 0, 0));
             fireCreated.transform.parent = transform;
             nbflames++;
         }
