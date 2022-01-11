@@ -70,7 +70,7 @@ public class PreGame : MonoBehaviour
 
     public void ExitGame()
     {
-        ms.Quit();
+        Application.Quit();
     }
 
     public void NextPlane()
