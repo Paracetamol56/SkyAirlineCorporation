@@ -1404,7 +1404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 421}
+  m_AnchoredPosition: {x: -0.000061035156, y: 292}
   m_SizeDelta: {x: 0.00012207, y: -955.5146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822704376
@@ -1423,7 +1423,8 @@ MonoBehaviour:
   lines:
   - Pour afficher les messages suivant faites un clic gauche.
   - "Pour lancer un mode de jeu veuillez vous rapprocher d'un a\xE9roport."
-  textSpeed: 0.1
+  - 'Voici les controles : ZQSD et SHIFT + CTRL'
+  textSpeed: 0.05
 --- !u!114 &822704377
 MonoBehaviour:
   m_ObjectHideFlags: 0
