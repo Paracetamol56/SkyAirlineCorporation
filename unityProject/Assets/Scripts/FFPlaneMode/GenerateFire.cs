@@ -12,18 +12,17 @@ public class GenerateFire : MonoBehaviour
     [SerializeField]
     private GameObject firePrefab;
 
-    private Vector3 center;
-    private Vector3 size;
-
     private bool chunckIsLoad = false;
 
     private List<GameObject> fireList = new List<GameObject>();
 
-    void Start()
+    // starting corouting
+    public IEnumerator Start()
     {
-        center = transform.position;
-        size = transform.localScale * 50;
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2);
 
+        // Change waypoint
         ChangeWaypoint();
     }
 
@@ -33,8 +32,8 @@ public class GenerateFire : MonoBehaviour
         for (int i = 0; i < 50; ++i)
         {
             // Generate random position inside a circle of radius 25
-            Vector2 randomCircle = Random.insideUnitCircle * 25;
-            randomCircle += new Vector2(center.x, center.z);
+            Vector2 randomCircle = Random.insideUnitCircle * 20;
+            randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
             GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.identity);
             fireList.Add(fireCreated);
@@ -43,30 +42,25 @@ public class GenerateFire : MonoBehaviour
 
     public void ChangeWaypoint()
     {
-        Debug.Log("All the fire are desactived");
         // Generate random position inside a circle of radius 3000 and center at the current position while the altitude is not between min and max altitude
-        Vector2 randomPos;
-        float altitude;
-        do
-        {
-            randomPos = Random.insideUnitCircle * 10000;
-            altitude = GetAltitude(randomPos.x, randomPos.y);
-        }
-        while (/*altitude < minAltitude || altitude > maxAltitude*/false);
 
-        Vector3 newPos = new Vector3(randomPos.x, 1000, randomPos.y);
-        transform.position = newPos;
-        center = new Vector3(randomPos.x, altitude, randomPos.y);
+        Vector2 randomPos = Random.insideUnitCircle * 1000;
+        float altitude = GetAltitude(randomPos.x, randomPos.y);
+
+        Debug.Log("randomPos : " + randomPos);
+
+        transform.position = new Vector3(randomPos.x, 1000, randomPos.y);
+
         FireSpawn();
     }
 
     public float GetAltitude(float x, float z)
     {
-        int mask = 1 << LayerMask.GetMask("Ground");
+        int mask = 1 << LayerMask.NameToLayer("Ground");
 
         // Raycast test
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 5000, mask))
+        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 50000))
         {
             Debug.Log("Hit : " + hit.collider.name);
             Debug.DrawRay(new Vector3(x, 10000, z), Vector3.down * hit.distance, Color.red);
