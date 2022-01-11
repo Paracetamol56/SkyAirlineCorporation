@@ -1175,13 +1175,77 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1195055186}
+    - target: {fileID: 1726516659149005840, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ForceModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ForceModule.y.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ForceModule.z.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ShapeModule.arc.spread
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ForceModule.inWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005841, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1726516659149005846, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005847, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726516659149005847, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7153852939871609670, guid: 1e7abed11aacac54497c7c372b014707, type: 3}
       propertyPath: m_RootOrder
