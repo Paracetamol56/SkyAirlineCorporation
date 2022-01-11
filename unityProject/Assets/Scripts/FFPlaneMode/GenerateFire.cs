@@ -56,11 +56,13 @@ public class GenerateFire : MonoBehaviour
 
     public float GetAltitude(float x, float z)
     {
-        int mask = 1 << LayerMask.NameToLayer("Ground");
+        // Get the altitude of the terrain at the given position
+        // Mask to get only the ground layer
+        int mask = 1 << 3;
 
         // Raycast test
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 50000))
+        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 50000, mask))
         {
             Debug.Log("Hit : " + hit.collider.name);
             Debug.DrawRay(new Vector3(x, 10000, z), Vector3.down * hit.distance, Color.red);
