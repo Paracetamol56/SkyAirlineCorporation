@@ -21,8 +21,6 @@ public class DestructionManager : MonoBehaviour
 
     private AudioSource audio;
 
-
-
     void Start()
     {
         PlanePos = this.GetComponent<Transform>();
@@ -81,12 +79,9 @@ public class DestructionManager : MonoBehaviour
         Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
     }
 
-
     IEnumerator SoundDown()
     {
         yield return new WaitForSeconds(0.1f);
         audio.volume -= 0.01f;
     }
-
-
 }

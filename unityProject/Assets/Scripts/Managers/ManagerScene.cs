@@ -5,26 +5,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum SceneIndex
+{
+    MainMenu = 0,
+    DeathScene = 1,
+    Freemode = 2,
+    FFplane = 3,
+    //Delivery = 4,
+    Freestyle = 4
+}
+
 public class ManagerScene : MonoBehaviour
 {
     ////////////SingleTon/////////////
     public static ManagerScene instance;
 
     // Plane material
+    [Header("Plane Material")]
     [SerializeField]
     private Material PrimaryMaterial;
     [SerializeField]
     private Material SecondaryMaterial;
 
+    // Variables to store the colors during all the game session
     private Color PrimaryColor;
     private Color SecondaryColor;
 
-    private void MakeSingleton()
+    // Make getter and setter for the current scene index
+    [HideInInspector]
+    public SceneIndex currentSceneIndex
     {
-        if (instance != null)
+        get
         {
-            Destroy(gameObject);
+            return currentSceneIndex;
         }
+        set
+        {
+            currentSceneIndex = value;
+            StartCoroutine(LoadGame());
+        }
+    }
+
+    private void Awake()
+    {
+        // Make singleton
+        if (instance != null)
+            Destroy(gameObject);
         else
         {
             instance = this;
@@ -32,30 +58,14 @@ public class ManagerScene : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        MakeSingleton();
-    }
-
     public void Start()
     {
-        SetMode(SceneIndex.PreGameScene);
+        currentSceneIndex = SceneIndex.MainMenu;
 
+
+        // Store materials color choosed by the user
         PrimaryColor = PrimaryMaterial.color;
         SecondaryColor = SecondaryMaterial.color;
-    }
-
-    //variables
-    public SceneIndex Mode;
-
-    public void SetMode(SceneIndex value)
-    {
-        Mode = value;
-    }
-
-    public SceneIndex GetMode()
-    {
-        return Mode;
     }
 
     public void Quit()
@@ -63,85 +73,65 @@ public class ManagerScene : MonoBehaviour
         Application.Quit();
     }
 
-
-    //////////Test Nouveau SceneManager n°1/////////////
-
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-    public IEnumerator LoadGame(SceneIndex Level)
+    public IEnumerator LoadGame()
     {
-        Debug.Log("changement vers " + (int)Level);
+        Debug.Log("Loading scene " + (int)currentSceneIndex);
 
         // Material reset
         PrimaryMaterial.color = PrimaryColor;
         SecondaryMaterial.color = SecondaryColor;
 
-        switch (Level)
+        switch (currentSceneIndex)
         {
-
-            //Loader Synchrone
-            case SceneIndex.PreGameScene:
-                SetMode(SceneIndex.PreGameScene);
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.PreGameScene);
-                break;
-
-            case SceneIndex.Freemode:
-                SetMode(SceneIndex.Freemode);
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
-
-                break;
-
-            case SceneIndex.FFplane:
-                SetMode(SceneIndex.FFplane);
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
-                // Changement de la couleur des material
+            case SceneIndex.MainMenu:
                 {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.MainMenu);
+                    break;
+                }
+            case SceneIndex.DeathScene:
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
+                    break;
+                }
+            case SceneIndex.Freemode:
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
+                    // Change the material color
+                    PrimaryMaterial.color = Color.white;
+                    SecondaryMaterial.color = Color.blue;
+                    break;
+                }
+            case SceneIndex.FFplane:
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.FFplane);
                     // Change the material color
                     PrimaryMaterial.color = Color.yellow;
                     SecondaryMaterial.color = Color.red;
+                    break;
                 }
-                break;
-
-            case SceneIndex.DeathScene:
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
-                break;
-
+            // case SceneIndex.Delivery:
+            //     {
+            //         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Delivery);
+            //         // Change the material color
+            //         PrimaryMaterial.color = Color.green;
+            //         SecondaryMaterial.color = Color.black;
+            //         break;
+            //     }
+            case SceneIndex.Freestyle:
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freestyle);
+                    // Change the material color
+                    PrimaryMaterial.color = Color.green;
+                    SecondaryMaterial.color = Color.black;
+                    break;
+                }
             default:
-                SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
-                break;
-
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freemode);
+                    break;
+                }
         }
-
         yield return new WaitForSeconds(1f);
     }
-
-
-
-    //truc sahel
-
-    //public IEnumerator LoadGameScene(string Mode)
-    //{
-    //    switch (Mode)
-    //    {
-    //        case "Freemode":/*GameMode.Freemode:*/
-    //            yield return new WaitForSeconds(.1f);
-    //            SceneManager.LoadScene("FreeMode");
-    //            break;
-    //        case "Delivery":/*GameMode.Delivery:*/
-    //            yield return new WaitForSeconds(.1f);
-    //            SceneManager.LoadScene("Delivery");
-    //            break;
-    //        case "FFplane":/*GameMode.FFplane:*/
-    //            yield return new WaitForSeconds(.1f);
-    //            SceneManager.LoadScene("FFPlane");
-    //            break;
-    //        case "Presentation":/*GameMode.Presentation:*/
-    //            yield return new WaitForSeconds(.1f);
-    //            SceneManager.LoadScene("Presentation");
-    //            break;
-    //        default:
-    //            yield return new WaitForSeconds(.1f);
-    //            SceneManager.LoadScene("FreeMode");
-    //            break;
-    //    }
-    //}
 }

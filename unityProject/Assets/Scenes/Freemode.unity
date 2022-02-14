@@ -509,7 +509,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96871984}
   m_CullTransparentMesh: 1
---- !u!43 &136345997
+--- !u!43 &147612264
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 532156762}
   - component: {fileID: 532156764}
   m_Layer: 0
-  m_Name: AeroportFFPlane
+  m_Name: FireFightingPlaneAirport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1477,7 +1477,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722810186}
-  m_Mesh: {fileID: 136345997}
+  m_Mesh: {fileID: 147612264}
 --- !u!114 &722810190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,7 +5073,7 @@ GameObject:
   - component: {fileID: 2004701891}
   - component: {fileID: 2004701890}
   m_Layer: 0
-  m_Name: AeroportVoltige
+  m_Name: FreestyleAirport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5804,7 +5804,7 @@ GameObject:
   - component: {fileID: 2138827162}
   - component: {fileID: 2138827161}
   m_Layer: 0
-  m_Name: AeroportLivraison
+  m_Name: DeliveryAirport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
