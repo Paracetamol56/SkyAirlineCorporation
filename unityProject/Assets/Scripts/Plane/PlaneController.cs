@@ -167,6 +167,8 @@ public class PlaneController : MonoBehaviour
     {
         transform.position = new Vector3(0, 1000, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        planeRigidBody.velocity = Vector3.zero;
+        planeRigidBody.angularVelocity = Vector3.zero;
         throttle = 100.0f;
     }
 }

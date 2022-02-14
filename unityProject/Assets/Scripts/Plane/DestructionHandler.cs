@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class DestructionManager : MonoBehaviour
+public class DestructionHandler : MonoBehaviour
 {
     public GameObject explosion;
     public bool drowned = false;
