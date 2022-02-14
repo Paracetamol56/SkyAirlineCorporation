@@ -29,22 +29,21 @@ public class PathGenerator : MonoBehaviour
         // Srtating path
         for (int i = 0; i < gateCircularBufferSize; i++)
         {
-            StartCoroutine(GenerateNextGate());
+            GenerateNextGate();
         }
     }
 
-    private IEnumerator GenerateNextGate()
+    public void GenerateNextGate()
     {
         for (int i = 0; i < gateSpacing; i++)
         {
             goToNextPoint();
             Instantiate(pointPrefab, transform.position, transform.rotation);
-            yield return new WaitForSeconds(0.01f);
         }
         // Instanciate a new gate
         GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation);
         gateCircularBuffer.Add(newGate);
-        if (gateCircularBuffer.Count > 10)
+        if (gateCircularBuffer.Count > gateCircularBufferSize)
         {
             Destroy(gateCircularBuffer[0]);
             gateCircularBuffer.RemoveAt(0);
