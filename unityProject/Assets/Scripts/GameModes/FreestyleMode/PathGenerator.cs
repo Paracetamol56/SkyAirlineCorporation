@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
@@ -12,18 +12,42 @@ public class PathGenerator : MonoBehaviour
     private float maxNextGenerationDistance = 100.0f;
     [SerializeField]
     private AnimationCurve distributionNextGenerationDistance;
+    [SerializeField]
+    private int gateSpacing = 50;
 
     [SerializeField]
     private GameObject pointPrefab;
+    [SerializeField]
+    private GameObject gatePrefab;
+
+    private List<GameObject> gateCircularBuffer = new List<GameObject>();
+    [SerializeField]
+    private uint gateCircularBufferSize = 4;
 
     void Start()
     {
-        for (int i = 0; i < 1000; i++)
+        // Srtating path
+        for (int i = 0; i < gateCircularBufferSize; i++)
         {
-            // generate a new path
+            StartCoroutine(GenerateNextGate());
+        }
+    }
+
+    private IEnumerator GenerateNextGate()
+    {
+        for (int i = 0; i < gateSpacing; i++)
+        {
             goToNextPoint();
-            GameObject newPoint = Instantiate(pointPrefab, transform.position, transform.rotation);
-            //newPoint.transform.parent = transform;
+            Instantiate(pointPrefab, transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.01f);
+        }
+        // Instanciate a new gate
+        GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation);
+        gateCircularBuffer.Add(newGate);
+        if (gateCircularBuffer.Count > 10)
+        {
+            Destroy(gateCircularBuffer[0]);
+            gateCircularBuffer.RemoveAt(0);
         }
     }
 
@@ -41,6 +65,6 @@ public class PathGenerator : MonoBehaviour
         Debug.Log("angleVertical: " + angleVertical);
         Debug.Log("distance: " + distance);
         transform.Rotate(angleHorizontal, 0.0f, angleVertical);
-        transform.Translate(distance, 0.0f, 0.0f);
+        transform.Translate(0.0f, 0.0f, distance);
     }
 }
