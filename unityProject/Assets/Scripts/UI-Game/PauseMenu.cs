@@ -7,30 +7,25 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject airPlane;
     private PlaneController planeController;
-    private DestructionManager destructionManager;
+    private DestructionHandler destructionManager;
     private ManagerScene managerScene;
+    private AudioSource musicAudioSource;
 
     void Start()
     {
         managerScene = ManagerScene.instance;
         planeController = airPlane.GetComponent<PlaneController>();
-        destructionManager = airPlane.GetComponent<DestructionManager>();
-        gameObject.SetActive(false);
+        destructionManager = airPlane.GetComponent<DestructionHandler>();
+        musicAudioSource = GameObject.Find("Song").GetComponent<AudioSource>();
     }
 
-    public void Pause()
-    {
-        Time.timeScale = 0;
-        gameObject.SetActive(true);
-    }
-
-    public void Resume()
+    public void ResumeGame()
     {
         Time.timeScale = 1;
         gameObject.SetActive(false);
     }
 
-    public void ResetPos()
+    public void ResetAirplanePosition()
     {
         destructionManager.drowned = false;
         planeController.RestAirplanePosition();
@@ -38,9 +33,14 @@ public class PauseMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void BackToMenu()
+    public void BackToMainMenu()
     {
         Time.timeScale = 1;
         managerScene.setCurrentSceneIndex(SceneIndex.MainMenu);
+    }
+
+    public void MuteMusic()
+    {
+        musicAudioSource.mute = !musicAudioSource.mute;
     }
 }
