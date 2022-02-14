@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4523782845206345637}
   - component: {fileID: 4128971803599827672}
+  - component: {fileID: 5634180282333334198}
   - component: {fileID: 4128971803599827674}
   m_Layer: 0
   m_Name: Generic Plane
@@ -48,6 +49,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5634180282333334198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858569116650040607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29edf7978393f264c9756a20216a9f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  drowned: 0
+  ExplosionSound: {fileID: 0}
+  SplashSound: {fileID: 0}
+  DeathLoader: {fileID: 0}
+  MainCamera: {fileID: 0}
 --- !u!114 &4128971803599827674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,13 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxThrottle: 200
+  averrageMinFlightSpeed: 70
   autoStabilization: 1
   throttleInputMultiplicator: 1
   inputMultiplicator: 1
   liftCoefficient: 1000
-  dragCoefficient: 10
-  YawSlider: {fileID: 0}
-  PitchSlider: {fileID: 0}
-  RollSlider: {fileID: 0}
-  ThrottleSlider: {fileID: 0}
-  speedText: {fileID: 0}
+  groundDetectionOffset: 0
