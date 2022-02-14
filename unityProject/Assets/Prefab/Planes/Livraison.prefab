@@ -164,6 +164,24 @@ MonoBehaviour:
   leftAileron: {fileID: 1891308431071929198}
   rightAileron: {fileID: 5839300152038260426}
   propeller: {fileID: 7018325797120118928}
+--- !u!114 &7298199823874661864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265769935197718496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c48afe1a731be46ae2050566800263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 100000, guid: 5d028565f79e270408884b995abc06ef, type: 3}
+  drowned: 0
+  ExplosionSound: {fileID: 8635950032689159728, guid: 0f7a7abaa37206f48909673cde8d3a4b, type: 3}
+  SplashSound: {fileID: 7830404626816422220, guid: 7313bbf8560b59d4e8c748a9a0045c7a, type: 3}
+  DeathLoader: {fileID: 0}
+  MainCamera: {fileID: 0}
 --- !u!1001 &76887208866373475
 PrefabInstance:
   m_ObjectHideFlags: 0
