@@ -9,9 +9,7 @@ public class PathGenerator : MonoBehaviour
     [SerializeField]
     private AnimationCurve distributionNextGenerationAngle;
     [SerializeField]
-    private float maxNextGenerationDistance = 100.0f;
-    [SerializeField]
-    private AnimationCurve distributionNextGenerationDistance;
+    private float nextGenerationDistance = 200.0f;
     [SerializeField]
     private int gateSpacing = 50;
 
@@ -46,7 +44,8 @@ public class PathGenerator : MonoBehaviour
             Instantiate(pointPrefab, transform.position, transform.rotation);
         }
         // Instanciate a new gate
-        GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation);
+        GameObject newGate = Instantiate(gatePrefab, transform.position, Quaternion.identity);
+        newGate.transform.rotation = Quaternion.LookRotation(transform.position - newGate.transform.position);
         gateCircularBuffer.Add(newGate);
         if (gateCircularBuffer.Count > gateCircularBufferSize)
         {
@@ -60,25 +59,22 @@ public class PathGenerator : MonoBehaviour
         float angleHorizontal = Random.Range(-1.0f, 1.0f);
         float angleVertical = Random.Range(-1.0f, 1.0f);
         angleHorizontal = distributionNextGenerationAngle.Evaluate(angleHorizontal) * maxNextGenerationAngle;
-        angleVertical = distributionNextGenerationAngle.Evaluate(angleVertical) * maxNextGenerationAngle;
-
-        float distance = Random.Range(0.0f, 1.0f);
-        distance = distributionNextGenerationDistance.Evaluate(distance) * maxNextGenerationDistance;
+        angleVertical = distributionNextGenerationAngle.Evaluate(angleVertical) * maxNextGenerationAngle / 3.0f;
 
         // Altitude correction to clamp the curve
         float altitude = transform.position.y;
         if (altitude < (minAltitude + 100.0f))
         {
-            float correctionAngle = altitude + (minAltitude / 2.0f);
-            transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
+            float correctionAngle = Mathf.Abs(altitude - minAltitude) / 100.0f;
+            transform.Rotate(new Vector3(-correctionAngle, 0.0f, 0.0f));
         }
         else if (altitude > (maxAltitude - 100.0f))
         {
-            float correctionAngle = altitude - (maxAltitude / 2.0f);
+            float correctionAngle = Mathf.Abs(altitude - maxAltitude) / 100.0f;
             transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
         }
 
-        transform.Rotate(angleHorizontal, 0.0f, angleVertical);
-        transform.Translate(0.0f, 0.0f, distance);
+        transform.Rotate(0.0f, angleHorizontal, angleVertical);
+        transform.Translate(0.0f, 0.0f, nextGenerationDistance);
     }
 }
