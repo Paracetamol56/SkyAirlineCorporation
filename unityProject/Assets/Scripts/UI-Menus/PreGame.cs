@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PreGame : MonoBehaviour
 {
@@ -25,22 +22,15 @@ public class PreGame : MonoBehaviour
 
     // Instances of managers
     private GlobalGameManager gm;
-    private ManagerScene ms;
+    private ManagerScene managerScene;
 
-    // Start is called before the first frame update
     void Start()
     {
         showPoint = GameObject.Find("ShowPoint");
         planesSelection[planeIndex].transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(planesSelection[planeIndex], showPoint.transform);
-
-        //primeColor =  currentPlaneShown.GetComponent<MeshRenderer>().material;
-        //secondColor = currentPlaneShown.GetComponent<MeshRenderer>().material;
-        //gm = GlobalGameManager.GetInstance();
-        //ms = ManagerScene.instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentPlaneShown.transform.position = showPoint.transform.position;
@@ -56,16 +46,9 @@ public class PreGame : MonoBehaviour
 
     public void StartGame()
     {
-        SceneIndex Level;
-
         SaveCurrentPlane();
 
-        //gm.SetSelectedPlane(currentPlaneType);
-
-        //ms.LoadGameScene();
-        SceneManager.LoadScene("Freemode", LoadSceneMode.Single);
-        //ms.SetMode(ManagerScene.GameMode.Freemode);
-        //ms.LoadGameScene();
+        managerScene.setCurrentSceneIndex(SceneIndex.Freestyle);
     }
 
     public void ExitGame()

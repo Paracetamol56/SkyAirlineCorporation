@@ -257,14 +257,14 @@ public class Settings : MonoBehaviour
         PlayerPrefs.SetInt("PosRoll", (int)KeyCode.E);
     }
 
-    public void SaveControls()
-    {
-        foreach (var Key in KeyBinds)
-        {
-            PlayerPrefs.SetInt(Key.Key, (int)Key.Value);
-        }
-        CustomInput.RefreshKeys();
-    }
+    // public void SaveControls()
+    // {
+    //     foreach (var Key in KeyBinds)
+    //     {
+    //         PlayerPrefs.SetInt(Key.Key, (int)Key.Value);
+    //     }
+    //     CustomInput.RefreshKeys();
+    // }
 
     void OnGUI()
     {

@@ -3,43 +3,46 @@ using UnityEngine.UI;
 
 class AirportSceneSelector : MonoBehaviour
 {
+    [SerializeField]
+    private Text airportMessage;
+
     private bool canJoinGameMode = false;
     private ManagerScene managerScene;
-    private SceneIndex SceneToLoad;
-    private Text airportText;
+    private SceneIndex sceneToLoad;
 
     private void Start()
     {
-        managerScene = ManagerScene.instance;
+        managerScene = GameObject.Find("SceneManager").GetComponent<ManagerScene>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Verify the name of other
-        if (other.name == "FireFightingPlaneAirport")
+        if (other.gameObject.name == "FireFightingPlaneAirport")
         {
             canJoinGameMode = true;
-            airportText.text = "Press F to join the Fire Fighting Plane Game Mode";
-            managerScene.currentSceneIndex = SceneIndex.FFplane;
+            airportMessage.text = "Press F to join the Fire Fighting Plane Game Mode";
+            sceneToLoad = SceneIndex.FFplane;
         }
         // else if (other.name == "DeliveryAirport")
         // {
         //     canJoinGameMode = true;
-        //     airportText.text = "Press F to join the Delivery Game Mode";
-        //     managerScene.currentSceneIndex = SceneIndex.Delivery;
+        //     airportMessage.text = "Press F to join the Delivery Game Mode";
+        //     sceneToLoad = SceneIndex.Delivery;
         // }
         else if (other.name == "FreestyleAirport")
         {
             canJoinGameMode = true;
-            airportText.text = "Press F to join the Freestyle Game Mode";
-            managerScene.currentSceneIndex = SceneIndex.Freestyle;
+            airportMessage.text = "Press F to join the Freestyle Game Mode";
+            sceneToLoad = SceneIndex.Freestyle;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         canJoinGameMode = false;
-        SceneToLoad = SceneIndex.Freemode;
+        airportMessage.text = "";
+        sceneToLoad = SceneIndex.Freemode;
     }
 
     private void Update()
@@ -48,7 +51,7 @@ class AirportSceneSelector : MonoBehaviour
         {
             if (canJoinGameMode == true)
             {
-                managerScene.currentSceneIndex = SceneToLoad;
+                managerScene.setCurrentSceneIndex(sceneToLoad);
             }
         }
     }

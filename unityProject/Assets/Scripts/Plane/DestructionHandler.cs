@@ -66,7 +66,8 @@ public class DestructionManager : MonoBehaviour
 
         if (drowned)
         {
-            PlayerController.SetThrottleAverageSpeed(0f, 0f);
+            // TODO : Freeze the plane's controls
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             StartCoroutine(SoundDown());
         }
 

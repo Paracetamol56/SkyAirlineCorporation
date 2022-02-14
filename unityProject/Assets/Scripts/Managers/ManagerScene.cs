@@ -17,7 +17,6 @@ public enum SceneIndex
 
 public class ManagerScene : MonoBehaviour
 {
-    ////////////SingleTon/////////////
     public static ManagerScene instance;
 
     // Plane material
@@ -33,18 +32,8 @@ public class ManagerScene : MonoBehaviour
 
     // Make getter and setter for the current scene index
     [HideInInspector]
-    public SceneIndex currentSceneIndex
-    {
-        get
-        {
-            return currentSceneIndex;
-        }
-        set
-        {
-            currentSceneIndex = value;
-            StartCoroutine(LoadGame());
-        }
-    }
+    private SceneIndex currentSceneIndex;
+    private SceneIndex lastSceneIndex;
 
     private void Awake()
     {
@@ -68,19 +57,38 @@ public class ManagerScene : MonoBehaviour
         SecondaryColor = SecondaryMaterial.color;
     }
 
+    public SceneIndex getCurrentSceneIndex()
+    {
+        return currentSceneIndex;
+    }
+
+    public void setCurrentSceneIndex(SceneIndex sceneIndex)
+    {
+        currentSceneIndex = sceneIndex;
+        Debug.Log("Current scene index: " + currentSceneIndex);
+        LoadGame();
+    }
+
     public void Quit()
     {
         Application.Quit();
     }
 
-    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-    public IEnumerator LoadGame()
+    public void LoadLastScene()
+    {
+        currentSceneIndex = lastSceneIndex;
+    }
+
+    private void LoadGame()
     {
         Debug.Log("Loading scene " + (int)currentSceneIndex);
 
         // Material reset
         PrimaryMaterial.color = PrimaryColor;
         SecondaryMaterial.color = SecondaryColor;
+
+        // Store the last scene index
+        lastSceneIndex = currentSceneIndex;
 
         switch (currentSceneIndex)
         {
@@ -132,6 +140,5 @@ public class ManagerScene : MonoBehaviour
                     break;
                 }
         }
-        yield return new WaitForSeconds(1f);
     }
 }
