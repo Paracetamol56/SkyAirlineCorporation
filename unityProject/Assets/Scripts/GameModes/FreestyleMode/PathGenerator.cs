@@ -16,6 +16,11 @@ public class PathGenerator : MonoBehaviour
     private int gateSpacing = 50;
 
     [SerializeField]
+    private float maxAltitude = 2000.0f;
+    [SerializeField]
+    private float minAltitude = 500.0f;
+
+    [SerializeField]
     private GameObject pointPrefab;
     [SerializeField]
     private GameObject gatePrefab;
@@ -60,9 +65,19 @@ public class PathGenerator : MonoBehaviour
         float distance = Random.Range(0.0f, 1.0f);
         distance = distributionNextGenerationDistance.Evaluate(distance) * maxNextGenerationDistance;
 
-        Debug.Log("angleHorizontal: " + angleHorizontal);
-        Debug.Log("angleVertical: " + angleVertical);
-        Debug.Log("distance: " + distance);
+        // Altitude correction to clamp the curve
+        float altitude = transform.position.y;
+        if (altitude < (minAltitude + 100.0f))
+        {
+            float correctionAngle = altitude + (minAltitude / 2.0f);
+            transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
+        }
+        else if (altitude > (maxAltitude - 100.0f))
+        {
+            float correctionAngle = altitude - (maxAltitude / 2.0f);
+            transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
+        }
+
         transform.Rotate(angleHorizontal, 0.0f, angleVertical);
         transform.Translate(0.0f, 0.0f, distance);
     }
