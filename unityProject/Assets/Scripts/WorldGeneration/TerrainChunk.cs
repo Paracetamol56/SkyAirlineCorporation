@@ -37,9 +37,9 @@ public class TerrainChunk : MonoBehaviour
     MeshSettings meshSettings;
     Transform viewer;
 
+    GameObject tree;
 
-
-    bool createSpawn, ray = true, ray1 = true;
+    bool createSpawn,hastree=false;
 
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject treeGameObject)
@@ -50,6 +50,7 @@ public class TerrainChunk : MonoBehaviour
         this.heightMapSettings = heightMapSettings;
         this.meshSettings = meshSettings;
         this.viewer = viewer;
+        this.tree = treeGameObject;
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
@@ -82,31 +83,8 @@ public class TerrainChunk : MonoBehaviour
                 lodMeshes[i].updateCallback += UpdateCollisionMesh;
             }
         }
-        int numberOfTree = 1;
-        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
-        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
-        Vector3 pos = new Vector3(randPosX, 1000, randPosZ);
-
-        RaycastHit hit;
-        //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
-        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
-        {
-            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
-            float posY = hit.transform.position.y;
-        }
-        ray = false;
-        for (int i = 0; i < numberOfTree; i++)
-        {
-            GameObject newTree = Instantiate(treeGameObject);
-            newTree.transform.parent = meshObject.transform;
-            if (ray1)
-            {
-                newTree.transform.localPosition = pos;
-                ray1 = false;
-            }
-            //Forest.Add(newTree);
-        }
-
+       
+        
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 
     }
@@ -212,6 +190,11 @@ public class TerrainChunk : MonoBehaviour
                 }
             }
         }
+        if (!hastree&&hasSetCollider)
+        {
+            CreateTree();
+            hastree=true;
+        }
     }
 
     public void SetVisible(bool visible)
@@ -223,7 +206,37 @@ public class TerrainChunk : MonoBehaviour
     {
         return meshObject.activeSelf;
     }
+    public void CreateTree()
+    {
+        int numberOfTree = 1;
+        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
+        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
+        Vector3 pos = new Vector3(randPosX, 1000, randPosZ);
 
+        RaycastHit hit;
+        //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
+        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
+        {
+            Debug.LogError("Raycast hit");
+            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
+            float posY = hit.transform.position.y;
+            pos = new Vector3(randPosX, posY, randPosZ);
+            Debug.LogError(hit.collider.gameObject.name);
+        }
+        else
+        {
+            Debug.LogError("RayCast Didn't hit");
+        }
+        for (int i = 0; i < numberOfTree; i++)
+        {
+            GameObject newTree = Instantiate(tree);
+            newTree.transform.parent = meshObject.transform;
+
+            newTree.transform.localPosition = pos;
+
+            //Forest.Add(newTree);
+        }
+    }
 }
 
 class LODMesh
@@ -244,7 +257,6 @@ class LODMesh
     {
         mesh = ((MeshData)meshDataObject).CreateMesh();
         hasMesh = true;
-
         updateCallback();
     }
 
