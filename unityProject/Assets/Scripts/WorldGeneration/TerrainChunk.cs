@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections;
 
 public class TerrainChunk : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class TerrainChunk : MonoBehaviour
     int previousLODIndex = -1;
     bool hasSetCollider;
     float maxViewDst;
+    ArrayList Forest;
 
 
     HeightMapSettings heightMapSettings;
@@ -37,10 +39,10 @@ public class TerrainChunk : MonoBehaviour
 
 
 
-    bool createSpawn;
+    bool createSpawn, ray = true, ray1 = true;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject treeGameObject)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -80,7 +82,31 @@ public class TerrainChunk : MonoBehaviour
                 lodMeshes[i].updateCallback += UpdateCollisionMesh;
             }
         }
-
+        int numberOfTree = 1;
+        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x/ 2);
+        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
+        Vector3 pos = new Vector3(randPosX,1000,randPosZ);
+        
+        RaycastHit hit;
+        //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
+        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
+        {
+            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
+            float posY = hit.transform.position.y;
+        }
+        ray = false;
+        for (int i = 0; i < numberOfTree; i++)
+        {
+            GameObject newTree = Instantiate(treeGameObject);
+            newTree.transform.parent = meshObject.transform;
+            if (ray1)
+            {
+                newTree.transform.localPosition = pos;
+                ray1 = false;
+            }
+                //Forest.Add(newTree);
+        }
+        
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 
     }
