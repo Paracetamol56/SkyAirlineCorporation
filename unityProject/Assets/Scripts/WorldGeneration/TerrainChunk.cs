@@ -83,10 +83,10 @@ public class TerrainChunk : MonoBehaviour
             }
         }
         int numberOfTree = 1;
-        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x/ 2);
+        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
         float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
-        Vector3 pos = new Vector3(randPosX,1000,randPosZ);
-        
+        Vector3 pos = new Vector3(randPosX, 1000, randPosZ);
+
         RaycastHit hit;
         //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
         if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
@@ -104,9 +104,9 @@ public class TerrainChunk : MonoBehaviour
                 newTree.transform.localPosition = pos;
                 ray1 = false;
             }
-                //Forest.Add(newTree);
+            //Forest.Add(newTree);
         }
-        
+
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 
     }
