@@ -7,11 +7,13 @@ TagManager:
   - Ground
   - Fire
   - Water
+  - Gate
+  - Undefined
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
   - 

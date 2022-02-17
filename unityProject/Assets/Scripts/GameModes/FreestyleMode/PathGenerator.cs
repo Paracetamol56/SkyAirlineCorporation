@@ -60,7 +60,7 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateNextGate()
+    public void GenerateNextGate()
     {
         for (int i = 0; i < gateSpacing; i++)
         {
