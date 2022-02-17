@@ -7,8 +7,6 @@ public class PathGenerator : MonoBehaviour
     [SerializeField]
     private float maxNextGenerationAngle = 30.0f;
     [SerializeField]
-    private AnimationCurve distributionNextGenerationAngle;
-    [SerializeField]
     private float nextGenerationDistance = 200.0f;
     [SerializeField]
     private int gateSpacing = 50;
@@ -29,6 +27,7 @@ public class PathGenerator : MonoBehaviour
 
     void Start()
     {
+
         // Srtating path
         for (int i = 0; i < gateCircularBufferSize; i++)
         {
@@ -56,10 +55,13 @@ public class PathGenerator : MonoBehaviour
 
     private void goToNextPoint()
     {
-        float angleHorizontal = Random.Range(-1.0f, 1.0f);
-        float angleVertical = Random.Range(-1.0f, 1.0f);
-        angleHorizontal = distributionNextGenerationAngle.Evaluate(angleHorizontal) * maxNextGenerationAngle;
-        angleVertical = distributionNextGenerationAngle.Evaluate(angleVertical) * maxNextGenerationAngle / 3.0f;
+        float noiseScale = 5.0f;
+        float angleHorizontal = Mathf.PerlinNoise(transform.position.x * noiseScale, transform.position.z * noiseScale);
+        float angleVertical = 0.5f;
+        angleHorizontal = (angleHorizontal - 0.5f) * 2 * maxNextGenerationAngle;
+        angleVertical = (angleVertical - 0.5f) * 2 * maxNextGenerationAngle;
+
+        Debug.Log(angleHorizontal);
 
         // Altitude correction to clamp the curve
         float altitude = transform.position.y;

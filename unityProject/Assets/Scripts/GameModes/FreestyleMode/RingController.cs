@@ -45,7 +45,6 @@ public class RingController : MonoBehaviour
         // Rotate the propellers
         foreach (GameObject propeller in propellers)
         {
-            Debug.Log(1);
             propeller.transform.Rotate(20, 0, 0);
         }
     }
