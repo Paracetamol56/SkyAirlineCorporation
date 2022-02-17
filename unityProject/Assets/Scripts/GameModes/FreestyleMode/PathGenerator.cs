@@ -4,30 +4,36 @@ using System.Collections.Generic;
 
 public class PathGenerator : MonoBehaviour
 {
+    [Header("Generation algorithm")]
     [SerializeField]
     private float maxNextGenerationAngle = 30.0f;
     [SerializeField]
     private float nextGenerationDistance = 200.0f;
     [SerializeField]
     private int gateSpacing = 50;
+    private float pathSeed = 0.0f;
 
+    [Header("Altitude limits")]
     [SerializeField]
     private float maxAltitude = 2000.0f;
     [SerializeField]
     private float minAltitude = 500.0f;
 
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject pointPrefab;
     [SerializeField]
     private GameObject gatePrefab;
 
+    [Header("Path length")]
     private List<GameObject> gateCircularBuffer = new List<GameObject>();
     [SerializeField]
     private uint gateCircularBufferSize = 4;
 
     void Start()
     {
-
+        // Set the random seed
+        pathSeed = Time.time;
         // Srtating path
         for (int i = 0; i < gateCircularBufferSize; i++)
         {
@@ -55,11 +61,10 @@ public class PathGenerator : MonoBehaviour
 
     private void goToNextPoint()
     {
-        float noiseScale = 5.0f;
-        float angleHorizontal = Mathf.PerlinNoise(transform.position.x * noiseScale, transform.position.z * noiseScale);
-        float angleVertical = 0.5f;
+        float angleHorizontal = Mathf.PerlinNoise(transform.position.x + pathSeed, transform.position.z + pathSeed);
+        float angleVertical = Mathf.PerlinNoise(Time.time, 0.0f);
         angleHorizontal = (angleHorizontal - 0.5f) * 2 * maxNextGenerationAngle;
-        angleVertical = (angleVertical - 0.5f) * 2 * maxNextGenerationAngle;
+        angleVertical = (angleVertical - 0.5f) * 2 * maxNextGenerationAngle / 5.0f;
 
         Debug.Log(angleHorizontal);
 
