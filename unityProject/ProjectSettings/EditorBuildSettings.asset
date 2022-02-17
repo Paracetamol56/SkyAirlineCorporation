@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Freestyle.unity
     guid: 528167d7b56427e449708553f2cd3534
+  - enabled: 1
+    path: Assets/Scenes/DeliveryScene.unity
+    guid: eb1f9797a9a9d214aa6e679b7ed191ed
   m_configObjects: {}
