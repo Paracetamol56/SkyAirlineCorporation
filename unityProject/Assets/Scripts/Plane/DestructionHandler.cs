@@ -40,7 +40,7 @@ public class DestructionHandler : MonoBehaviour
             {
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
-                managerScene.setCurrentSceneIndex(SceneIndex.DeathScene);
+                managerScene.setCurrentSceneIndex(SceneIndex.GameOver);
                 for (int i = 0; i < nbExplosion; ++i)
                 {
                     Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
@@ -74,7 +74,7 @@ public class DestructionHandler : MonoBehaviour
     {
         drowned = true;
         Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-        managerScene.setCurrentSceneIndex(SceneIndex.DeathScene);
+        managerScene.setCurrentSceneIndex(SceneIndex.GameOver);
     }
 
     IEnumerator SoundDown()

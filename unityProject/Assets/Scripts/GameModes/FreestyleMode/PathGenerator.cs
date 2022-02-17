@@ -30,6 +30,13 @@ public class PathGenerator : MonoBehaviour
     [SerializeField]
     private uint gateCircularBufferSize = 4;
 
+    [Header("Trail generation")]
+    [SerializeField]
+    private float movingStep = 2.0f;
+    [SerializeField]
+    private Transform trailGenerator;
+    private List<Vector3> pointsPositions = new List<Vector3>();
+
     void Start()
     {
         // Set the random seed
@@ -41,12 +48,23 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateNextGate()
+    private void Update()
+    {
+        if (pointsPositions.Count > 0)
+        {
+            trailGenerator.position = Vector3.MoveTowards(trailGenerator.position, pointsPositions[0], Time.deltaTime * movingStep);
+            if (Vector3.Distance(trailGenerator.position, pointsPositions[0]) < 0.1f)
+            {
+                pointsPositions.RemoveAt(0);
+            }
+        }
+    }
+
+    private void GenerateNextGate()
     {
         for (int i = 0; i < gateSpacing; i++)
         {
             goToNextPoint();
-            Instantiate(pointPrefab, transform.position, transform.rotation);
         }
         // Instanciate a new gate
         GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation) as GameObject;
@@ -80,5 +98,7 @@ public class PathGenerator : MonoBehaviour
 
         transform.Rotate(0.0f, angleHorizontal, angleVertical);
         transform.Translate(0.0f, 0.0f, nextGenerationDistance);
+
+        pointsPositions.Add(transform.position);
     }
 }
