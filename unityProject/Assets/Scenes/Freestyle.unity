@@ -362,7 +362,7 @@ TrailRenderer:
   m_Time: 120
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -433,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190106783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1500, z: 0}
+  m_LocalPosition: {x: 0, y: 1500, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -574,7 +574,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!43 &356114663
+--- !u!43 &334450149
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -789,7 +789,7 @@ MonoBehaviour:
   pointPrefab: {fileID: 1161768393585157219, guid: 6a1b2302b0a2cc242b941059a99688af, type: 3}
   gatePrefab: {fileID: 956114541230279552, guid: 61ed7e0507a760848b61125273fe32d9, type: 3}
   gateCircularBufferSize: 1
-  movingStep: 100
+  movingStep: 150
   trailGenerator: {fileID: 190106785}
 --- !u!1 &558850382
 GameObject:
@@ -1038,7 +1038,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722810186}
-  m_Mesh: {fileID: 356114663}
+  m_Mesh: {fileID: 334450149}
 --- !u!114 &722810190
 MonoBehaviour:
   m_ObjectHideFlags: 0
