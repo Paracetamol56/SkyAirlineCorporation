@@ -49,8 +49,7 @@ public class PathGenerator : MonoBehaviour
             Instantiate(pointPrefab, transform.position, transform.rotation);
         }
         // Instanciate a new gate
-        GameObject newGate = Instantiate(gatePrefab, transform.position, Quaternion.identity);
-        newGate.transform.rotation = Quaternion.LookRotation(transform.position - newGate.transform.position);
+        GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation) as GameObject;
         gateCircularBuffer.Add(newGate);
         if (gateCircularBuffer.Count > gateCircularBufferSize)
         {
@@ -65,8 +64,6 @@ public class PathGenerator : MonoBehaviour
         float angleVertical = Mathf.PerlinNoise(Time.time, 0.0f);
         angleHorizontal = (angleHorizontal - 0.5f) * 2 * maxNextGenerationAngle;
         angleVertical = (angleVertical - 0.5f) * 2 * maxNextGenerationAngle / 5.0f;
-
-        Debug.Log(angleHorizontal);
 
         // Altitude correction to clamp the curve
         float altitude = transform.position.y;

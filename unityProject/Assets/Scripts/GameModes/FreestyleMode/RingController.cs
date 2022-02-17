@@ -7,6 +7,7 @@ public class RingController : MonoBehaviour
 
     private void Start()
     {
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         // create a new material and give it a random color
         Material newMaterial = new Material(Shader.Find("Standard"));
         newMaterial.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
