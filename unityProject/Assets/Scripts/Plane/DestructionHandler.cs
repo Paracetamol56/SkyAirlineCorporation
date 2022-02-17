@@ -7,9 +7,9 @@ public class DestructionHandler : MonoBehaviour
     public bool drowned = false;
     public GameObject ExplosionSound;
     public GameObject SplashSound;
-    public GameObject DeathLoader;
     private Transform PlanePos;
     private Rigidbody rigidBody;
+    private ManagerScene managerScene;
 
     public Camera MainCamera;
     private CameraController CamScript;
@@ -17,7 +17,7 @@ public class DestructionHandler : MonoBehaviour
 
     float LandingSpeedMax = 125.0f;
 
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -25,8 +25,8 @@ public class DestructionHandler : MonoBehaviour
         rigidBody = this.GetComponent<Rigidbody>();
         CamScript = MainCamera.GetComponent<CameraController>();
         PlayerController = gameObject.GetComponent<PlaneController>();
-        audio = gameObject.GetComponent<AudioSource>();
-
+        audioSource = gameObject.GetComponent<AudioSource>();
+        managerScene = GameObject.Find("SceneManager").GetComponent<ManagerScene>();
     }
 
     void OnCollisionEnter(Collision col)
@@ -40,7 +40,7 @@ public class DestructionHandler : MonoBehaviour
             {
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
-                Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
+                managerScene.setCurrentSceneIndex(SceneIndex.DeathScene);
                 for (int i = 0; i < nbExplosion; ++i)
                 {
                     Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
@@ -50,7 +50,6 @@ public class DestructionHandler : MonoBehaviour
                 CamScript.DestroyCam(PlanePos);
                 gameObject.SetActive(false);
             }
-
         }
     }
 
@@ -75,12 +74,12 @@ public class DestructionHandler : MonoBehaviour
     {
         drowned = true;
         Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-        Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
+        managerScene.setCurrentSceneIndex(SceneIndex.DeathScene);
     }
 
     IEnumerator SoundDown()
     {
         yield return new WaitForSeconds(0.1f);
-        audio.volume -= 0.01f;
+        audioSource.volume -= 0.01f;
     }
 }
