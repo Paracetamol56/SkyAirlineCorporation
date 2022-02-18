@@ -6,7 +6,7 @@ public class PathGenerator : MonoBehaviour
 {
     [Header("Generation algorithm")]
     [SerializeField]
-    private float maxNextGenerationAngle = 30.0f;
+    public float maxNextGenerationAngle = 30.0f;
     [SerializeField]
     private float nextGenerationDistance = 200.0f;
     [SerializeField]
@@ -60,7 +60,7 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateNextGate()
+    public void GenerateNextGate()
     {
         for (int i = 0; i < gateSpacing; i++)
         {
@@ -87,12 +87,12 @@ public class PathGenerator : MonoBehaviour
         float altitude = transform.position.y;
         if (altitude < (minAltitude + 100.0f))
         {
-            float correctionAngle = Mathf.Abs(altitude - minAltitude) / 100.0f;
+            float correctionAngle = Mathf.Abs(altitude - minAltitude) / 50.0f;
             transform.Rotate(new Vector3(-correctionAngle, 0.0f, 0.0f));
         }
         else if (altitude > (maxAltitude - 100.0f))
         {
-            float correctionAngle = Mathf.Abs(altitude - maxAltitude) / 100.0f;
+            float correctionAngle = Mathf.Abs(altitude - maxAltitude) / 50.0f;
             transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
         }
 
