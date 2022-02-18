@@ -30,6 +30,9 @@ public class FreestyleManager : MonoBehaviour
         totalTime += runTime;
 
         scoreText.text = "Score : " + score.ToString() + "\nTime : " + runTime.ToString("0.00") + "\nMean time : " + (totalTime / score).ToString("0.00");
+
+        // Increment difficulty
+        pathGenerator.maxNextGenerationAngle += 0.5f;
     }
 
     private void OnTriggerEnter(Collider other)
