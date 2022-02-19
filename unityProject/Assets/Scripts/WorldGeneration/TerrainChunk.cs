@@ -37,6 +37,7 @@ public class TerrainChunk : MonoBehaviour
     MeshSettings meshSettings;
     Transform viewer;
 
+    Vector3 chunkPos;
     GameObject tree;
 
     bool createSpawn,hastree=false;
@@ -50,12 +51,13 @@ public class TerrainChunk : MonoBehaviour
         this.heightMapSettings = heightMapSettings;
         this.meshSettings = meshSettings;
         this.viewer = viewer;
-        this.tree = treeGameObject;
+        tree = treeGameObject;
+        
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
         bounds = new Bounds(position, Vector2.one * meshSettings.meshWorldSize);
-
+        chunkPos = new Vector3(position.x,0,position.y);
 
         meshObject = new GameObject("Terrain Chunk");
         meshObject.tag = "Ground";
@@ -86,7 +88,10 @@ public class TerrainChunk : MonoBehaviour
        
         
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
-
+        Vector3 ReturnPos()
+        {
+            return new Vector3(position.x,0,position.y);
+        }
     }
 
     public void Load()
@@ -187,13 +192,13 @@ public class TerrainChunk : MonoBehaviour
                 {
                     meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
                     hasSetCollider = true;
+                    if (!hastree)
+                    {
+                        CreateTree();
+                        hastree = true;
+                    }
                 }
             }
-        }
-        if (!hastree&&hasSetCollider)
-        {
-            CreateTree();
-            hastree=true;
         }
     }
 
@@ -208,31 +213,38 @@ public class TerrainChunk : MonoBehaviour
     }
     public void CreateTree()
     {
+        bool endloop = true; ;
         int numberOfTree = 1;
         float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
         float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
-        Vector3 pos = new Vector3(randPosX, 1000, randPosZ);
+        Vector3 pos = new Vector3(randPosX+chunkPos.x, 1000, randPosZ+chunkPos.z);
 
         RaycastHit hit;
         //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
+
         if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
         {
             Debug.LogError("Raycast hit");
             Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
-            float posY = hit.transform.position.y;
-            pos = new Vector3(randPosX, posY, randPosZ);
+            float posY = hit.point.y;
+            //float posX = hit.point.x;
+            //float posZ = hit.point.z;
+            pos = new Vector3(pos.x, posY, pos.z);
+            Debug.LogError(hit.point.y + " " +hit.distance);
             Debug.LogError(hit.collider.gameObject.name);
+            endloop = false;
         }
         else
         {
             Debug.LogError("RayCast Didn't hit");
         }
+      
         for (int i = 0; i < numberOfTree; i++)
         {
             GameObject newTree = Instantiate(tree);
             newTree.transform.parent = meshObject.transform;
 
-            newTree.transform.localPosition = pos;
+            newTree.transform.position = pos;
 
             //Forest.Add(newTree);
         }
