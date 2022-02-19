@@ -40,7 +40,7 @@ public class TerrainChunk : MonoBehaviour
     Vector3 chunkPos;
     GameObject tree;
 
-    bool createSpawn,hastree=false;
+    bool createSpawn, hastree = false;
 
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject treeGameObject)
@@ -52,12 +52,12 @@ public class TerrainChunk : MonoBehaviour
         this.meshSettings = meshSettings;
         this.viewer = viewer;
         tree = treeGameObject;
-        
+
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
         bounds = new Bounds(position, Vector2.one * meshSettings.meshWorldSize);
-        chunkPos = new Vector3(position.x,0,position.y);
+        chunkPos = new Vector3(position.x, 0, position.y);
 
         meshObject = new GameObject("Terrain Chunk");
         meshObject.tag = "Ground";
@@ -85,12 +85,12 @@ public class TerrainChunk : MonoBehaviour
                 lodMeshes[i].updateCallback += UpdateCollisionMesh;
             }
         }
-       
-        
+
+
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
         Vector3 ReturnPos()
         {
-            return new Vector3(position.x,0,position.y);
+            return new Vector3(position.x, 0, position.y);
         }
     }
 
@@ -217,7 +217,7 @@ public class TerrainChunk : MonoBehaviour
         int numberOfTree = 1;
         float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
         float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
-        Vector3 pos = new Vector3(randPosX+chunkPos.x, 1000, randPosZ+chunkPos.z);
+        Vector3 pos = new Vector3(randPosX + chunkPos.x, 1000, randPosZ + chunkPos.z);
 
         RaycastHit hit;
         //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
@@ -230,7 +230,7 @@ public class TerrainChunk : MonoBehaviour
             //float posX = hit.point.x;
             //float posZ = hit.point.z;
             pos = new Vector3(pos.x, posY, pos.z);
-            Debug.LogError(hit.point.y + " " +hit.distance);
+            Debug.LogError(hit.point.y + " " + hit.distance);
             Debug.LogError(hit.collider.gameObject.name);
             endloop = false;
         }
@@ -238,7 +238,7 @@ public class TerrainChunk : MonoBehaviour
         {
             Debug.LogError("RayCast Didn't hit");
         }
-      
+
         for (int i = 0; i < numberOfTree; i++)
         {
             GameObject newTree = Instantiate(tree);
