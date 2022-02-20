@@ -45,7 +45,7 @@ public class TerrainChunk : MonoBehaviour
     bool createSpawn, hastree = false;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, List<GameObject> treeGameObject,int numberOfTreePerChunck)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, List<GameObject> treeGameObject, int numberOfTreePerChunck)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -216,11 +216,11 @@ public class TerrainChunk : MonoBehaviour
     }
     public void CreateTree()
     {
-        
+
         int whichPrefab = Random.Range(0, tree.Count - 1);
         for (int i = 0; i < numberOfTree; i++)
         {
-            
+
             GameObject newTree = Instantiate(tree[whichPrefab]);
             newTree.transform.parent = meshObject.transform;
 
@@ -232,7 +232,7 @@ public class TerrainChunk : MonoBehaviour
     {
         Vector3 pos = new Vector3(1, 1000, 1);
         RaycastHit hit;
-        
+
         float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
         float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
         pos = new Vector3(randPosX + chunkPos.x, 1000, randPosZ + chunkPos.z);
