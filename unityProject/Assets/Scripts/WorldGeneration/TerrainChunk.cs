@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TerrainChunk : MonoBehaviour
 {
@@ -38,12 +39,13 @@ public class TerrainChunk : MonoBehaviour
     Transform viewer;
 
     Vector3 chunkPos;
-    GameObject tree;
+    List<GameObject> tree;
+    int numberOfTree;
 
     bool createSpawn, hastree = false;
 
 
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, GameObject treeGameObject)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, List<GameObject> treeGameObject,int numberOfTreePerChunck)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -52,6 +54,7 @@ public class TerrainChunk : MonoBehaviour
         this.meshSettings = meshSettings;
         this.viewer = viewer;
         tree = treeGameObject;
+        numberOfTree = numberOfTreePerChunck;
 
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
@@ -213,41 +216,42 @@ public class TerrainChunk : MonoBehaviour
     }
     public void CreateTree()
     {
-        bool endloop = true; ;
-        int numberOfTree = 1;
-        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
-        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
-        Vector3 pos = new Vector3(randPosX + chunkPos.x, 1000, randPosZ + chunkPos.z);
-
-        RaycastHit hit;
-        //float res = heightMapSettings.heightCurve.Evaluate(Noise.GetPosZ(x, y, heightMapSettings.noiseSettings, meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, sampleCentre)) * heightMapSettings.heightMultiplier;
-
-        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
-        {
-            Debug.LogError("Raycast hit");
-            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
-            float posY = hit.point.y;
-            //float posX = hit.point.x;
-            //float posZ = hit.point.z;
-            pos = new Vector3(pos.x, posY, pos.z);
-            Debug.LogError(hit.point.y + " " + hit.distance);
-            Debug.LogError(hit.collider.gameObject.name);
-            endloop = false;
-        }
-        else
-        {
-            Debug.LogError("RayCast Didn't hit");
-        }
-
+        
+        int whichPrefab = Random.Range(0, tree.Count - 1);
         for (int i = 0; i < numberOfTree; i++)
         {
-            GameObject newTree = Instantiate(tree);
+            
+            GameObject newTree = Instantiate(tree[whichPrefab]);
             newTree.transform.parent = meshObject.transform;
 
-            newTree.transform.position = pos;
+            newTree.transform.position = FindPosOfTree();
 
-            //Forest.Add(newTree);
         }
+    }
+    private Vector3 FindPosOfTree()
+    {
+        Vector3 pos = new Vector3(1, 1000, 1);
+        RaycastHit hit;
+        
+        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
+        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
+        pos = new Vector3(randPosX + chunkPos.x, 1000, randPosZ + chunkPos.z);
+        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
+        {
+
+            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
+            float posY = hit.point.y;
+            pos = new Vector3(pos.x, posY, pos.z);
+            if (hit.point.y < 365)
+            {
+                if (Physics.Raycast(new Vector3(pos.x, 365, pos.z), Vector3.left, out hit, 10000))
+                {
+                    pos = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+
+                }
+            }
+        }
+        return pos;
     }
 }
 
