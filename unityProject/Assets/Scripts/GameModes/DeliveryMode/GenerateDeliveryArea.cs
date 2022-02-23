@@ -27,6 +27,8 @@ public class GenerateDeliveryArea : MonoBehaviour
         DeliveryAreaSpawn();
 
         spawnedObject = GameObject.Find("SmokePS(Clone)");
+
+        Timer.instance.StartTimer();
     }
 
     void Update()
@@ -65,6 +67,7 @@ public class GenerateDeliveryArea : MonoBehaviour
             Debug.Log("Lets go position change");
             spawnedObject.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
             transform.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
+            Timer.instance.ResetTimer();
         }
         else Debug.LogWarning("No composant");
     }

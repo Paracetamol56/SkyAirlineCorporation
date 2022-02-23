@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Fire
   - Water
-  - DeliveryArea
   layers:
   - Default
   - TransparentFX
