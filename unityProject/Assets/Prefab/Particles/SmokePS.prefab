@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6552856930817170642}
   - component: {fileID: 6552856930817170643}
   - component: {fileID: 6552856930817170640}
-  - component: {fileID: 5422708731220740254}
   m_Layer: 0
   m_Name: SmokePS
   m_TagString: DeliveryArea
@@ -4824,16 +4823,3 @@ MonoBehaviour:
   maxDistance: 1
   waypointColor: {r: 0, g: 1, b: 0.22020864, a: 1}
   waypointName: Livraison
---- !u!65 &5422708731220740254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6552856930817170652}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1595.8481, y: 1227.5742, z: 33.710823}
-  m_Center: {x: -23.721436, y: -2.4808655, z: 15.435406}

@@ -62,11 +62,11 @@ public class GenerateDeliveryArea : MonoBehaviour
 
         if (spawnedObject != null)
         {
-            Debug.Log("Lets go change position");
+            Debug.Log("Lets go position change");
             spawnedObject.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
             transform.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
         }
-        else Debug.LogError("Aucun composant trouvé");
+        else Debug.LogWarning("No composant");
     }
 
     public float GetAltitude(float x, float z)
