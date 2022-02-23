@@ -13,7 +13,7 @@ public class SystemDeliveryArea : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("Erreur");
             return;
