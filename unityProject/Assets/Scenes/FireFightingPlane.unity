@@ -769,7 +769,6 @@ GameObject:
   m_Component:
   - component: {fileID: 627232036}
   - component: {fileID: 627232038}
-  - component: {fileID: 627232037}
   m_Layer: 0
   m_Name: FireGenerator
   m_TagString: Untagged
@@ -1189,7 +1188,6 @@ GameObject:
   - component: {fileID: 867660961}
   - component: {fileID: 867660960}
   - component: {fileID: 867660959}
-  - component: {fileID: 867660963}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged

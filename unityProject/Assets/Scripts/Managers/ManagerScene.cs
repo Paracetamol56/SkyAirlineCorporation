@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
 
 public enum SceneIndex
 {
@@ -9,8 +11,8 @@ public enum SceneIndex
     GameOver = 1,
     Freemode = 2,
     FFplane = 3,
-    //Delivery = 4,
-    Freestyle = 4
+    Freestyle = 4,
+    Delivery = 5,
 }
 
 public class ManagerScene : MonoBehaviour
@@ -77,7 +79,7 @@ public class ManagerScene : MonoBehaviour
         currentSceneIndex = lastSceneIndex;
     }
 
-    private void LoadGame()
+    public void LoadGame()
     {
         Debug.Log("Loading scene " + (int)currentSceneIndex);
 
@@ -97,7 +99,7 @@ public class ManagerScene : MonoBehaviour
                 }
             case SceneIndex.GameOver:
                 {
-                    StartCoroutine(LoadGameOver());
+                    StartCoroutine("DeathLoader");
                     break;
                 }
             case SceneIndex.Freemode:
@@ -116,14 +118,14 @@ public class ManagerScene : MonoBehaviour
                     SecondaryMaterial.color = Color.red;
                     break;
                 }
-            // case SceneIndex.Delivery:
-            //     {
-            //         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Delivery);
-            //         // Change the material color
-            //         PrimaryMaterial.color = Color.green;
-            //         SecondaryMaterial.color = Color.black;
-            //         break;
-            //     }
+            case SceneIndex.Delivery:
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Delivery);
+                    // Change the material color
+                    PrimaryMaterial.color = Color.green;
+                    SecondaryMaterial.color = Color.black;
+                    break;
+                }
             case SceneIndex.Freestyle:
                 {
                     SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.Freestyle);
@@ -140,10 +142,9 @@ public class ManagerScene : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadGameOver()
+    IEnumerator DeathLoader()
     {
-        // Wait for 5 seconds
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.GameOver);
     }
 }
