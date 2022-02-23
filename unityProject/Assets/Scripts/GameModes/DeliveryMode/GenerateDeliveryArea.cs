@@ -42,9 +42,16 @@ public class GenerateDeliveryArea : MonoBehaviour
 
     public void DeliveryAreaSpawn()
     {
-        Vector2 randomCircle = Random.insideUnitCircle * 10000;
-        randomCircle += new Vector2(transform.position.x, transform.position.z);
-        Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
+        Vector2 randomPos;
+        float altitude;
+        do
+        {
+            randomPos = Random.insideUnitCircle * 10000;
+            altitude = GetAltitude(randomPos.x, randomPos.y);
+        }
+        while (altitude < minAltitude || altitude > maxAltitude);
+        Debug.Log("randomPos : " + randomPos);
+        Vector3 pos = new Vector3(randomPos.x, altitude, randomPos.y);
         Instantiate(prefab, pos, Quaternion.Euler(-90, 0, 0));
     }
 
