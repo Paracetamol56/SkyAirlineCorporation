@@ -7,9 +7,9 @@ public class DestructionHandler : MonoBehaviour
     public bool drowned = false;
     public GameObject ExplosionSound;
     public GameObject SplashSound;
-    public GameObject DeathLoader;
     private Transform PlanePos;
     private Rigidbody rigidBody;
+    public ManagerScene sm;
 
     public Camera MainCamera;
     private CameraController CamScript;
@@ -40,7 +40,8 @@ public class DestructionHandler : MonoBehaviour
             {
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
-                Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
+                sm.setCurrentSceneIndex(SceneIndex.DeathScene);
+                sm.LoadGame();
                 for (int i = 0; i < nbExplosion; ++i)
                 {
                     Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
@@ -75,7 +76,8 @@ public class DestructionHandler : MonoBehaviour
     {
         drowned = true;
         Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
-        Instantiate(DeathLoader, PlanePos.position, Quaternion.identity);
+        sm.setCurrentSceneIndex(SceneIndex.DeathScene);
+        sm.LoadGame();
     }
 
     IEnumerator SoundDown()

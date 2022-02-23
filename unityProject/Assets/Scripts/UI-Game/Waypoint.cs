@@ -34,6 +34,11 @@ class Waypoint : MonoBehaviour
         waypointUI.transform.Find("Color").GetComponent<Image>().color = waypointColor;
         // Get the element called "Name (TMP)" inside waypointUI and assign the name
         waypointUI.transform.Find("Name (TMP)").GetComponent<TextMeshProUGUI>().text = waypointName;
+
+        if(MainCamera == null)
+        {
+            MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        }
     }
 
     private void Update()

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
 
 public enum SceneIndex
 {
@@ -75,7 +77,7 @@ public class ManagerScene : MonoBehaviour
         currentSceneIndex = lastSceneIndex;
     }
 
-    private void LoadGame()
+    public void LoadGame()
     {
         Debug.Log("Loading scene " + (int)currentSceneIndex);
 
@@ -95,7 +97,7 @@ public class ManagerScene : MonoBehaviour
                 }
             case SceneIndex.DeathScene:
                 {
-                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
+                    StartCoroutine("DeathLoader");
                     break;
                 }
             case SceneIndex.Freemode:
@@ -136,5 +138,11 @@ public class ManagerScene : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    IEnumerator DeathLoader()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
     }
 }
