@@ -14,7 +14,7 @@ public class BalanceIndicator : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("BalanceIndicator multiple instances");
             return;
