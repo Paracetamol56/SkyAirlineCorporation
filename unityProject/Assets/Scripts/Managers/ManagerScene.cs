@@ -1,14 +1,12 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public enum SceneIndex
 {
     MainMenu = 0,
-    DeathScene = 1,
+    GameOver = 1,
     Freemode = 2,
     FFplane = 3,
     //Delivery = 4,
@@ -97,9 +95,9 @@ public class ManagerScene : MonoBehaviour
                     SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.MainMenu);
                     break;
                 }
-            case SceneIndex.DeathScene:
+            case SceneIndex.GameOver:
                 {
-                    SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.DeathScene);
+                    StartCoroutine(LoadGameOver());
                     break;
                 }
             case SceneIndex.Freemode:
@@ -140,5 +138,12 @@ public class ManagerScene : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    private IEnumerator LoadGameOver()
+    {
+        // Wait for 5 seconds
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.GameOver);
     }
 }

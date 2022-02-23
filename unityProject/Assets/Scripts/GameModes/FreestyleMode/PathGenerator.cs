@@ -1,46 +1,104 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
+    [Header("Generation algorithm")]
     [SerializeField]
-    private float maxNextGenerationAngle = 30.0f;
+    public float maxNextGenerationAngle = 30.0f;
     [SerializeField]
-    private AnimationCurve distributionNextGenerationAngle;
+    private float nextGenerationDistance = 200.0f;
     [SerializeField]
-    private float maxNextGenerationDistance = 100.0f;
-    [SerializeField]
-    private AnimationCurve distributionNextGenerationDistance;
+    private int gateSpacing = 50;
+    private float pathSeed = 0.0f;
 
+    [Header("Altitude limits")]
+    [SerializeField]
+    private float maxAltitude = 2000.0f;
+    [SerializeField]
+    private float minAltitude = 500.0f;
+
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject pointPrefab;
+    [SerializeField]
+    private GameObject gatePrefab;
+
+    [Header("Path length")]
+    private List<GameObject> gateCircularBuffer = new List<GameObject>();
+    [SerializeField]
+    private uint gateCircularBufferSize = 4;
+
+    [Header("Trail generation")]
+    [SerializeField]
+    private float movingStep = 2.0f;
+    [SerializeField]
+    private Transform trailGenerator;
+    private List<Vector3> pointsPositions = new List<Vector3>();
 
     void Start()
     {
-        for (int i = 0; i < 1000; i++)
+        // Set the random seed
+        pathSeed = Time.time;
+        // Srtating path
+        for (int i = 0; i < gateCircularBufferSize; i++)
         {
-            // generate a new path
+            GenerateNextGate();
+        }
+    }
+
+    private void Update()
+    {
+        if (pointsPositions.Count > 0)
+        {
+            trailGenerator.position = Vector3.MoveTowards(trailGenerator.position, pointsPositions[0], Time.deltaTime * movingStep);
+            if (Vector3.Distance(trailGenerator.position, pointsPositions[0]) < 0.1f)
+            {
+                pointsPositions.RemoveAt(0);
+            }
+        }
+    }
+
+    public void GenerateNextGate()
+    {
+        for (int i = 0; i < gateSpacing; i++)
+        {
             goToNextPoint();
-            GameObject newPoint = Instantiate(pointPrefab, transform.position, transform.rotation);
-            //newPoint.transform.parent = transform;
+        }
+        // Instanciate a new gate
+        GameObject newGate = Instantiate(gatePrefab, transform.position, transform.rotation) as GameObject;
+        gateCircularBuffer.Add(newGate);
+        if (gateCircularBuffer.Count > gateCircularBufferSize)
+        {
+            Destroy(gateCircularBuffer[0]);
+            gateCircularBuffer.RemoveAt(0);
         }
     }
 
     private void goToNextPoint()
     {
-        float angleHorizontal = Random.Range(-1.0f, 1.0f);
-        float angleVertical = Random.Range(-1.0f, 1.0f);
-        angleHorizontal = distributionNextGenerationAngle.Evaluate(angleHorizontal) * maxNextGenerationAngle;
-        angleVertical = distributionNextGenerationAngle.Evaluate(angleVertical) * maxNextGenerationAngle;
+        float angleHorizontal = Mathf.PerlinNoise(transform.position.x + pathSeed, transform.position.z + pathSeed);
+        float angleVertical = Mathf.PerlinNoise(Time.time, 0.0f);
+        angleHorizontal = (angleHorizontal - 0.5f) * 2 * maxNextGenerationAngle;
+        angleVertical = (angleVertical - 0.5f) * 2 * maxNextGenerationAngle / 5.0f;
 
-        float distance = Random.Range(0.0f, 1.0f);
-        distance = distributionNextGenerationDistance.Evaluate(distance) * maxNextGenerationDistance;
+        // Altitude correction to clamp the curve
+        float altitude = transform.position.y;
+        if (altitude < (minAltitude + 100.0f))
+        {
+            float correctionAngle = Mathf.Abs(altitude - minAltitude) / 50.0f;
+            transform.Rotate(new Vector3(-correctionAngle, 0.0f, 0.0f));
+        }
+        else if (altitude > (maxAltitude - 100.0f))
+        {
+            float correctionAngle = Mathf.Abs(altitude - maxAltitude) / 50.0f;
+            transform.Rotate(new Vector3(correctionAngle, 0.0f, 0.0f));
+        }
 
-        Debug.Log("angleHorizontal: " + angleHorizontal);
-        Debug.Log("angleVertical: " + angleVertical);
-        Debug.Log("distance: " + distance);
-        transform.Rotate(angleHorizontal, 0.0f, angleVertical);
-        transform.Translate(distance, 0.0f, 0.0f);
+        transform.Rotate(0.0f, angleHorizontal, angleVertical);
+        transform.Translate(0.0f, 0.0f, nextGenerationDistance);
+
+        pointsPositions.Add(transform.position);
     }
 }
