@@ -18,7 +18,7 @@ public class SystemDeliveryArea : MonoBehaviour
             Debug.LogError("Erreur");
             return;
         }
-        instance = new SystemDeliveryArea();
+        instance = this;
     }
 
     private void Start()
@@ -37,7 +37,7 @@ public class SystemDeliveryArea : MonoBehaviour
 
     public void ChangeState()
     {
-        send = !send;
+        send = false;
     }
 
     public bool GetState()

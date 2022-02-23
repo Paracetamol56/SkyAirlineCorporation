@@ -6,7 +6,6 @@ public class DeliveryDetection : MonoBehaviour
 {
     private void Start()
     {
-        SystemDeliveryArea.instance.ChangeState();
         StartCoroutine(timeBeforeAutoDelete());
     }
 
@@ -16,7 +15,15 @@ public class DeliveryDetection : MonoBehaviour
         {
             Debug.Log("colis recu dans la zone de livraison");
         }
-        else if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Water"))
+        else if (collision.gameObject.CompareTag("Water"))
+        {
+            Debug.Log("colis nest pas recu dans la zone de livraison");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("colis nest pas recu dans la zone de livraison");
         }

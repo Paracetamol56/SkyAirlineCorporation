@@ -33,8 +33,8 @@ public class GenerateDeliveryArea : MonoBehaviour
     {
         if (SystemDeliveryArea.instance.GetState())
         {
-            StartCoroutine(timeBeforeChangeWaypoint());
             SystemDeliveryArea.instance.ChangeState();
+            StartCoroutine(timeBeforeChangeWaypoint());
         }
     }
 
@@ -62,9 +62,9 @@ public class GenerateDeliveryArea : MonoBehaviour
 
         if (spawnedObject != null)
         {
+            Debug.Log("Lets go change position");
             spawnedObject.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
             transform.GetComponent<Transform>().position = new Vector3(randomPos.x, altitude, randomPos.y);
-            SystemDeliveryArea.instance.ChangeState();
         }
         else Debug.LogError("Aucun composant trouvé");
     }
