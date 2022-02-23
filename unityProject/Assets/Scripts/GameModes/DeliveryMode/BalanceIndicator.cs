@@ -16,7 +16,7 @@ public class BalanceIndicator : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("BalanceIndicator multiple instances");
+            Debug.LogError("BalanceIndicator multiple instance");
             return;
         }
         instance = this;

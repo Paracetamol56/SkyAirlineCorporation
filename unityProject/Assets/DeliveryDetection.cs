@@ -24,14 +24,12 @@ public class DeliveryDetection : MonoBehaviour
 
     private void calculateMoney()
     {
-        float distance = Vector3.Distance(spawnedArea.GetComponent<Transform>().position, GetComponent<Transform>().position);
+        float distance = Vector3.Distance(spawnedArea.GetComponent<Transform>().position, transform.position);
         int parcelValue = 2000;
-        Debug.Log("Distance = " + distance.ToString());
 
         if (distance <= 100)
         {
-            float finalValue = Mathf.Clamp(0, 100, distance) * parcelValue / 100;
-            Debug.Log("Added Value = " + finalValue.ToString());
+            float finalValue = Mathf.Clamp(distance, 0, 100) * parcelValue / 100;
             BalanceIndicator.instance.AddMoney(finalValue);
         }
     }
