@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TerrainChunk : MonoBehaviour
 {
@@ -29,18 +31,21 @@ public class TerrainChunk : MonoBehaviour
     int previousLODIndex = -1;
     bool hasSetCollider;
     float maxViewDst;
+    ArrayList Forest;
 
 
     HeightMapSettings heightMapSettings;
     MeshSettings meshSettings;
     Transform viewer;
 
+    Vector3 chunkPos;
+    List<GameObject> tree;
+    int numberOfTree;
+
+    bool createSpawn, hastree = false;
 
 
-    bool createSpawn;
-
-
-    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn)
+    public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool CreateSpawn, List<GameObject> treeGameObject, int numberOfTreePerChunck)
     {
         this.coord = coord;
         this.detailLevels = detailLevels;
@@ -48,11 +53,14 @@ public class TerrainChunk : MonoBehaviour
         this.heightMapSettings = heightMapSettings;
         this.meshSettings = meshSettings;
         this.viewer = viewer;
+        tree = treeGameObject;
+        numberOfTree = numberOfTreePerChunck;
+
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
         bounds = new Bounds(position, Vector2.one * meshSettings.meshWorldSize);
-
+        chunkPos = new Vector3(position.x, 0, position.y);
 
         meshObject = new GameObject("Terrain Chunk");
         meshObject.tag = "Ground";
@@ -81,8 +89,12 @@ public class TerrainChunk : MonoBehaviour
             }
         }
 
-        maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 
+        maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
+        Vector3 ReturnPos()
+        {
+            return new Vector3(position.x, 0, position.y);
+        }
     }
 
     public void Load()
@@ -183,6 +195,11 @@ public class TerrainChunk : MonoBehaviour
                 {
                     meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
                     hasSetCollider = true;
+                    if (!hastree)
+                    {
+                        CreateTree();
+                        hastree = true;
+                    }
                 }
             }
         }
@@ -197,7 +214,45 @@ public class TerrainChunk : MonoBehaviour
     {
         return meshObject.activeSelf;
     }
+    public void CreateTree()
+    {
 
+        int whichPrefab = Random.Range(0, tree.Count - 1);
+        for (int i = 0; i < numberOfTree; i++)
+        {
+
+            GameObject newTree = Instantiate(tree[whichPrefab]);
+            newTree.transform.parent = meshObject.transform;
+
+            newTree.transform.position = FindPosOfTree();
+
+        }
+    }
+    private Vector3 FindPosOfTree()
+    {
+        Vector3 pos = new Vector3(1, 1000, 1);
+        RaycastHit hit;
+
+        float randPosX = Random.Range(-bounds.size.x / 2, bounds.size.x / 2);
+        float randPosZ = Random.Range(-bounds.size.y / 2, bounds.size.y / 2);
+        pos = new Vector3(randPosX + chunkPos.x, 1000, randPosZ + chunkPos.z);
+        if (Physics.Raycast(pos, Vector3.down, out hit, 10000))
+        {
+
+            Debug.DrawRay(pos, Vector3.down * hit.distance, Color.red);
+            float posY = hit.point.y;
+            pos = new Vector3(pos.x, posY, pos.z);
+            if (hit.point.y < 365)
+            {
+                if (Physics.Raycast(new Vector3(pos.x, 365, pos.z), Vector3.left, out hit, 10000))
+                {
+                    pos = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+
+                }
+            }
+        }
+        return pos;
+    }
 }
 
 class LODMesh
@@ -218,7 +273,6 @@ class LODMesh
     {
         mesh = ((MeshData)meshDataObject).CreateMesh();
         hasMesh = true;
-
         updateCallback();
     }
 
