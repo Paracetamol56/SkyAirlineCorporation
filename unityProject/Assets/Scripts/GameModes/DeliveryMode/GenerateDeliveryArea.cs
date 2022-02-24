@@ -18,7 +18,7 @@ public class GenerateDeliveryArea : MonoBehaviour
     public IEnumerator Start()
     {
         // Wait for 2 seconds
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
 
         // Change waypoint
         ChangeWaypoint();
@@ -42,11 +42,12 @@ public class GenerateDeliveryArea : MonoBehaviour
 
     public void DeliveryAreaSpawn()
     {
+        // Generate random position inside a circle of radius 3000 and center at the current position while the altitude is not between min and max altitude
         Vector2 randomPos;
         float altitude;
         do
         {
-            randomPos = Random.insideUnitCircle * 10000;
+            randomPos = Random.insideUnitCircle * 5000;
             altitude = GetAltitude(randomPos.x, randomPos.y);
         }
         while (altitude < minAltitude || altitude > maxAltitude);
@@ -83,15 +84,11 @@ public class GenerateDeliveryArea : MonoBehaviour
     {
         // Get the altitude of the terrain at the given position
 
-        // Mask to get only the ground layer
-        int mask = 1 << 3;
-
         // Raycast test
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 50000, mask))
+        if (Physics.Raycast(new Vector3(x, 10000, z), Vector3.down, out hit, 50000))
         {
-            Debug.Log("Hit : " + hit.collider.name);
-            Debug.DrawRay(new Vector3(x, 10000, z), Vector3.down * hit.distance, Color.red);
+            // Debug.Log("Hit : " + hit.collider.gameObject.name);
             float raycastDistance = hit.distance;
             raycastDistance = 10000 - raycastDistance;
             // Debug raycast result
