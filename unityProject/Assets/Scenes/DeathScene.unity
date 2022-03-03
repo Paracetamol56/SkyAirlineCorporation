@@ -300,10 +300,22 @@ PrefabInstance:
     - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1905552192}
+      objectReference: {fileID: 999965195}
     - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DeathUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 11495182, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
       propertyPath: m_Text
@@ -644,7 +656,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 999965190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c88ccd5f01cce04bb234b6f2a83835a, type: 3}
+  m_Script: {fileID: 11500000, guid: b66066bcf2831f84cb67977548104e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1097676156
@@ -660,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11458850, guid: 48db09633bc1f47eaa7aa4a63900d142, type: 3}
       propertyPath: m_Text
-      value: You crached
+      value: You crashed
       objectReference: {fileID: 0}
     - target: {fileID: 11458850, guid: 48db09633bc1f47eaa7aa4a63900d142, type: 3}
       propertyPath: m_FontData.m_MaxSize
@@ -775,6 +787,34 @@ PrefabInstance:
     - target: {fileID: 149968, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
       propertyPath: m_Name
       value: SquareButton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 999965195}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BacktoMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DeathUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434868, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 11495182, guid: 751f7137cfffd4a16b1a4c191e687d64, type: 3}
       propertyPath: m_Text
@@ -1020,10 +1060,13 @@ PrefabInstance:
       propertyPath: loadingScreen
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7956755234501883862, guid: 8d58222625c5c6e4c8243c2c4a2916ab, type: 3}
+      propertyPath: PrimaryMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a43801a9fea32b41ab1bb95d74208dc, type: 2}
+    - target: {fileID: 7956755234501883862, guid: 8d58222625c5c6e4c8243c2c4a2916ab, type: 3}
+      propertyPath: SecondaryMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a915805deea52648b3d1f2363e47ad0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d58222625c5c6e4c8243c2c4a2916ab, type: 3}
---- !u!1 &1905552192 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6415274828719958344, guid: 8d58222625c5c6e4c8243c2c4a2916ab, type: 3}
-  m_PrefabInstance: {fileID: 1905552191}
-  m_PrefabAsset: {fileID: 0}

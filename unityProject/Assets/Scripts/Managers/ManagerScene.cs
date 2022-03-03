@@ -31,7 +31,7 @@ public class ManagerScene : MonoBehaviour
     private Color SecondaryColor;
 
     // Make getter and setter for the current scene index
-    [HideInInspector]
+    //[HideInInspector]
     private SceneIndex currentSceneIndex;
     private SceneIndex lastSceneIndex;
 
@@ -49,7 +49,7 @@ public class ManagerScene : MonoBehaviour
 
     public void Start()
     {
-        currentSceneIndex = SceneIndex.MainMenu;
+        currentSceneIndex = SceneIndex.Freemode;
 
 
         // Store materials color choosed by the user
@@ -146,6 +146,11 @@ public class ManagerScene : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.GameOver);
+    }
+
+    public void BacktoMenu()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.MainMenu);
     }
 
 }
