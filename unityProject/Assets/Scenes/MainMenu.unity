@@ -1134,9 +1134,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 765270103}
-        m_TargetAssemblyTypeName: PreGame, Assembly-CSharp
-        m_MethodName: ExitGame
+      - m_Target: {fileID: 511113139}
+        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2837,6 +2837,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508764417}
   m_CullTransparentMesh: 1
+--- !u!1 &511113138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511113140}
+  - component: {fileID: 511113139}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &511113139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511113138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbe7fda368489745bb924318304fc7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrimaryMaterial: {fileID: 2100000, guid: 6a43801a9fea32b41ab1bb95d74208dc, type: 2}
+  SecondaryMaterial: {fileID: 2100000, guid: 4a915805deea52648b3d1f2363e47ad0, type: 2}
+--- !u!4 &511113140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511113138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046268497, y: 0.10690737, z: 1.0392244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521242352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,9 +4032,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 765270098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba4d552bb9538d4aab76972027c9ac4, type: 3}
+  m_Script: {fileID: 11500000, guid: bc66bd33dfa2cbb4ab3a8ae97b5ef310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planesSelection:
+  - {fileID: 919132149155446097, guid: fefb41a112165e949b30a4fd326c35f7, type: 3}
+  - {fileID: 919132149155446097, guid: 122917b383793ba41947152846169f7a, type: 3}
+  - {fileID: 919132149155446097, guid: 91013a53ee7ffe8479694860cd3b7ec9, type: 3}
+  rotationSpeed: 10
+  coef: 1
+  ColorPickedPrefab: {fileID: 1889240517}
+  primeColor: {fileID: 2100000, guid: 6a43801a9fea32b41ab1bb95d74208dc, type: 2}
+  secondColor: {fileID: 2100000, guid: 4a915805deea52648b3d1f2363e47ad0, type: 2}
 --- !u!1 &835645512
 GameObject:
   m_ObjectHideFlags: 0
@@ -9153,8 +9207,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 765270103}
-        m_TargetAssemblyTypeName: PreGame, Assembly-CSharp
+      - m_Target: {fileID: 511113139}
+        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

@@ -147,4 +147,11 @@ public class ManagerScene : MonoBehaviour
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.GameOver);
     }
+
+    public void StartGame()
+    {
+        currentSceneIndex = SceneIndex.Freemode;
+        Debug.Log("Current scene index: " + currentSceneIndex);
+        LoadGame();
+    }
 }
