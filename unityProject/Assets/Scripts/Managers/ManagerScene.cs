@@ -148,10 +148,4 @@ public class ManagerScene : MonoBehaviour
         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.GameOver);
     }
 
-    public void StartGame()
-    {
-        currentSceneIndex = SceneIndex.Freemode;
-        Debug.Log("Current scene index: " + currentSceneIndex);
-        LoadGame();
-    }
 }

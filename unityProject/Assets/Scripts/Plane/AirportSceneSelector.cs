@@ -24,12 +24,12 @@ class AirportSceneSelector : MonoBehaviour
             airportMessage.text = "Press F to join the Fire Fighting Plane Game Mode";
             sceneToLoad = SceneIndex.FFplane;
         }
-        // else if (other.name == "DeliveryAirport")
-        // {
-        //     canJoinGameMode = true;
-        //     airportMessage.text = "Press F to join the Delivery Game Mode";
-        //     sceneToLoad = SceneIndex.Delivery;
-        // }
+        else if (other.name == "DeliveryAirport")
+        {
+            canJoinGameMode = true;
+            airportMessage.text = "Press F to join the Delivery Game Mode";
+            sceneToLoad = SceneIndex.Delivery;
+        }
         else if (other.name == "FreestyleAirport")
         {
             canJoinGameMode = true;

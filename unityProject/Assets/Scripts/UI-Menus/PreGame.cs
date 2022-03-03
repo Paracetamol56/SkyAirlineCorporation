@@ -29,6 +29,7 @@ public class PreGame : MonoBehaviour
         showPoint = GameObject.Find("ShowPoint");
         planesSelection[planeIndex].transform.localScale = new Vector3(1, 1, 1) * coef;
         currentPlaneShown = Instantiate(planesSelection[planeIndex], showPoint.transform);
+        managerScene = GameObject.Find("SceneManager").GetComponent<ManagerScene>(); 
     }
 
     void Update()
@@ -48,7 +49,7 @@ public class PreGame : MonoBehaviour
     {
         SaveCurrentPlane();
 
-        managerScene.setCurrentSceneIndex(SceneIndex.Freestyle);
+        managerScene.setCurrentSceneIndex(SceneIndex.Freemode);
     }
 
     public void ExitGame()
