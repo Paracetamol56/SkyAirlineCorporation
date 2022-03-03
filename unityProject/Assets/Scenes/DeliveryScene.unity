@@ -649,6 +649,8 @@ MonoBehaviour:
   viewer: {fileID: 1227593431}
   mapMaterial: {fileID: 2100000, guid: 129a3116a2fc56a4fbca4dd98d829096, type: 2}
   createSpawn: 0
+  numberOfTreePerChunk: 0
+  treePrefabObject: []
 --- !u!4 &773607839
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,10 +1293,50 @@ PrefabInstance:
       propertyPath: airPlane
       value: 
       objectReference: {fileID: 886525218}
+    - target: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_MinValue
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513685637, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513685637, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513690283, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513690283, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513690283, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8063380775349554866, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 8657801853712769816, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 886525219}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
 --- !u!224 &1656682300 stripped
@@ -1302,6 +1344,39 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 661637286973647245, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
   m_PrefabInstance: {fileID: 1656682299}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1656682301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4239009693491920899, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+  m_PrefabInstance: {fileID: 1656682299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1656682302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+  m_PrefabInstance: {fileID: 1656682299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656682301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1656682303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656682301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924e6e30d66930c4881d8c174323838d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeParameter: MasterVolume
+  mixer: {fileID: 24100000, guid: 7eef21980dd944f288b987f532f0a9a2, type: 2}
+  slider: {fileID: 1656682302}
+  sliderValue: 0
+  multiplier: 30
 --- !u!1 &1711835669
 GameObject:
   m_ObjectHideFlags: 0
