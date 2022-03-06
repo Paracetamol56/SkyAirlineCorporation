@@ -14,7 +14,7 @@ public class DeathUI : MonoBehaviour
 
     public void Restart()
     {
-        ms.LoadLastScene();
+        ms.loadlastscene();
     }
     public void BacktoMenu()
     {

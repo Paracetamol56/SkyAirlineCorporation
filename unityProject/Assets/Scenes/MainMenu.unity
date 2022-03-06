@@ -4036,9 +4036,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planesSelection:
-  - {fileID: 919132149155446097, guid: fefb41a112165e949b30a4fd326c35f7, type: 3}
-  - {fileID: 919132149155446097, guid: 122917b383793ba41947152846169f7a, type: 3}
-  - {fileID: 919132149155446097, guid: 91013a53ee7ffe8479694860cd3b7ec9, type: 3}
+  - {fileID: 8991727880101379110, guid: a97d50e2eaa3bb24e9f589bdd2cfe1c6, type: 3}
+  - {fileID: 1160548545324090281, guid: f562846aac400544ab7e7576530a5170, type: 3}
+  - {fileID: 6252278134197587619, guid: b345072fd50110149b5c1aff3b70789f, type: 3}
   rotationSpeed: 10
   coef: 1
   ColorPickedPrefab: {fileID: 1889240517}

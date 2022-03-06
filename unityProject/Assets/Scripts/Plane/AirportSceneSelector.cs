@@ -52,6 +52,7 @@ class AirportSceneSelector : MonoBehaviour
             if (canJoinGameMode == true)
             {
                 managerScene.setCurrentSceneIndex(sceneToLoad);
+                managerScene.LoadGame();
             }
         }
     }

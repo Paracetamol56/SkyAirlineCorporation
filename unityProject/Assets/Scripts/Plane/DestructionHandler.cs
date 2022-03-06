@@ -18,6 +18,7 @@ public class DestructionHandler : MonoBehaviour
     float LandingSpeedMax = 125.0f;
 
     private AudioSource audioSource;
+    private bool canExplode = true;
 
     void Start()
     {
@@ -31,16 +32,20 @@ public class DestructionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
+        
         Vector3 planeNormal = PlanePos.up;
         Vector3 ContactSol = col.contacts[0].normal;
         float DotProduct = Vector3.Dot(planeNormal, ContactSol);
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" && canExplode == true)
         {
+            canExplode= false;
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
             {
                 int nbExplosion = Random.Range(3, 6);
                 Instantiate(ExplosionSound, PlanePos.position, Quaternion.identity);
+                managerScene.setlastSceneIndex(managerScene.getCurrentSceneIndex());
                 managerScene.setCurrentSceneIndex(SceneIndex.GameOver);
+                managerScene.LoadGame();
                 for (int i = 0; i < nbExplosion; ++i)
                 {
                     Instantiate(explosion, PlanePos.position + (Random.insideUnitSphere * 15), Quaternion.identity);
@@ -64,17 +69,20 @@ public class DestructionHandler : MonoBehaviour
         if (drowned)
         {
             // TODO : Freeze the plane's controls
-            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+            //rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             StartCoroutine(SoundDown());
         }
 
     }
 
+
     void SpawnDrownGameObject()
     {
         drowned = true;
         Instantiate(SplashSound, PlanePos.position, Quaternion.identity);
+        managerScene.setlastSceneIndex(managerScene.getCurrentSceneIndex());
         managerScene.setCurrentSceneIndex(SceneIndex.GameOver);
+        managerScene.LoadGame();
     }
 
     IEnumerator SoundDown()
@@ -82,4 +90,5 @@ public class DestructionHandler : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         audioSource.volume -= 0.01f;
     }
+
 }

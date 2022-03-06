@@ -34,6 +34,7 @@ public class ManagerScene : MonoBehaviour
     //[HideInInspector]
     private SceneIndex currentSceneIndex;
     private SceneIndex lastSceneIndex;
+    
 
     private void Awake()
     {
@@ -66,7 +67,11 @@ public class ManagerScene : MonoBehaviour
     {
         currentSceneIndex = sceneIndex;
         Debug.Log("Current scene index: " + currentSceneIndex);
-        LoadGame();
+    }
+
+    public void setlastSceneIndex(SceneIndex index)
+    {
+        lastSceneIndex = index;
     }
 
     public void Quit()
@@ -74,10 +79,6 @@ public class ManagerScene : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadLastScene()
-    {
-        currentSceneIndex = lastSceneIndex;
-    }
 
     public void LoadGame()
     {
@@ -87,8 +88,6 @@ public class ManagerScene : MonoBehaviour
         PrimaryMaterial.color = PrimaryColor;
         SecondaryMaterial.color = SecondaryColor;
 
-        // Store the last scene index
-        lastSceneIndex = currentSceneIndex;
 
         switch (currentSceneIndex)
         {
@@ -101,6 +100,7 @@ public class ManagerScene : MonoBehaviour
                 {
                     StartCoroutine("DeathLoader");
                     break;
+
                 }
             case SceneIndex.Freemode:
                 {
@@ -151,6 +151,13 @@ public class ManagerScene : MonoBehaviour
     public void BacktoMenu()
     {
         SceneManager.LoadScene(sceneBuildIndex: (int)SceneIndex.MainMenu);
+        currentSceneIndex = SceneIndex.MainMenu;
+    }
+
+    public void loadlastscene()
+    {
+        currentSceneIndex = lastSceneIndex;
+        LoadGame();
     }
 
 }
