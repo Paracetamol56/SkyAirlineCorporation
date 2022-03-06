@@ -34,7 +34,7 @@ public class ManagerScene : MonoBehaviour
     //[HideInInspector]
     private SceneIndex currentSceneIndex;
     private SceneIndex lastSceneIndex;
-    
+
 
     private void Awake()
     {

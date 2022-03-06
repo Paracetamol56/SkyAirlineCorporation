@@ -32,13 +32,13 @@ public class DestructionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        
+
         Vector3 planeNormal = PlanePos.up;
         Vector3 ContactSol = col.contacts[0].normal;
         float DotProduct = Vector3.Dot(planeNormal, ContactSol);
         if (col.gameObject.tag == "Ground" && canExplode == true)
         {
-            canExplode= false;
+            canExplode = false;
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
             {
                 int nbExplosion = Random.Range(3, 6);
