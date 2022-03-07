@@ -103,9 +103,14 @@ Shader "Custom/Terrain"
 
                         if (height > _SnowMinHeight) {
                             // Snow
-                            float snowBlendHeight = (_SnowMinHeight + _SnowBlendDistance) * (1 - _SnowBlendAmount);
-                            float snowWeight = saturate((height - snowBlendHeight) / ((_SnowMinHeight + _SnowBlendDistance) - snowBlendHeight));
-                            o.Albedo = lerp(o.Albedo, _SnowColor, snowWeight);
+                            // Slope weight
+                            float slopeBlendHeight = _SnowSlopeThreshold * (1 - _SnowBlendAmount);
+                            float slopeWeight = 1 - saturate((slope - slopeBlendHeight) / (_SnowSlopeThreshold - slopeBlendHeight));
+                            
+                            // Height weight
+                            float snowBlendHeight = _SnowMinHeight - _SnowBlendDistance * (1 - _SnowBlendAmount);
+                            float snowWeight = saturate((height - snowBlendHeight) / (_SnowMinHeight + _SnowBlendDistance - snowBlendHeight));
+                            o.Albedo = lerp(o.Albedo, _SnowColor, slopeWeight * snowWeight);
                         }
                     }
                 }
