@@ -20,6 +20,7 @@ Shader "Custom/Terrain"
         // Snow
         _SnowColor ("Snow Colour", Color) = (1,1,1,1)
         _SnowMinHeight ("Snow Min Height", Float) = 0.0
+        _SnowSlopeThreshold ("Snow Slope Threshold", Range(0,1)) = .5
         _SnowBlendDistance ("Snow Blend Distance", Float) = 0.0
         _SnowBlendAmount ("Snow Blend", Range(0,1)) = 0.0
     }
@@ -54,6 +55,7 @@ Shader "Custom/Terrain"
         // Snow
         fixed4 _SnowColor;
         half _SnowMinHeight;
+        half _SnowSlopeThreshold;
         half _SnowBlendDistance;
         half _SnowBlendAmount;
 
@@ -108,12 +110,6 @@ Shader "Custom/Terrain"
                     }
                 }
             }
-
-
-            // float grassBlendHeight = _GrassSlopeThreshold * (1-_GrassBlendAmount);
-            // float grassWeight = 1-saturate((slope-grassBlendHeight)/(_GrassSlopeThreshold-grassBlendHeight));
-
-            // o.Albedo = _GrassColour * grassWeight + _RockColour * (1-grassWeight);
         }
         ENDCG
     }

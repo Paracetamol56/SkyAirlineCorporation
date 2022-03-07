@@ -169,7 +169,7 @@ Material:
     - _GrassBlendAmount: 0.358
     - _GrassBlendDistance: 87.3
     - _GrassHeightFadePower: 1.77
-    - _GrassMaxHeight: 788.5
+    - _GrassMaxHeight: 1000
     - _GrassSlopeThreshold: 0.221
     - _HeightTransition: 0
     - _Metallic: 0
@@ -188,7 +188,7 @@ Material:
     - _RockBlendAmount: 0.377
     - _SampleGI: 0
     - _SandBlendAmount: 0.225
-    - _SandMaxHeight: 315.9
+    - _SandMaxHeight: 313.92
     - _Smoothness: 0
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
@@ -212,7 +212,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GrassColor: {r: 0.15472588, g: 0.5754717, b: 0.15472588, a: 1}
+    - _GrassColor: {r: 0.12148452, g: 0.3962264, b: 0.12148452, a: 1}
     - _GrassColour: {r: 0, g: 0.5660378, b: 0, a: 1}
     - _MainCol: {r: 1, g: 1, b: 1, a: 1}
     - _RimColour: {r: 0.3557178, g: 0.5566038, b: 0.27042544, a: 1}
