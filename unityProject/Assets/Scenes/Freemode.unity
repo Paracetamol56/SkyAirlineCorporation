@@ -855,14 +855,9 @@ MonoBehaviour:
   - {fileID: 1000011937025076, guid: 0b94787e83d06de44ab9db821c2c0142, type: 3}
   - {fileID: 1000011750255288, guid: af9ebdc546d59e04fa5f4cf6805cc187, type: 3}
   - {fileID: 1000013472076366, guid: 3f9bc1a85199f7440a7dc65376e90332, type: 3}
-  - {fileID: 1000011914158716, guid: 78af3a7aad589fa49b8fb946c9e57362, type: 3}
-  - {fileID: 1000011147454354, guid: 01d2dd5255c308a4db25dbb77d9f65ea, type: 3}
-  - {fileID: 1000012936420096, guid: a6dbabfd6d3c8cb47b7243b0b8723af2, type: 3}
   - {fileID: 5615850383405093744, guid: f71b20244eeed3744a3c832612b9d7aa, type: 3}
   - {fileID: 195258322087653104, guid: b6799d6ae33d405449be67efb6639687, type: 3}
   - {fileID: 5991441236876759185, guid: 586aef121ef7dd54b815432db966019d, type: 3}
-  - {fileID: 3361605162110079133, guid: e74c425f2d0820b47970d6bb290a5a80, type: 3}
-  - {fileID: 3477289980368711487, guid: e8ace63fde06de643a2468b8e96bec90, type: 3}
 --- !u!114 &558850384
 MonoBehaviour:
   m_ObjectHideFlags: 0

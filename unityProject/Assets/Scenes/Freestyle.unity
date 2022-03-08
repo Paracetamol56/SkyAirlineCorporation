@@ -717,8 +717,14 @@ MonoBehaviour:
   viewer: {fileID: 867660962}
   mapMaterial: {fileID: 2100000, guid: 129a3116a2fc56a4fbca4dd98d829096, type: 2}
   createSpawn: 0
-  numberOfTreePerChunk: 0
-  treePrefabObject: []
+  numberOfTreePerChunk: 100
+  treePrefabObject:
+  - {fileID: 5615850383405093744, guid: f71b20244eeed3744a3c832612b9d7aa, type: 3}
+  - {fileID: 195258322087653104, guid: b6799d6ae33d405449be67efb6639687, type: 3}
+  - {fileID: 5991441236876759185, guid: 586aef121ef7dd54b815432db966019d, type: 3}
+  - {fileID: 1000011937025076, guid: 0b94787e83d06de44ab9db821c2c0142, type: 3}
+  - {fileID: 1000011750255288, guid: af9ebdc546d59e04fa5f4cf6805cc187, type: 3}
+  - {fileID: 1000013472076366, guid: 3f9bc1a85199f7440a7dc65376e90332, type: 3}
 --- !u!114 &558850384
 MonoBehaviour:
   m_ObjectHideFlags: 0

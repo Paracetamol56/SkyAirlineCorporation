@@ -389,6 +389,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6998888067459783369, guid: 1e1f41b2756f38f4a8270f3ffcba7602, type: 3}
+      propertyPath: m_TagString
+      value: Gate
+      objectReference: {fileID: 0}
     - target: {fileID: -2003367396813875394, guid: 1e1f41b2756f38f4a8270f3ffcba7602, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
