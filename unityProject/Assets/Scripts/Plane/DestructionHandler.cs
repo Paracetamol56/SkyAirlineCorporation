@@ -36,7 +36,7 @@ public class DestructionHandler : MonoBehaviour
         Vector3 planeNormal = PlanePos.up;
         Vector3 ContactSol = col.contacts[0].normal;
         float DotProduct = Vector3.Dot(planeNormal, ContactSol);
-        if ((col.gameObject.tag == "Ground"|| col.gameObject.tag == "Gate") && canExplode == true)
+        if ((col.gameObject.tag == "Ground" || col.gameObject.tag == "Gate") && canExplode == true)
         {
             canExplode = false;
             if ((DotProduct < 0.90f && DotProduct > -0.90f) || (rigidBody.velocity.magnitude >= LandingSpeedMax))
