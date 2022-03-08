@@ -37,10 +37,10 @@ public class GenerateFire : MonoBehaviour
     public void FireSpawn()
     {
         //                  \/ Here is fire count
-        for (int i = 0; i < 50; ++i)
+        for (int i = 0; i < Random.Range(25,150); ++i)
         {
             // Generate random position inside a circle of radius 25
-            Vector2 randomCircle = Random.insideUnitCircle * 20;
+            Vector2 randomCircle = Random.insideUnitCircle * Random.Range(25,100);
             randomCircle += new Vector2(transform.position.x, transform.position.z);
             Vector3 pos = new Vector3(randomCircle.x, GetAltitude(randomCircle.x, randomCircle.y), randomCircle.y);
             GameObject fireCreated = Instantiate(firePrefab, pos, Quaternion.Euler(-90, 0, 0));
