@@ -217,7 +217,7 @@ public class TerrainChunk : MonoBehaviour
     public void CreateTree()
     {
 
-        
+
         for (int i = 0; i < numberOfTree; i++)
         {
 
