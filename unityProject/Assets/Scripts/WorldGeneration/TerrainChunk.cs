@@ -217,11 +217,11 @@ public class TerrainChunk : MonoBehaviour
     public void CreateTree()
     {
 
-        int whichPrefab = Random.Range(0, tree.Count - 1);
+        
         for (int i = 0; i < numberOfTree; i++)
         {
 
-            GameObject newTree = Instantiate(tree[whichPrefab]);
+            GameObject newTree = Instantiate(tree[Random.Range(0, tree.Count - 1)]);
             newTree.transform.parent = meshObject.transform;
 
             newTree.transform.position = FindPosOfTree();
