@@ -4028,7 +4028,7 @@ MonoBehaviour:
   - {fileID: 1160548545324090281, guid: f562846aac400544ab7e7576530a5170, type: 3}
   - {fileID: 6252278134197587619, guid: b345072fd50110149b5c1aff3b70789f, type: 3}
   rotationSpeed: 10
-  coef: 1
+  coef: 50
   ColorPickedPrefab: {fileID: 0}
   primeColor: {fileID: 2100000, guid: 6a43801a9fea32b41ab1bb95d74208dc, type: 2}
   secondColor: {fileID: 2100000, guid: 4a915805deea52648b3d1f2363e47ad0, type: 2}

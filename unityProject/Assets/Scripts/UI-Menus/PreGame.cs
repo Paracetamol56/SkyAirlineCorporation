@@ -77,7 +77,7 @@ public class PreGame : MonoBehaviour
         Destroy(currentPlaneShown);
         currentPlaneShown = planesSelection[planeIndex];
         if (planeIndex == 1)
-            currentPlaneShown.transform.localScale = new Vector3(1, 1, 1);
+            currentPlaneShown.transform.localScale = new Vector3(1, 1, 1)*coef;
         currentPlaneShown = Instantiate(currentPlaneShown, showPoint.transform);
         currentPlaneShown.transform.rotation = planeAngle;
 
