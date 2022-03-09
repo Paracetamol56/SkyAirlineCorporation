@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class PlaneController : MonoBehaviour
 {
     // Input axis
-    private float throttle = 0.0f;
     private float yawAxis = 0.0f;
     private float pitchAxis = 0.0f;
     private float rollAxis = 0.0f;
+    private float throttleAxis = 0.0f;
+    private float smoothedThrottleAxis = 0.0f;
 
     // Plane parameters
     [Header("Plane parameters")]
@@ -72,7 +73,7 @@ public class PlaneController : MonoBehaviour
         planeRigidBody = GetComponent<Rigidbody>();
         objectController = GetComponent<ObjectController>();
 
-        throttle = 100.0f;
+        smoothedThrottleAxis = 100.0f;
     }
 
     /// <summary>
@@ -81,8 +82,7 @@ public class PlaneController : MonoBehaviour
     private void Update()
     {
         // Throttle input
-        throttle = Mathf.Clamp(throttle + (Input.GetAxis("Throttle") * throttleInputMultiplicator), 0.0f, maxThrottle);
-        objectController.UpdateThrottle(throttle / maxThrottle);
+        throttleAxis = Input.GetAxis("Throttle");
 
         // Axis inputs
         if (isGrounded)
@@ -101,8 +101,12 @@ public class PlaneController : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        // Throttle smoothing
+        smoothedThrottleAxis = Mathf.Clamp(smoothedThrottleAxis + (throttleAxis * throttleInputMultiplicator), 0.0f, maxThrottle);
+        objectController.UpdateThrottle(smoothedThrottleAxis / maxThrottle);
+
         // Speed calculation (independant of isGrounded)
-        speed = Mathf.SmoothDamp(speed, throttle, ref speedRef, 10.0f);
+        speed = Mathf.SmoothDamp(speed, smoothedThrottleAxis, ref speedRef, 10.0f);
 
         // Lift calculation
         float zVelocity = Vector3.Magnitude(new Vector3(0, 0, planeRigidBody.velocity.z));
@@ -150,7 +154,7 @@ public class PlaneController : MonoBehaviour
     /// <returns>throttle : the acceleration input</returns>
     public float GetThrottle()
     {
-        return throttle;
+        return smoothedThrottleAxis;
     }
 
     public float getMaxThrottle()
@@ -163,12 +167,12 @@ public class PlaneController : MonoBehaviour
         return planeRigidBody.velocity.magnitude;
     }
 
-    public void RestAirplanePosition()
+    public void ResetAirplanePosition()
     {
         transform.position = new Vector3(0, 1000, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
         planeRigidBody.velocity = Vector3.zero;
         planeRigidBody.angularVelocity = Vector3.zero;
-        throttle = 100.0f;
+        smoothedThrottleAxis = 100.0f;
     }
 }

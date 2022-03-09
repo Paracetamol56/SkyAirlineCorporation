@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     public void ResetAirplanePosition()
     {
         destructionManager.drowned = false;
-        planeController.RestAirplanePosition();
+        planeController.ResetAirplanePosition();
         Time.timeScale = 1;
         gameObject.SetActive(false);
     }
