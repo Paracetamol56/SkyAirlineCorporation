@@ -40,7 +40,7 @@ public class GenerateFire : MonoBehaviour
     public void FireSpawn()
     {
         //                  \/ Here is fire count
-        for (int i = 0; i < RandomNbFlames;++i)
+        for (int i = 0; i < RandomNbFlames; ++i)
         {
             // Generate random position inside a circle of radius 25
             Vector2 randomCircle = Random.insideUnitCircle * Random.Range(25, 100);
