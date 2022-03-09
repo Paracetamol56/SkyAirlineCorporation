@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!43 &1401477264
+--- !u!43 &1487325432
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1521,6 +1521,10 @@ PrefabInstance:
       propertyPath: airPlane
       value: 
       objectReference: {fileID: 886525218}
+    - target: {fileID: 1783275266586085031, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -339
+      objectReference: {fileID: 0}
     - target: {fileID: 4239009693502711717, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
       propertyPath: m_Value
       value: 1
@@ -1556,6 +1560,10 @@ PrefabInstance:
     - target: {fileID: 4239009693513690283, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239009693513741677, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -421
       objectReference: {fileID: 0}
     - target: {fileID: 8063380775349554866, guid: 4dcfef2ee92ee8c42b00d1d759327a84, type: 3}
       propertyPath: m_Name
@@ -1993,7 +2001,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007735453}
-  m_Mesh: {fileID: 1401477264}
+  m_Mesh: {fileID: 1487325432}
 --- !u!1001 &2008983231
 PrefabInstance:
   m_ObjectHideFlags: 0

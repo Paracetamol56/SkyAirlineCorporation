@@ -50,6 +50,7 @@ public class PreGame : MonoBehaviour
         SaveCurrentPlane();
 
         managerScene.setCurrentSceneIndex(SceneIndex.Freemode);
+        managerScene.LoadGame();
     }
 
     public void ExitGame()

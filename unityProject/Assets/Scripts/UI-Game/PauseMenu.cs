@@ -37,6 +37,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         managerScene.setCurrentSceneIndex(SceneIndex.MainMenu);
+        managerScene.LoadGame();
     }
 
     public void MuteMusic()
