@@ -2,23 +2,28 @@ Shader "Custom/Terrain"
 {
     Properties {
         // Water
-        _WaterColour ("Water Colour", Color) = (0,1,0,1)
+        _WaterColor ("Water Color", Color) = (0,1,0,1)
         _WaterMaxHeight ("Water Max Height", Float) = 0.0
         // Sand
-        _SandColor ("Sand Colour", Color) = (1,1,0,1)
+        _SandColor ("Sand Color", Color) = (1,1,0,1)
         _SandMaxHeight ("Sand Max Height", Float) = 0.0
         _SandBlendAmount ("Sand Blend", Range(0,1)) = 0.0
         // Grass
-        _GrassColor ("Grass Colour", Color) = (0,1,0,1)
+        _GrassColor ("Grass Color", Color) = (0,1,0,1)
         _GrassMaxHeight ("Grass Max Height", Float) = 0.0
         _GrassSlopeThreshold ("Grass Slope Threshold", Range(0,1)) = .5
         _GrassBlendDistance ("Grass Blend Distance", Float) = 0.0
         _GrassBlendAmount ("Grass Blend", Range(0,1)) = 0.0
+        // Grass noise
+        _NoiseBlendAmount ("Noise Blend", Range(0,1)) = 0.0
+        _NoiseScale ("Noise Scale", Float) = 0.0
+        _NoiseColor ("Noise Color", Color) = (0,1,0,1)
+        _NoiseTex ("Noise Map", 2D) = "white" {}
         // Rock
-        _RockColor ("Rock Colour", Color) = (1,1,1,1)
+        _RockColor ("Rock Color", Color) = (1,1,1,1)
         _RockBlendAmount ("Rock Blend", Range(0,1)) = 0.0
         // Snow
-        _SnowColor ("Snow Colour", Color) = (1,1,1,1)
+        _SnowColor ("Snow Color", Color) = (1,1,1,1)
         _SnowMinHeight ("Snow Min Height", Float) = 0.0
         _SnowSlopeThreshold ("Snow Slope Threshold", Range(0,1)) = .5
         _SnowBlendDistance ("Snow Blend Distance", Float) = 0.0
@@ -27,9 +32,14 @@ Shader "Custom/Terrain"
     SubShader
     {
         Tags { "RenderType"="Opaque" }
+
         CGPROGRAM
+
         #pragma surface surf Standard fullforwardshadows
         #pragma target 3.0
+
+        #include "./Includes/Triplanar.cginc"
+        #include "./Includes/Math.cginc"
 
         struct Input {
             float3 worldPos;
@@ -37,7 +47,7 @@ Shader "Custom/Terrain"
         };
 
         // Water
-        fixed4 _WaterColour;
+        fixed4 _WaterColor;
         half _WaterMaxHeight;
         // Sand
         fixed4 _SandColor;
@@ -49,6 +59,11 @@ Shader "Custom/Terrain"
         half _GrassSlopeThreshold;
         half _GrassBlendDistance;
         half _GrassBlendAmount;
+        // Grass noise
+        half _NoiseBlendAmount;
+        half _NoiseScale;
+        fixed4 _NoiseColor;
+        sampler2D _NoiseTex;
         // Rock
         fixed4 _RockColor;
         half _RockBlendAmount;
@@ -65,23 +80,26 @@ Shader "Custom/Terrain"
 
             // Water
             if (height < _WaterMaxHeight) {
-                o.Albedo = _WaterColour;
+                o.Albedo = _WaterColor;
             }
             else {
                 if (height < _SandMaxHeight) {
                     // Sand
                     float sandBlendHeight = _SandMaxHeight * (1 - _SandBlendAmount);
                     float sandWeight = saturate((height - sandBlendHeight) / (_SandMaxHeight - sandBlendHeight));
-                    o.Albedo = lerp(_WaterColour, _SandColor, sandWeight);
+                    o.Albedo = lerp(_WaterColor, _SandColor, sandWeight);
                 }
                 else {
                     if (height < _GrassMaxHeight) {
                         // Grass
-                        
+
+                        float noise = triplanar(IN.worldPos, IN.worldNormal, _NoiseScale, _NoiseTex).g;
+                        fixed4 grassColor = lerp(_GrassColor, _NoiseColor, noise * _NoiseBlendAmount);
+
                         // Blend between rock and grass acording to slope
                         float slopeBlendHeight = _GrassSlopeThreshold * (1 - _GrassBlendAmount);
                         float slopeWeight = saturate((slope - slopeBlendHeight) / (_GrassSlopeThreshold - slopeBlendHeight));
-                        fixed4 grassColor = lerp(_GrassColor, _RockColor, slopeWeight);
+                        grassColor = lerp(grassColor, _RockColor, slopeWeight);
 
                         if (height < _SandMaxHeight + _GrassBlendDistance) {
                             float grassBlendHeight = _SandMaxHeight + _GrassBlendDistance * (1 - _GrassBlendAmount);
