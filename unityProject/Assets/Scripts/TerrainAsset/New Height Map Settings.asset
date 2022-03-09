@@ -15,7 +15,7 @@ MonoBehaviour:
   autoUpdate: 1
   noiseSettings:
     normalizeMode: 1
-    scale: 50
+    scale: 75
     octaves: 15
     persistance: 0.451
     lacunarity: 1.88
@@ -54,7 +54,7 @@ MonoBehaviour:
       outWeight: 0.13909274
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0.9999949
       inSlope: 0
       outSlope: 0
       tangentMode: 0
