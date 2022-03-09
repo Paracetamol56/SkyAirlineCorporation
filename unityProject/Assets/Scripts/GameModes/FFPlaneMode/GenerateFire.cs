@@ -15,12 +15,15 @@ public class GenerateFire : MonoBehaviour
     private bool chunckIsLoad = false;
     public int nbflames = 0;
     public GameObject FireGen;
+    private int RandomNbFlames = 0;
 
     // starting corouting
     public IEnumerator Start()
     {
+        RandomNbFlames = Random.Range(25, 150);
         // Wait for 2 seconds
         yield return new WaitForSeconds(1f);
+
 
         // Change waypoint
         ChangeWaypoint();
@@ -37,7 +40,7 @@ public class GenerateFire : MonoBehaviour
     public void FireSpawn()
     {
         //                  \/ Here is fire count
-        for (int i = 0; i < Random.Range(25, 150); ++i)
+        for (int i = 0; i < RandomNbFlames;++i)
         {
             // Generate random position inside a circle of radius 25
             Vector2 randomCircle = Random.insideUnitCircle * Random.Range(25, 100);
@@ -84,5 +87,10 @@ public class GenerateFire : MonoBehaviour
         }
         Debug.Log("Raycast missed");
         return 1000;
+    }
+
+    public int GetNbFlames()
+    {
+        return RandomNbFlames;
     }
 }

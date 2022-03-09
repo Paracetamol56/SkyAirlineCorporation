@@ -16,7 +16,7 @@ public class FireLvlIndicator : MonoBehaviour
     public void Update()
     {
         int Nbflames = scriptFire.nbflames;
-        int max = 50;
+        int max = scriptFire.GetNbFlames();
 
         int pourcentage = Nbflames*100/max;
         int affichage = 100- pourcentage;
