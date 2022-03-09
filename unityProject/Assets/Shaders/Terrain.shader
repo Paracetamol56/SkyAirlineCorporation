@@ -18,6 +18,7 @@ Shader "Custom/Terrain"
         _NoiseBlendAmount ("Noise Blend", Range(0,1)) = 0.0
         _NoiseScale ("Noise Scale", Float) = 0.0
         _NoiseColor ("Noise Color", Color) = (0,1,0,1)
+        _NoiseChannel ("Noise Channel", Range(0,3)) = 0.0
         _NoiseTex ("Noise Map", 2D) = "white" {}
         // Rock
         _RockColor ("Rock Color", Color) = (1,1,1,1)
@@ -63,6 +64,7 @@ Shader "Custom/Terrain"
         half _NoiseBlendAmount;
         half _NoiseScale;
         fixed4 _NoiseColor;
+        int _NoiseChannel;
         sampler2D _NoiseTex;
         // Rock
         fixed4 _RockColor;
@@ -93,7 +95,7 @@ Shader "Custom/Terrain"
                     if (height < _GrassMaxHeight) {
                         // Grass
 
-                        float noise = triplanar(IN.worldPos, IN.worldNormal, _NoiseScale, _NoiseTex).g;
+                        float noise = triplanar(IN.worldPos, IN.worldNormal, _NoiseScale, _NoiseTex)[_NoiseChannel];
                         fixed4 grassColor = lerp(_GrassColor, _NoiseColor, noise * _NoiseBlendAmount);
 
                         // Blend between rock and grass acording to slope
