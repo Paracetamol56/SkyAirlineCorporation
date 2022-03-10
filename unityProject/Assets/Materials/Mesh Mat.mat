@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mesh Mat
-  m_Shader: {fileID: 4800000, guid: d5b136c96042fb34497967c665540018, type: 3}
+  m_Shader: {fileID: 4800000, guid: adea4e141ad28c8459479d3308266468, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c44ca8fbb43ec8841825a79e51ad9868, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask0:
@@ -82,6 +82,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: c44ca8fbb43ec8841825a79e51ad9868, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal0:
@@ -166,6 +170,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _GrassBlendAmount: 0.358
+    - _GrassBlendDistance: 87.3
+    - _GrassHeightFadePower: 1.77
+    - _GrassMaxHeight: 1000
+    - _GrassSlopeThreshold: 0.221
     - _HeightTransition: 0
     - _Metallic: 0
     - _Metallic0: 0
@@ -173,22 +182,35 @@ Material:
     - _Metallic2: 0
     - _Metallic3: 0
     - _Mode: 0
+    - _NoiseBlendAmount: 1
+    - _NoiseChannel: 1
+    - _NoiseScale: 0.0005
     - _NumLayersCount: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RimFac: 1
+    - _RimPower: 0.5
+    - _RockBlendAmount: 0.377
     - _SampleGI: 0
+    - _SandBlendAmount: 0.225
+    - _SandMaxHeight: 313.92
     - _Smoothness: 0
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SnowBlendAmount: 0.13
+    - _SnowBlendDistance: 159.5
+    - _SnowMinHeight: 1499.16
+    - _SnowSlopeThreshold: 0.29
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
+    - _WaterMaxHeight: 243.7
     - _WorkflowMode: 1
     - _ZWrite: 1
     - testScale: 10.56
@@ -197,5 +219,16 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GrassColor: {r: 0.12148452, g: 0.3962264, b: 0.12148452, a: 1}
+    - _GrassColour: {r: 0, g: 0.5660378, b: 0, a: 1}
+    - _MainCol: {r: 1, g: 1, b: 1, a: 1}
+    - _NoiseColor: {r: 0.12322001, g: 0.3679245, b: 0.12322001, a: 1}
+    - _RimColour: {r: 0.3557178, g: 0.5566038, b: 0.27042544, a: 1}
+    - _RockColor: {r: 0.41509432, g: 0.32658982, b: 0.27607688, a: 1}
+    - _RockColour: {r: 0.8301887, g: 0.5195401, b: 0.3563546, a: 1}
+    - _SandColor: {r: 0.8396226, g: 0.7590319, b: 0.41585082, a: 1}
+    - _SnowColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _WaterColor: {r: 0.19624422, g: 0.6455169, b: 0.8490566, a: 1}
+    - _WaterColour: {r: 0, g: 0.51349497, b: 1, a: 1}
   m_BuildTextureStacks: []

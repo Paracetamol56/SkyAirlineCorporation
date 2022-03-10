@@ -35,7 +35,6 @@ public static class Noise
         {
             for (int x = 0; x < mapWidth; x++)
             {
-
                 amplitude = 1;
                 frequency = 1;
                 float noiseHeight = 0;
@@ -46,17 +45,8 @@ public static class Noise
                     float sampleY = (y - halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
 
                     float perlinValue;
-                    //Debug.Log(perlinValue);
-                    if (CreateSpawn)
-                    {
-                        perlinValue = SpawnGenerator.GenerateSpawnMap(sampleCentre, x, y, sampleX, sampleY);
-                        //utiliser un *entre les valeurs de base et les valeurs du spawn avec les pos x et y de chacun pour obtenir un ratio pour determiner la perlinValue
-                    }
-                    else
-                    {
-                        perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
-                    }
-                    //perlinValue = 0.5f * 2 - 1;
+                    perlinValue = Mathf.Pow(1 - Mathf.Abs(Mathf.PerlinNoise(sampleX, sampleY) - 0.5f), 2) * 2 - 1.5f;
+
                     noiseHeight += perlinValue * amplitude;
 
                     amplitude *= settings.persistance;
@@ -78,6 +68,24 @@ public static class Noise
                     float normalizedHeight = (noiseMap[x, y] + 1) / (maxPossibleHeight / 0.9f);
                     noiseMap[x, y] = Mathf.Clamp(normalizedHeight, 0, int.MaxValue);
                 }
+
+                if (sampleCentre.x == 0.0f && sampleCentre.y == 0.0f)
+                {
+                    if (CreateSpawn)
+                    {
+                        // Distance from center
+                        float distanceFromCenter = Mathf.Sqrt(Mathf.Pow(x - halfWidth, 2) + Mathf.Pow(y - halfHeight, 2));
+                        if (distanceFromCenter < 18)
+                        {
+                            noiseMap[x, y] = 0.5f;
+                        }
+                        else if (distanceFromCenter < 25)
+                        {
+                            float blendValue = (25 - distanceFromCenter) / 7;
+                            noiseMap[x, y] = Mathf.Lerp(noiseMap[x, y], 0.5f, blendValue);
+                        }
+                    }
+                }
             }
         }
 
@@ -94,6 +102,7 @@ public static class Noise
 
         return noiseMap;
     }
+
     public static float GetPosZ(float xSearch, float ySearch, NoiseSettings settings, int mapWidth, int mapHeight, Vector2 sampleCentre)
     {
 
