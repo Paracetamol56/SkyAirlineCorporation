@@ -1,6 +1,6 @@
 # SkyAirlineCorporation ✈️
 
-![Progressbar](https://progress-bar.dev/75/?scale=100&title=completion&width=120&color=565656&suffix=%)
+![Progressbar](https://progress-bar.dev/95/?scale=100&title=completion&width=120&color=565656&suffix=%)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Paracetamol56/Projet-prod)
 ![GitHub issues](https://img.shields.io/github/issues/Paracetamol56/Projet-prod)
 ![GitHub contributors](https://img.shields.io/github/contributors/Paracetamol56/Projet-prod)
@@ -31,11 +31,4 @@ Check out this page on @Paracetamol56 's portfolio: [https://paracetamol56.githu
 This project is a Flight Simulator like airplane game. We want to create a fairly realistic plane that can move in a procedural map in order to accomplish different tasks in 3 game modes:
 - free mode: the player can explore the map as much as he wants
 - delivery mode: the player must transport goods from point A to point B
-- canadair mode: the player must drop water to extinguish fires
-
-## Product backlog ✅
-
-### Planned
-
-### Sandbox
-
+- firefighting mode: the player must drop water to extinguish fires
